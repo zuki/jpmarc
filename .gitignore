@@ -1,0 +1,12 @@
+/_build
+/deps
+erl_crash.dump
+*~
+*.pox
+*.ez
+*.mo
+doc
+mix.lock
+priv/lang
+*.pot_db
+*.mrc
