@@ -19,14 +19,14 @@ defmodule JPMarc do
 
   def parse_record(marc) do
     <<leader::bytes-size(24), rest::binary>> = marc
-    leader = JPMarc.Leader.init(leader)
+    leader = parse_leader(leader)
     length_of_dirs = leader.base - 24 - 1 # -1 for \x1e
     <<dir_block::bytes-size(length_of_dirs), "\x1e", data:: binary>> = rest
 
     directories = get_directories(dir_block)
     fields = for {tag, length, position} <- directories do
       tag_data = binary_part(data, position, length)
-      fields = parse_tag_data(tag, tag_data)
+      parse_tag_data(tag, tag_data)
     end
     %__MODULE__{leader: leader, fields: fields}
   end
@@ -38,6 +38,12 @@ defmodule JPMarc do
   defp _get_directories(<<tag::bytes-size(3), length::bytes-size(4), position::bytes-size(5), rest::binary>>, acc) do
     acc = [{tag, String.to_integer(length), String.to_integer(position)} | acc]
     _get_directories(rest, acc)
+  end
+
+  defp parse_leader(leader) do
+    <<length::bytes-size(5), status::bytes-size(1), type::bytes-size(1),
+      level::bytes-size(1), _::bytes-size(4), base::bytes-size(5), _::binary>> = leader
+    %JPMarc.Leader{length: String.to_integer(length), status: status, type: type, level: level, base: String.to_integer(base)}
   end
 
   defp parse_tag_data(tag, <<ind::bytes-size(2), "\x1f", rest::binary>> = data) do
