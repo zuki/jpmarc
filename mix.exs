@@ -4,9 +4,15 @@ defmodule JPMarc.Mixfile do
   def project do
     [app: :jpmarc,
      version: "0.1.0",
+     compilers: Mix.compilers ++ [:po],
      elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     docs: [
+       main: "JPMarc",
+       formatter: Exgettext.HTML,
+       source_url: "https://github.com/zuki/jpmarc"
+    ],
      deps: deps()]
   end
 
@@ -28,6 +34,9 @@ defmodule JPMarc.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [
+      {:ex_doc, "~> 0.14"},
+      {:exgettext, github: "zuki/exgettext"}
+    ]
   end
 end

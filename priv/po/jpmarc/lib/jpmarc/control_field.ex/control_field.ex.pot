@@ -1,0 +1,5 @@
+#. TRANSLATORS: @type t
+#: lib/jpmarc/control_field.ex:2 
+msgid ""
+"    Type that represents `JPMarc.ControlField` struct with `:tag` as binary and `:value` as binary.\n"
+msgstr ""

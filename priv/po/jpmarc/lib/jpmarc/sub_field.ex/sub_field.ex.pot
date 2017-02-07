@@ -1,0 +1,5 @@
+#. TRANSLATORS: @type t
+#: lib/jpmarc/sub_field.ex:2 
+msgid ""
+"    Type that represents `JPMarc.SubField` struct with `:code` as binary and `:value` as binary.\n"
+msgstr ""

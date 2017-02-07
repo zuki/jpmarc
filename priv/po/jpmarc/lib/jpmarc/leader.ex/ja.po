@@ -1,0 +1,23 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2017-02-07 15:25+0900\n"
+"Last-Translator: Keiji Suzuki <EMAIL@ADDRESS>\n"
+"Language-Team: Japanese\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.8.11\n"
+
+#. TRANSLATORS: @type t
+#: lib/jpmarc/leader.ex:2
+msgid ""
+"    Type that represents `JPMarc.Leader` struct with `:length` as integer, `:"
+"status` as binary, `:type` of binary, `:level` as binary and  `:base` as "
+"integer\n"
+msgstr ""
+"`JPMarc.Leader`構造体の型。integerの`:length`、バイナリの`:status`、バイナリ"
+"の`:type`、バイナリの`:level`、integerの`:base`からなる。\n"

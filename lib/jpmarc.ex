@@ -1,27 +1,32 @@
 defmodule JPMarc do
   @moduledoc """
-  Documentation for JPMarc.
+    Library for parsing JPMARC
   """
 
   @typedoc """
-      Type that represents JPMarc struct with :leader as JPMarc.Leader.t, :fiels as
-      List of JPMarc.ControlField.t or JPMarc.DataField.t
+      Type that represents `JPMarc` struct with `:leader` as `JPMarc.Leader.t`, `:fiels` as List of `JPMarc.ControlField.t` or `JPMarc.DataField.t`
   """
   @type t :: %JPMarc{leader: JPMarc.Leader.t, fields: [JPMarc.ControlField.t | JPMarc.DataField.t]}
   defstruct leader: nil, fields: []
 
   @doc """
-  Parse a marc file.
+    Parse a marc file and return `JPMarc` struct or nil if a error occures when reading the specific file
   """
+  @spec parse_file(binary)::(JPMarc.t|nil)
   def parse_file(file) do
     case File.read(file) do
       {:ok, marc} ->
         parse_record(marc)
       {:error, reason} ->
         IO.puts "Error occured: #{reason}"
+        nil
     end
   end
 
+  @doc """
+    Parse a binary of marc and return `JPMarc` struct
+  """
+  @spec parse_file(binary)::JPMarc.t
   def parse_record(marc) do
     <<leader::bytes-size(24), rest::binary>> = marc
     leader = parse_leader(leader)

@@ -1,0 +1,20 @@
+#. TRANSLATORS: def JPMarc.parse_file(file)
+#: lib/jpmarc.ex:12 
+msgid ""
+"  Parse a marc file and return `JPMarc` struct or nil if a error occures when reading the specific file\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.parse_record(marc)
+#: lib/jpmarc.ex:26 
+msgid ""
+"  Parse a binary of marc and return `JPMarc` struct\n"
+msgstr ""
+#. TRANSLATORS: Elixir.JPMarc Summary
+#: lib/jpmarc.ex:2 
+msgid ""
+"  Library for parsing JPMARC\n"
+msgstr ""
+#. TRANSLATORS: @type t
+#: lib/jpmarc.ex:6 
+msgid ""
+"    Type that represents `JPMarc` struct with `:leader` as `JPMarc.Leader.t`, `:fiels` as List of `JPMarc.ControlField.t` or `JPMarc.DataField.t`\n"
+msgstr ""
