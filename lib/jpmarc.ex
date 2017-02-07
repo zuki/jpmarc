@@ -3,6 +3,11 @@ defmodule JPMarc do
   Documentation for JPMarc.
   """
 
+  @typedoc """
+      Type that represents JPMarc struct with :leader as JPMarc.Leader.t, :fiels as
+      List of JPMarc.ControlField.t or JPMarc.DataField.t
+  """
+  @type t :: %JPMarc{leader: JPMarc.Leader.t, fields: [JPMarc.ControlField.t | JPMarc.DataField.t]}
   defstruct leader: nil, fields: []
 
   @doc """
