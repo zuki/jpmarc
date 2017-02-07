@@ -56,9 +56,9 @@ defmodule JPMarc do
     %JPMarc.Leader{length: String.to_integer(length), status: status, type: type, level: level, base: String.to_integer(base)}
   end
 
-  defp parse_tag_data(tag, <<ind::bytes-size(2), "\x1f", rest::binary>> = data) do
+  defp parse_tag_data(tag, <<ind1::bytes-size(1), ind2::bytes-size(1), "\x1f", rest::binary>> = data) do
     subfields = parse_subfields(rest)
-    %JPMarc.DataField{tag: tag, indicator: ind, subfields: subfields}
+    %JPMarc.DataField{tag: tag, ind1: ind1, ind2: ind2, subfields: subfields}
   end
 
   defp parse_tag_data(tag, data) do

@@ -35,7 +35,8 @@ defmodule JPMarcTest do
     assert length(data_fields) == 36
 
     first_data_field = Enum.at(data_fields, 0)
-    assert first_data_field.indicator == "  "
+    assert first_data_field.ind1 == " "
+    assert first_data_field.ind2 == " "
     assert length(first_data_field.subfields) == 2
 
     first_subfield = Enum.at(first_data_field.subfields, 0)
