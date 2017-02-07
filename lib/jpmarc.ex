@@ -26,7 +26,7 @@ defmodule JPMarc do
   @doc """
     Parse a binary of marc and return `JPMarc` struct
   """
-  @spec parse_file(binary)::JPMarc.t
+  @spec parse_record(binary)::JPMarc.t
   def parse_record(marc) do
     <<leader::bytes-size(24), rest::binary>> = marc
     leader = parse_leader(leader)
