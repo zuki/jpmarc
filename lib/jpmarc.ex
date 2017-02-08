@@ -6,6 +6,7 @@ defmodule JPMarc do
   alias JPMarc.ControlField
   alias JPMarc.DataField
   alias JPMarc.SubField
+  alias JPMarc.Const
 
   @typedoc """
       Type that represents `JPMarc` struct
@@ -14,7 +15,6 @@ defmodule JPMarc do
   """
   @type t :: %JPMarc{leader: Leader.t, fields: [ControlField.t | DataField.t]}
   defstruct leader: nil, fields: []
-
 
   @doc """
     Parse a marc file and return `JPMarc` struct or nil if a error occures when reading the specific file
@@ -54,9 +54,9 @@ defmodule JPMarc do
   @spec to_marc(JPMarc.t)::String.t
   def to_marc(record) do
     {directories, data} = make_directories_data(record.fields)
-    marc = JPMarc.Leader.to_marc(record.leader) <> directories <> "\x1e" <> data <> "\x1d"
+    marc = JPMarc.Leader.to_marc(record.leader) <> directories <> Const.fs <> data <> Const.rs
     l = %Leader{record.leader | length: byte_size(marc), base: (25 + byte_size(directories))}
-    Leader.to_marc(l) <> directories <> "\x1e" <> data <> "\x1d"
+    Leader.to_marc(l) <> directories <> Const.fs <> data <> Const.rs
   end
 
   defp get_directories(block), do: _get_directories(block, [])
@@ -80,12 +80,12 @@ defmodule JPMarc do
   end
 
   defp parse_tag_data(tag, data) do
-    %ControlField{tag: tag, value: String.trim_trailing(data, "\x1e")}
+    %ControlField{tag: tag, value: String.trim_trailing(data, Const.fs)}
   end
 
   defp parse_subfields(data) do
-    data = String.trim_trailing(data, "\x1e")
-    String.split(data, "\x1f", trim: true)
+    data = String.trim_trailing(data, Const.fs)
+    String.split(data, Const.ss, trim: true)
       |> Enum.map(fn chunk ->
         <<code::bytes-size(1), value::binary>> = chunk
         %SubField{code: code, value: value}
