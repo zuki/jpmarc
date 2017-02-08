@@ -1,5 +1,12 @@
+#. TRANSLATORS: def JPMarc.ControlField.to_marc(field)
+#: lib/jpmarc/control_field.ex:10 
+msgid ""
+"  Return the MARC Format of the control field\n"
+msgstr ""
 #. TRANSLATORS: @type t
 #: lib/jpmarc/control_field.ex:2 
 msgid ""
-"    Type that represents `JPMarc.ControlField` struct with `:tag` as binary and `:value` as binary.\n"
+"    Type that represents `JPMarc.ControlField` struct\n"
+"\n"
+"    This is constructed with `:tag` as binary and `:value` as binary.\n"
 msgstr ""

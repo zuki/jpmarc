@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-02-07 15:24+0900\n"
+"PO-Revision-Date: 2017-02-08 11:15+0900\n"
 "Last-Translator: Keiji Suzuki <EMAIL@ADDRESS>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -12,11 +12,18 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.8.11\n"
 
+#. TRANSLATORS: def JPMarc.ControlField.to_marc(field)
+#: lib/jpmarc/control_field.ex:10
+msgid "  Return the MARC Format of the control field\n"
+msgstr "このコントロールフィールドのMARC形式の文字列を返します。\n"
+
 #. TRANSLATORS: @type t
 #: lib/jpmarc/control_field.ex:2
 msgid ""
-"    Type that represents `JPMarc.ControlField` struct with `:tag` as binary "
-"and `:value` as binary.\n"
+"    Type that represents `JPMarc.ControlField` struct\n"
+"\n"
+"    This is constructed with `:tag` as binary and `:value` as binary.\n"
 msgstr ""
-"`JPMarc.ControlField`構造体の型。バイナリの`:tag`およびバイナリの"
-"`:value`からなる。\n"
+"`JPMarc.ControlField`構造体の型\n"
+"\n"
+"バイナリの`:tag`およびバイナリの`:value`\n"

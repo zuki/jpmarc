@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-02-07 15:24+0900\n"
+"PO-Revision-Date: 2017-02-08 11:16+0900\n"
 "Last-Translator: Keiji Suzuki <EMAIL@ADDRESS>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -12,11 +12,20 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.8.11\n"
 
+#. TRANSLATORS: def JPMarc.DataField.to_marc(field)
+#: lib/jpmarc/data_field.ex:10
+msgid "  Return the MARC Format of the data field\n"
+msgstr "このデータフィールドのMARC形式の文字列を返します。\n"
+
 #. TRANSLATORS: @type t
 #: lib/jpmarc/data_field.ex:2
 msgid ""
-"    Type that represents `JPMarc.DataField` struct with `:tag` as binary, `:"
-"indicator` as binary and `:subfields` as List of `JPMarc.SubField.t`\n"
+"    Type that represents `JPMarc.DataField` struct.\n"
+"\n"
+"    This is constructed with `:tag` as binary, `:ind1` as binary, `:ind2` as "
+"binary and `:subfields` as List of `JPMarc.SubField.t`\n"
 msgstr ""
-"`JPMarc.DataField`構造体の型。バイナリの`:tag`、バイナリの`:indicator`、"
-"`JPMarc.SubField.t`のリストの`:subfields`からなる。\n"
+"`JPMarc.DataField`構造体の型。\n"
+"\n"
+"バイナリの`:tag`、バイナリの`:indicator`、`JPMarc.SubField.t`のリストの`:"
+"subfields`で構成されます。\n"

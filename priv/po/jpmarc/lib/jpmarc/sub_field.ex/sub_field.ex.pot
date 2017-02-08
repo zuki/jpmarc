@@ -1,5 +1,12 @@
+#. TRANSLATORS: def JPMarc.SubField.to_marc(field)
+#: lib/jpmarc/sub_field.ex:10 
+msgid ""
+"  Return the MARC Format of the subfield\n"
+msgstr ""
 #. TRANSLATORS: @type t
 #: lib/jpmarc/sub_field.ex:2 
 msgid ""
-"    Type that represents `JPMarc.SubField` struct with `:code` as binary and `:value` as binary.\n"
+"    Type that represents `JPMarc.SubField` struct\n"
+"\n"
+"    This is constructed with `:code` as binary and `:value` as binary.\n"
 msgstr ""

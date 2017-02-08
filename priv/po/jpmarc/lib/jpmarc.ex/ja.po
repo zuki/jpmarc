@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-02-07 15:24+0900\n"
+"PO-Revision-Date: 2017-02-08 11:19+0900\n"
 "Last-Translator: Keiji Suzuki <EMAIL@ADDRESS>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -11,6 +11,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.8.11\n"
+
+#. TRANSLATORS: def JPMarc.to_marc(record)
+#: lib/jpmarc.ex:44
+msgid "  Return the MARC Format of the JPMarc struct\n"
+msgstr "このJPMarc構造体のMARC形式の文字列を返します。\n"
 
 #. TRANSLATORS: def JPMarc.parse_file(file)
 #: lib/jpmarc.ex:12

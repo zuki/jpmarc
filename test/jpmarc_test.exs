@@ -21,6 +21,7 @@ defmodule JPMarcTest do
     assert leader.type == "a"
     assert leader.level == "m"
     assert leader.status == "c"
+    assert leader.format == "i"
   end
 
   test "control_fields", %{control_fields: control_fields} do
@@ -42,5 +43,11 @@ defmodule JPMarcTest do
     first_subfield = Enum.at(first_data_field.subfields, 0)
     assert first_subfield.code == "a"
     assert first_subfield.value == "22339211"
+  end
+
+  test "write marc", %{record: record} do
+    marc = JPMarc.to_marc(record)
+    {:ok, org} = File.read("marc.mrc")
+    assert marc == org
   end
 end

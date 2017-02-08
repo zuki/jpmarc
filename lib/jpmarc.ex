@@ -41,6 +41,16 @@ defmodule JPMarc do
     %__MODULE__{leader: leader, fields: fields}
   end
 
+  @doc """
+    Return the MARC Format of the JPMarc struct
+  """
+  def to_marc(record) do
+    {directories, data} = make_directories_data(record.fields)
+    marc = JPMarc.Leader.to_marc(record.leader) <> directories <> "\x1e" <> data <> "\x1d"
+    l = %JPMarc.Leader{record.leader | length: byte_size(marc), base: (25 + byte_size(directories))}
+    JPMarc.Leader.to_marc(l) <> directories <> "\x1e" <> data <> "\x1d"
+  end
+
   defp get_directories(block), do: _get_directories(block, [])
   defp _get_directories("", acc) do
     Enum.reverse acc
@@ -52,11 +62,11 @@ defmodule JPMarc do
 
   defp parse_leader(leader) do
     <<length::bytes-size(5), status::bytes-size(1), type::bytes-size(1),
-      level::bytes-size(1), _::bytes-size(4), base::bytes-size(5), _::binary>> = leader
-    %JPMarc.Leader{length: String.to_integer(length), status: status, type: type, level: level, base: String.to_integer(base)}
+      level::bytes-size(1), _::bytes-size(4), base::bytes-size(5), encoding::bytes-size(1), format::bytes-size(1), _::binary>> = leader
+    %JPMarc.Leader{length: String.to_integer(length), status: status, type: type, level: level, base: String.to_integer(base), encoding: encoding, format: format}
   end
 
-  defp parse_tag_data(tag, <<ind1::bytes-size(1), ind2::bytes-size(1), "\x1f", rest::binary>> = data) do
+  defp parse_tag_data(tag, <<ind1::bytes-size(1), ind2::bytes-size(1), "\x1f", rest::binary>>) do
     subfields = parse_subfields(rest)
     %JPMarc.DataField{tag: tag, ind1: ind1, ind2: ind2, subfields: subfields}
   end
@@ -67,10 +77,29 @@ defmodule JPMarc do
 
   defp parse_subfields(data) do
     data = String.trim_trailing(data, "\x1e")
-    fields = String.split(data, "\x1f", trim: true)
+    String.split(data, "\x1f", trim: true)
       |> Enum.map(fn chunk ->
         <<code::bytes-size(1), value::binary>> = chunk
         %JPMarc.SubField{code: code, value: value}
     end)
+  end
+
+  defp make_directories_data(fields), do: _make_directories_data(fields, {[], []}, 0)
+  defp _make_directories_data([], {dir, data}, _pos),
+    do: {
+      dir |> Enum.reverse |> Enum.join,
+      data |> Enum.reverse |> Enum.join
+    }
+  defp _make_directories_data([head|tail], {dir, data}, pos) do
+    marc = case head.__struct__ do
+      JPMarc.ControlField -> JPMarc.ControlField.to_marc(head)
+      JPMarc.DataField -> JPMarc.DataField.to_marc(head)
+    end
+
+    length = byte_size(marc)
+    length_str = length |> Integer.to_string |> String.pad_leading(4, "0")
+    pos_str = pos |> Integer.to_string |> String.pad_leading(5, "0")
+
+    _make_directories_data(tail, {[head.tag <> length_str <> pos_str|dir] , [marc|data]}, pos + length)
   end
 end

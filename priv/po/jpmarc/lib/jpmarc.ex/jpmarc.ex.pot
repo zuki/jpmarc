@@ -1,3 +1,8 @@
+#. TRANSLATORS: def JPMarc.to_marc(record)
+#: lib/jpmarc.ex:44 
+msgid ""
+"  Return the MARC Format of the JPMarc struct\n"
+msgstr ""
 #. TRANSLATORS: def JPMarc.parse_file(file)
 #: lib/jpmarc.ex:12 
 msgid ""
