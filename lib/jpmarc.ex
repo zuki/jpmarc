@@ -2,12 +2,19 @@ defmodule JPMarc do
   @moduledoc """
     Library for parsing JPMARC
   """
+  alias JPMarc.Leader
+  alias JPMarc.ControlField
+  alias JPMarc.DataField
+  alias JPMarc.SubField
 
   @typedoc """
-      Type that represents `JPMarc` struct with `:leader` as `JPMarc.Leader.t`, `:fiels` as List of `JPMarc.ControlField.t` or `JPMarc.DataField.t`
+      Type that represents `JPMarc` struct
+
+      This is constructed with `:leader` as `JPMarc.Leader.t`, `:fiels` as List of `JPMarc.ControlField.t` or `JPMarc.DataField.t`
   """
-  @type t :: %JPMarc{leader: JPMarc.Leader.t, fields: [JPMarc.ControlField.t | JPMarc.DataField.t]}
+  @type t :: %JPMarc{leader: Leader.t, fields: [ControlField.t | DataField.t]}
   defstruct leader: nil, fields: []
+
 
   @doc """
     Parse a marc file and return `JPMarc` struct or nil if a error occures when reading the specific file
@@ -44,11 +51,12 @@ defmodule JPMarc do
   @doc """
     Return the MARC Format of the JPMarc struct
   """
+  @spec to_marc(JPMarc.t)::String.t
   def to_marc(record) do
     {directories, data} = make_directories_data(record.fields)
     marc = JPMarc.Leader.to_marc(record.leader) <> directories <> "\x1e" <> data <> "\x1d"
-    l = %JPMarc.Leader{record.leader | length: byte_size(marc), base: (25 + byte_size(directories))}
-    JPMarc.Leader.to_marc(l) <> directories <> "\x1e" <> data <> "\x1d"
+    l = %Leader{record.leader | length: byte_size(marc), base: (25 + byte_size(directories))}
+    Leader.to_marc(l) <> directories <> "\x1e" <> data <> "\x1d"
   end
 
   defp get_directories(block), do: _get_directories(block, [])
@@ -63,16 +71,16 @@ defmodule JPMarc do
   defp parse_leader(leader) do
     <<length::bytes-size(5), status::bytes-size(1), type::bytes-size(1),
       level::bytes-size(1), _::bytes-size(4), base::bytes-size(5), encoding::bytes-size(1), format::bytes-size(1), _::binary>> = leader
-    %JPMarc.Leader{length: String.to_integer(length), status: status, type: type, level: level, base: String.to_integer(base), encoding: encoding, format: format}
+    %Leader{length: String.to_integer(length), status: status, type: type, level: level, base: String.to_integer(base), encoding: encoding, format: format}
   end
 
   defp parse_tag_data(tag, <<ind1::bytes-size(1), ind2::bytes-size(1), "\x1f", rest::binary>>) do
     subfields = parse_subfields(rest)
-    %JPMarc.DataField{tag: tag, ind1: ind1, ind2: ind2, subfields: subfields}
+    %DataField{tag: tag, ind1: ind1, ind2: ind2, subfields: subfields}
   end
 
   defp parse_tag_data(tag, data) do
-    %JPMarc.ControlField{tag: tag, value: String.trim_trailing(data, "\x1e")}
+    %ControlField{tag: tag, value: String.trim_trailing(data, "\x1e")}
   end
 
   defp parse_subfields(data) do
@@ -80,7 +88,7 @@ defmodule JPMarc do
     String.split(data, "\x1f", trim: true)
       |> Enum.map(fn chunk ->
         <<code::bytes-size(1), value::binary>> = chunk
-        %JPMarc.SubField{code: code, value: value}
+        %SubField{code: code, value: value}
     end)
   end
 
@@ -92,8 +100,8 @@ defmodule JPMarc do
     }
   defp _make_directories_data([head|tail], {dir, data}, pos) do
     marc = case head.__struct__ do
-      JPMarc.ControlField -> JPMarc.ControlField.to_marc(head)
-      JPMarc.DataField -> JPMarc.DataField.to_marc(head)
+      ControlField -> ControlField.to_marc(head)
+      DataField -> DataField.to_marc(head)
     end
 
     length = byte_size(marc)

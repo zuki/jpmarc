@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-02-08 11:19+0900\n"
+"PO-Revision-Date: 2017-02-08 21:06+0900\n"
 "Last-Translator: Keiji Suzuki <EMAIL@ADDRESS>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -13,21 +13,21 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 
 #. TRANSLATORS: def JPMarc.to_marc(record)
-#: lib/jpmarc.ex:44
+#: lib/jpmarc.ex:51
 msgid "  Return the MARC Format of the JPMarc struct\n"
 msgstr "このJPMarc構造体のMARC形式の文字列を返します。\n"
 
 #. TRANSLATORS: def JPMarc.parse_file(file)
-#: lib/jpmarc.ex:12
+#: lib/jpmarc.ex:19
 msgid ""
 "  Parse a marc file and return `JPMarc` struct or nil if a error occures "
 "when reading the specific file\n"
 msgstr ""
-"MARCファイルのパスである文字列を受け取り、`JPMarc`構造体を返します。ファイ"
-"ルの読み込み時にエラーが発生した場合は、`nil`を返します。\n"
+"MARCファイルのパスである文字列を受け取り、`JPMarc`構造体を返します。ファ"
+"イルの読み込み時にエラーが発生した場合は、`nil`を返します。\n"
 
 #. TRANSLATORS: def JPMarc.parse_record(marc)
-#: lib/jpmarc.ex:26
+#: lib/jpmarc.ex:33
 msgid "  Parse a binary of marc and return `JPMarc` struct\n"
 msgstr ""
 "MARC形式の文字列をパースして`JPMarc`構造体を返します。\n"
@@ -39,11 +39,14 @@ msgid "  Library for parsing JPMARC\n"
 msgstr "JPMARCを解析するライブラリ\n"
 
 #. TRANSLATORS: @type t
-#: lib/jpmarc.ex:6
+#: lib/jpmarc.ex:10
 msgid ""
-"    Type that represents `JPMarc` struct with `:leader` as `JPMarc.Leader."
-"t`, `:fiels` as List of `JPMarc.ControlField.t` or `JPMarc.DataField.t`\n"
+"    Type that represents `JPMarc` struct\n"
+"\n"
+"    This is constructed with `:leader` as `JPMarc.Leader.t`, `:fiels` as "
+"List of `JPMarc.ControlField.t` or `JPMarc.DataField.t`\n"
 msgstr ""
-"`JPMarc`構造体の型。`JPMarc.Leader.t`の`:leader`および、`JPMarc."
-"ControlField.t`\n"
-"または`JPMarc.DataField.t`のリストの`:fields`からなる。\n"
+"`JPMarc`構造体の型。\n"
+"\n"
+"`JPMarc.Leader.t`の`:leader`および、`JPMarc.ControlField.t`\n"
+"または`JPMarc.DataField.t`のリストの`:fields`で構成されます。\n"

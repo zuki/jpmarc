@@ -1,0 +1,15 @@
+#. TRANSLATORS: def JPMarc.Const.ss()
+#: lib/jpmarc/const.ex:14 
+msgid ""
+" SubField Separator\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.Const.rs()
+#: lib/jpmarc/const.ex:2 
+msgid ""
+" Record Separator\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.Const.fs()
+#: lib/jpmarc/const.ex:8 
+msgid ""
+" Field Separator\n"
+msgstr ""

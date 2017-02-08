@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-02-08 11:17+0900\n"
+"PO-Revision-Date: 2017-02-08 21:02+0900\n"
 "Last-Translator: Keiji Suzuki <EMAIL@ADDRESS>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -13,17 +13,17 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 
 #. TRANSLATORS: def JPMarc.SubField.to_marc(field)
-#: lib/jpmarc/sub_field.ex:10
+#: lib/jpmarc/sub_field.ex:12
 msgid "  Return the MARC Format of the subfield\n"
 msgstr "このサブフィールドのMARC形式の文字列を返します。\n"
 
 #. TRANSLATORS: @type t
-#: lib/jpmarc/sub_field.ex:2
+#: lib/jpmarc/sub_field.ex:4
 msgid ""
 "    Type that represents `JPMarc.SubField` struct\n"
 "\n"
-"    This is constructed with `:code` as binary and `:value` as binary.\n"
+"    This is constructed with `:code` as String and `:value` as String.\n"
 msgstr ""
 "`JPMarc.SubField`構造体の型。\n"
 "\n"
-"バイナリの`:code`およびバイナリの`:value`で構成されます。\n"
+"文字列の`:code`および文字列の`:value`で構成されます。\n"

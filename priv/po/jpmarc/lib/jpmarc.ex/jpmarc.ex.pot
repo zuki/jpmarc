@@ -1,15 +1,15 @@
 #. TRANSLATORS: def JPMarc.to_marc(record)
-#: lib/jpmarc.ex:44 
+#: lib/jpmarc.ex:51 
 msgid ""
 "  Return the MARC Format of the JPMarc struct\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.parse_file(file)
-#: lib/jpmarc.ex:12 
+#: lib/jpmarc.ex:19 
 msgid ""
 "  Parse a marc file and return `JPMarc` struct or nil if a error occures when reading the specific file\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.parse_record(marc)
-#: lib/jpmarc.ex:26 
+#: lib/jpmarc.ex:33 
 msgid ""
 "  Parse a binary of marc and return `JPMarc` struct\n"
 msgstr ""
@@ -19,7 +19,9 @@ msgid ""
 "  Library for parsing JPMARC\n"
 msgstr ""
 #. TRANSLATORS: @type t
-#: lib/jpmarc.ex:6 
+#: lib/jpmarc.ex:10 
 msgid ""
-"    Type that represents `JPMarc` struct with `:leader` as `JPMarc.Leader.t`, `:fiels` as List of `JPMarc.ControlField.t` or `JPMarc.DataField.t`\n"
+"    Type that represents `JPMarc` struct\n"
+"\n"
+"    This is constructed with `:leader` as `JPMarc.Leader.t`, `:fiels` as List of `JPMarc.ControlField.t` or `JPMarc.DataField.t`\n"
 msgstr ""

@@ -1,0 +1,28 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2017-02-08 21:00+0900\n"
+"Last-Translator: DSpaceユーザ <EMAIL@ADDRESS>\n"
+"Language-Team: Japanese\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.8.11\n"
+
+#. TRANSLATORS: def JPMarc.Const.ss()
+#: lib/jpmarc/const.ex:14
+msgid " SubField Separator\n"
+msgstr "サブフィールド・セパレータ: “\\x1f”\n"
+
+#. TRANSLATORS: def JPMarc.Const.rs()
+#: lib/jpmarc/const.ex:2
+msgid " Record Separator\n"
+msgstr "レコード・セパレータ: “\\x1d”\n"
+
+#. TRANSLATORS: def JPMarc.Const.fs()
+#: lib/jpmarc/const.ex:8
+msgid " Field Separator\n"
+msgstr "フィールド・セパレータ: “\\x1e”\n"

@@ -1,12 +1,12 @@
 #. TRANSLATORS: def JPMarc.DataField.to_marc(field)
-#: lib/jpmarc/data_field.ex:10 
+#: lib/jpmarc/data_field.ex:13 
 msgid ""
 "  Return the MARC Format of the data field\n"
 msgstr ""
 #. TRANSLATORS: @type t
-#: lib/jpmarc/data_field.ex:2 
+#: lib/jpmarc/data_field.ex:5 
 msgid ""
 "    Type that represents `JPMarc.DataField` struct.\n"
 "\n"
-"    This is constructed with `:tag` as binary, `:ind1` as binary, `:ind2` as binary and `:subfields` as List of `JPMarc.SubField.t`\n"
+"    This is constructed with `:tag` as String, `:ind1` as String, `:ind2` as String and `:subfields` as List of `JPMarc.SubField.t`\n"
 msgstr ""

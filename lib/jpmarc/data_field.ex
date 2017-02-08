@@ -1,21 +1,25 @@
 defmodule JPMarc.DataField do
+  alias JPMarc.Const
+  alias JPMarc.SubField
+
   @typedoc """
       Type that represents `JPMarc.DataField` struct.
 
-      This is constructed with `:tag` as binary, `:ind1` as binary, `:ind2` as binary and `:subfields` as List of `JPMarc.SubField.t`
+      This is constructed with `:tag` as String, `:ind1` as String, `:ind2` as String and `:subfields` as List of `JPMarc.SubField.t`
   """
-  @type t :: %JPMarc.DataField{tag: binary, ind1: binary, ind2: binary, subfields: [JPMarc.SubField.t]}
+  @type t :: %JPMarc.DataField{tag: String.t, ind1: String.t, ind2: String.t, subfields: [SubField.t]}
   defstruct tag: "", ind1: " ", ind2: " ", subfields: []
 
   @doc """
     Return the MARC Format of the data field
   """
+  @spec to_marc(JPMarc.DataField.t)::String.t
   def to_marc(field) do
-    sfs = field.subfields
-      |> Enum.map(&JPMarc.SubField.to_marc/1)
+    subfields = field.subfields
+      |> Enum.map(&SubField.to_marc/1)
       |> Enum.join
 
-    field.ind1 <> field.ind2 <> sfs <> "\x1e"
+    field.ind1 <> field.ind2 <> subfields <> Const.fs
   end
 
 end
