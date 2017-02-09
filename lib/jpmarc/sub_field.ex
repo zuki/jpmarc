@@ -1,5 +1,7 @@
 defmodule JPMarc.SubField do
-  alias JPMarc.Const
+  # Subfield separator
+  @ss "\x1f"
+
 
   @typedoc """
       Type that represents `JPMarc.SubField` struct
@@ -14,7 +16,7 @@ defmodule JPMarc.SubField do
   """
   @spec to_marc(JPMarc.SubField.t)::String.t
   def to_marc(field) do
-    Const.ss <> field.code <> field.value
+    @ss <> field.code <> field.value
   end
 
 end

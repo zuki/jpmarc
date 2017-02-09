@@ -1,5 +1,6 @@
 defmodule JPMarc.ControlField do
-  alias JPMarc.Const
+  # Field separator
+  @fs "\x1e"
 
   @typedoc """
       Type that represents `JPMarc.ControlField` struct
@@ -14,7 +15,7 @@ defmodule JPMarc.ControlField do
   """
   @spec to_marc(JPMarc.ControlField.t)::String.t
   def to_marc(field) do
-     field.value <> Const.fs
+     field.value <> @fs
   end
 
 end

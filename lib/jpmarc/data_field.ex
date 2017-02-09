@@ -1,6 +1,8 @@
 defmodule JPMarc.DataField do
-  alias JPMarc.Const
   alias JPMarc.SubField
+
+  # Field separator
+  @fs "\x1e"
 
   @typedoc """
       Type that represents `JPMarc.DataField` struct.
@@ -19,7 +21,7 @@ defmodule JPMarc.DataField do
       |> Enum.map(&SubField.to_marc/1)
       |> Enum.join
 
-    field.ind1 <> field.ind2 <> subfields <> Const.fs
+    field.ind1 <> field.ind2 <> subfields <> @fs
   end
 
 end
