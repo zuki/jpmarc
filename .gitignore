@@ -9,4 +9,4 @@ doc
 mix.lock
 priv/lang
 *.pot_db
-*.mrc
+marc.mrc
