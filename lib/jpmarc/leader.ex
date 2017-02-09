@@ -5,7 +5,7 @@ defmodule JPMarc.Leader do
       This constructed with `:length` as integer, `:status` as String, `:type` of String, `:level` as String, `:base` as integer, `:encoding` String, `:format` String
   """
   @type t :: %JPMarc.Leader{length: integer, status: String.t, type: String.t, level: String.t, base: integer, encoding: String.t, format: String.t}
-  defstruct length: 0, status: "", type: "", level: "", base: 0, encoding: "z", format: "i"
+  defstruct length: 0, status: "n", type: "a", level: "m", base: 0, encoding: "z", format: "i"
 
   @doc """
     Return the MARC Format of the leader
