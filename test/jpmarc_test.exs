@@ -1,11 +1,11 @@
 defmodule JPMarcTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   alias JPMarc.Leader
   alias JPMarc.ControlField, as: CF
   alias JPMarc.DataField, as: DF
   alias JPMarc.SubField, as: SF
-  import JPMarc.RecordSigil
-  
+  import JPMarc.MarcSigil
+
   setup_all do
     record = JPMarc.parse_file("test/data/test.mrc")
     {control_fields, data_fields} =

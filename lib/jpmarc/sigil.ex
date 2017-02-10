@@ -1,4 +1,4 @@
-defmodule JPMarc.RecordSigil do
+defmodule JPMarc.MarcSigil do
   @doc """
   Implement the "~M" sigil, which takes a string containig
   JPMARC representation and return JPMarc struct.
@@ -17,7 +17,6 @@ defmodule JPMarc.RecordSigil do
     [leader|fields] = lines |> String.split("\n") |> Enum.map(&String.trim/1) |> Enum.map(fn (l) ->
       case l do
         <<"LDR\t \t", leader::binary>> ->
-          IO.puts leader
           JPMarc.parse_leader(leader)
         <<"FMT", _::binary>> -> []
         <<"SYS", _::binary>> -> []
