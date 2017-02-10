@@ -10,3 +10,4 @@ mix.lock
 priv/lang
 *.pot_db
 marc.mrc
+*.txt

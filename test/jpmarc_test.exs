@@ -4,7 +4,8 @@ defmodule JPMarcTest do
   alias JPMarc.ControlField, as: CF
   alias JPMarc.DataField, as: DF
   alias JPMarc.SubField, as: SF
-
+  import JPMarc.RecordSigil
+  
   setup_all do
     record = JPMarc.parse_file("test/data/test.mrc")
     {control_fields, data_fields} =
@@ -68,6 +69,19 @@ defmodule JPMarcTest do
     record = %JPMarc{leader: l, fields: [df1, df2, df3, cf1]}
     sorted = %JPMarc{leader: l, fields: [cf1, df3, df2, df1]}
     assert JPMarc.sort(record) == sorted
+  end
+
+  test "~M sigil" do
+    record = ~M"""
+    FMT	 	BK
+    LDR	 	00000cam a22     zi 4500
+    001	 	027524410
+    24500	 	|6 880-01 |a タイトル / |c 山田, 太郎著.
+    260	 	|6 880-02 |a 東京 : |b A出版, |c 2017.2.
+    300	 	|a 325p ; |c 21cm.
+    SYS	 	027524410
+    """
+    assert record.__struct__ == JPMarc
   end
 
 end
