@@ -17,4 +17,15 @@ defmodule JPMarc.Leader do
     "#{length}#{l.status}#{l.type}#{l.level} a22#{base}#{l.encoding}#{l.format} 4500"
   end
 
+  defimpl Inspect, for: JPMarc.Leader do
+    def inspect(leader, _opts) do
+      JPMarc.Leader.to_marc(leader)
+    end
+  end
+
+  defimpl String.Chars, for: JPMarc.Leader do
+    def to_string(leader) do
+      JPMarc.Leader.to_marc(leader)
+    end
+  end
 end

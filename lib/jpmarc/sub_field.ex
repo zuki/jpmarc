@@ -19,4 +19,16 @@ defmodule JPMarc.SubField do
     @ss <> field.code <> field.value
   end
 
+  defimpl Inspect, for: JPMarc.SubField do
+    def inspect(%JPMarc.SubField{code: code, value: value}, _opts) do
+      "$#{code} #{value}"
+    end
+  end
+
+  defimpl String.Chars, for: JPMarc.SubField do
+    def to_string(%JPMarc.SubField{code: code, value: value}) do
+      "$#{code} #{value}"
+    end
+  end
+
 end

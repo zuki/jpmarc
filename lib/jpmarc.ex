@@ -62,6 +62,19 @@ defmodule JPMarc do
     Leader.to_marc(l) <> directories <> @fs <> data <> @rs
   end
 
+  @doc """
+    Sort its fields by tag and subfields of field
+  """
+  @spec sort(JPMarc.t)::JPMarc.t
+  def sort(record) do
+    {control_fields, data_fields} =
+      Enum.split_with(record.fields, &(&1.__struct__ == ControlField))
+    sorted_control_fields = control_fields |> Enum.sort(&(&1.tag <= &2.tag))
+    sorted_data_fields = data_fields |> Enum.map(&DataField.sort/1) |> Enum.sort(&(&1.tag<>&1.ind1<>&1.ind2 <= &2.tag<>&2.ind1<>&2.ind2))
+    %__MODULE__{record | fields: sorted_control_fields ++ sorted_data_fields}
+  end
+
+
   defp get_directories(block), do: _get_directories(block, [])
   defp _get_directories("", acc) do
     Enum.reverse acc
@@ -113,4 +126,17 @@ defmodule JPMarc do
 
     _make_directories_data(tail, {[head.tag <> length_str <> pos_str|dir] , [marc|data]}, pos + length)
   end
+
+  defimpl Inspect do
+    def inspect(%JPMarc{leader: leader, fields: fields}, _opts) do
+      "#{leader}\n#{Enum.join(fields, "\n")}"
+    end
+  end
+
+  defimpl String.Chars, for: JPMarc do
+    def to_string(%JPMarc{leader: leader, fields: fields}) do
+      "#{leader}, #{Enum.join(fields, ", ")}"
+    end
+  end
+
 end

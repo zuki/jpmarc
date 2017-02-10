@@ -24,4 +24,25 @@ defmodule JPMarc.DataField do
     field.ind1 <> field.ind2 <> subfields <> @fs
   end
 
+  @doc """
+    Sort its subfields by code
+  """
+  @spec sort(JPMarc.DataField.t)::JPMarc.DataField.t
+  def sort(field) do
+    sfs = field.subfields |> Enum.sort(&(&1.code <= &2.code))
+    %__MODULE__{field | subfields: sfs}
+  end
+
+  defimpl Inspect do
+    def inspect(%JPMarc.DataField{tag: tag, ind1: ind1, ind2: ind2, subfields: subfields}, _opts) do
+      "#{tag} #{ind1} #{ind2} #{Enum.join(subfields, " ")}"
+    end
+  end
+
+  defimpl String.Chars, for: JPMarc.DataField do
+    def to_string(%JPMarc.DataField{tag: tag, ind1: ind1, ind2: ind2, subfields: subfields}) do
+      "#{tag} #{ind1} #{ind2} #{Enum.join(subfields, " ")}"
+    end
+  end
+
 end

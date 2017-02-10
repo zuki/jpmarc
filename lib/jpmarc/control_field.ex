@@ -18,4 +18,16 @@ defmodule JPMarc.ControlField do
      field.value <> @fs
   end
 
+  defimpl Inspect do
+    def inspect(%JPMarc.ControlField{tag: tag, value: value}, _opts) do
+      "#{tag} #{value}"
+    end
+  end
+
+  defimpl String.Chars, for: JPMarc.ControlField do
+    def to_string(%JPMarc.ControlField{tag: tag, value: value}) do
+      "#{tag} #{value}"
+    end
+  end
+
 end
