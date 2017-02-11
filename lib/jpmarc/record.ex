@@ -57,9 +57,8 @@ defmodule JPMarc.Record do
   @spec to_xml(t)::String.t
   def to_xml(record) do
     sorted = sort(record)
-    {control_fields, data_fields} = Enum.split_with(sorted.fields, &(&1.__struct__ == ControlField))
-    cf_xml = control_fields |> Enum.map(&ControlField.to_xml/1)
-    df_xml = data_fields |> Enum.map(&DataField.to_xml/1)
+    cf_xml = sorted.control_fields |> Enum.map(&ControlField.to_xml/1)
+    df_xml = sorted.data_fields |> Enum.map(&DataField.to_xml/1)
     xml = [Leader.to_xml(sorted.leader)] ++ cf_xml ++ df_xml
     element(:record, nil, xml)
   end
