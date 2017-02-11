@@ -1,5 +1,5 @@
 defmodule JPMarc.SubField do
-  @moduledoc"""
+  @moduledoc """
   Tools for working with JPMARC SubFields
   """
 
@@ -11,13 +11,13 @@ defmodule JPMarc.SubField do
 
       This is constructed with `:code` as String and `:value` as String.
   """
-  @type t :: %JPMarc.SubField{code: String.t, value: String.t}
+  @type t :: %__MODULE__{code: String.t, value: String.t}
   defstruct code: "", value: ""
 
-  @doc"""
+  @doc """
   Decode a string representation to JPMarc.SubField struct
   """
-  @spec decode(String.t)::[JPMarc.SubField.t]
+  @spec decode(String.t)::[t]
   def decode(data) do
     data = String.trim_trailing(data, @fs)
     String.split(data, @ss, trim: true)
@@ -30,15 +30,15 @@ defmodule JPMarc.SubField do
   @doc """
     Return the MARC Format of the subfield
   """
-  @spec to_marc(JPMarc.SubField.t)::String.t
+  @spec to_marc(t)::String.t
   def to_marc(field) do
     @ss <> field.code <> field.value
   end
 
-  @doc"""
+  @doc """
   Return a tuple representing its xml element
   """
-  @spec to_xml(JPMarc.SubField.t)::tuple
+  @spec to_xml(t)::tuple
   def to_xml(sf) do
     {:subfield, %{code: sf.code}, sf.value}
   end

@@ -1,5 +1,7 @@
 defmodule JPMarcTest do
   use ExUnit.Case, async: true
+  alias JPMarc
+  alias JPMarc.Record
   alias JPMarc.Leader
   alias JPMarc.ControlField, as: CF
   alias JPMarc.DataField, as: DF
@@ -7,19 +9,18 @@ defmodule JPMarcTest do
   import JPMarc.MarcSigil
 
   setup_all do
-    record = JPMarc.parse_file("test/data/test.mrc")
-    {control_fields, data_fields} =
-      Enum.split_with(record.fields, &(&1.__struct__ == CF))
+    records = JPMarc.parse_file("test/data/test.mrc")
+    record = Enum.at(records, 0)
     {:ok, [
+      records: records,
       record: record,
       leader: record.leader,
-      control_fields: control_fields,
-      data_fields: data_fields]}
+      control_fields: record.control_fields,
+      data_fields: record.data_fields]}
   end
 
-  test "Read a MARC file", %{record: record} do
-    assert record.leader != nil
-    assert length(record.fields) == 7
+  test "Parse MARC file", %{records: records} do
+    assert length(records) == 1
   end
 
   test "Parse leader", %{leader: leader} do
@@ -49,7 +50,7 @@ defmodule JPMarcTest do
   end
 
   test "Write a MARC file", %{record: record} do
-    marc = JPMarc.to_marc(record)
+    marc = JPMarc.to_marc([record])
     {:ok, org} = File.read("test/data/test.mrc")
     assert marc == org
   end
@@ -66,9 +67,9 @@ defmodule JPMarcTest do
     df3 = %DF{tag: "100", ind1: " ", ind2: " ", subfields: [%SF{code: "a", value: "012345"}]}
     cf1 = %CF{tag: "001", value: "12345"}
     l = %Leader{}
-    record = %JPMarc{leader: l, fields: [df1, df2, df3, cf1]}
-    sorted = %JPMarc{leader: l, fields: [cf1, df3, df2, df1]}
-    assert JPMarc.sort(record) == sorted
+    record = %Record{leader: l, data_fields: [df1, df2, df3], control_fields: [cf1]}
+    sorted = %Record{leader: l, control_fields: [cf1], data_fields: [df3, df2, df1]}
+    assert Record.sort(record) == sorted
   end
 
   test "~M sigil" do
@@ -81,7 +82,7 @@ defmodule JPMarcTest do
     300	 	|a 325p ; |c 21cm.
     SYS	 	027524410
     """
-    assert record.__struct__ == JPMarc
+    assert record.__struct__ == Record
   end
 
 end

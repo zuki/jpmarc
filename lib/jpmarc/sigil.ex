@@ -4,7 +4,7 @@ defmodule JPMarc.MarcSigil do
   JPMARC representation and return JPMarc struct.
   """
 
-  alias JPMarc
+  alias JPMarc.Record
   alias JPMarc.ControlField, as: CF
   alias JPMarc.DataField, as: DF
   alias JPMarc.SubField, as: SF
@@ -33,7 +33,8 @@ defmodule JPMarc.MarcSigil do
         _ -> []
       end
     end) |> List.flatten()
-    %JPMarc{leader: leader, fields: fields}
+    {control_fields, data_fields} = Enum.split_with(fields, &(&1.__struct__ == ControlField))
+    %Record{leader: leader, control_fields: control_fields, data_fields: data_fields}
   end
 
   defp make_data_field(tag, ind1, ind2, value) do

@@ -1,5 +1,5 @@
 defmodule JPMarc.ControlField do
-  @moduledoc"""
+  @moduledoc """
   Tools for working with JPMARC ControlFields
   """
 
@@ -10,13 +10,13 @@ defmodule JPMarc.ControlField do
 
       This is constructed with `:tag` as String and `:value` as String.
   """
-  @type t :: %JPMarc.ControlField{tag: String.t, value: String.t}
+  @type t :: %__MODULE__{tag: String.t, value: String.t}
   defstruct tag: "", value: ""
 
   @doc """
     Return the MARC Format of the control field
   """
-  @spec to_marc(JPMarc.ControlField.t)::String.t
+  @spec to_marc(t)::String.t
   def to_marc(field) do
      field.value <> @fs
   end
@@ -24,7 +24,7 @@ defmodule JPMarc.ControlField do
   @doc"""
   Return a tuple representing its xml element
   """
-  @spec to_xml(JPMarc.ControlField.t)::tuple
+  @spec to_xml(t)::tuple
   def to_xml(cf) do
     {:controlfield, %{tag: cf.tag}, cf.value}
   end

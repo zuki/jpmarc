@@ -1,37 +1,20 @@
-#. TRANSLATORS: def JPMarc.to_xml(record)
-#: lib/jpmarc.ex:66 
+#. TRANSLATORS: def JPMarc.to_xml(records)
+#: lib/jpmarc.ex:32 
 msgid ""
-"Return the MARCXML Format of the JPMarc struct\n"
-msgstr ""
-#. TRANSLATORS: def JPMarc.sort(record)
-#: lib/jpmarc.ex:80 
-msgid ""
-"  Sort its fields by tag and subfields of field\n"
-msgstr ""
-#. TRANSLATORS: def JPMarc.to_marc(record)
-#: lib/jpmarc.ex:55 
-msgid ""
-"  Return the MARC Format of the JPMarc struct\n"
-msgstr ""
-#. TRANSLATORS: def JPMarc.parse_file(file)
-#: lib/jpmarc.ex:23 
-msgid ""
-"  Parse a marc file and return `JPMarc` struct or nil if a error occures when reading the specific file\n"
-msgstr ""
-#. TRANSLATORS: def JPMarc.parse_record(marc)
-#: lib/jpmarc.ex:37 
-msgid ""
-"  Parse a binary of marc and return `JPMarc` struct\n"
+"Return the MARCXML Format of List of JPMarc.Record\n"
 msgstr ""
 #. TRANSLATORS: Elixir.JPMarc Summary
 #: lib/jpmarc.ex:2 
 msgid ""
-"  Library for parsing JPMARC\n"
+"  Tools for working wiht JPMARC records\n"
 msgstr ""
-#. TRANSLATORS: @type t
-#: lib/jpmarc.ex:15 
+#. TRANSLATORS: def JPMarc.to_marc(records)
+#: lib/jpmarc.ex:24 
 msgid ""
-"    Type that represents `JPMarc` struct\n"
-"\n"
-"    This is constructed with `:leader` as `JPMarc.Leader.t`, `:fiels` as List of `JPMarc.ControlField.t` or `JPMarc.DataField.t`\n"
+"  Return the String representing a List of MARC Format of the JPMarc.Record struct\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.parse_file(file)
+#: lib/jpmarc.ex:10 
+msgid ""
+"  Parse a marc file and return List of `JPMarc.Record` struct\n"
 msgstr ""

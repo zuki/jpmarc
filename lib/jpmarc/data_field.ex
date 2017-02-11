@@ -1,5 +1,5 @@
 defmodule JPMarc.DataField do
-  @moduledoc"""
+  @moduledoc """
   Tools for working with JPMARC DataFields
   """
 
@@ -11,13 +11,13 @@ defmodule JPMarc.DataField do
 
       This is constructed with `:tag` as String, `:ind1` as String, `:ind2` as String and `:subfields` as List of `JPMarc.SubField.t`
   """
-  @type t :: %JPMarc.DataField{tag: String.t, ind1: String.t, ind2: String.t, subfields: [SubField.t]}
+  @type t :: %__MODULE__{tag: String.t, ind1: String.t, ind2: String.t, subfields: [SubField.t]}
   defstruct tag: "", ind1: " ", ind2: " ", subfields: []
 
   @doc """
     Return the MARC Format of the data field
   """
-  @spec to_marc(JPMarc.DataField.t)::String.t
+  @spec to_marc(t)::String.t
   def to_marc(field) do
     subfields = field.subfields
       |> Enum.map(&SubField.to_marc/1)
@@ -29,7 +29,7 @@ defmodule JPMarc.DataField do
   @doc"""
   Return a tuple representing its xml element
   """
-  @spec to_xml(JPMarc.DataField.t)::tuple
+  @spec to_xml(t)::tuple
   def to_xml(df) do
     sfs = df.subfields |> Enum.map(&SubField.to_xml/1)
     {:datafield, %{tag: df.tag}, sfs}
@@ -38,7 +38,7 @@ defmodule JPMarc.DataField do
   @doc """
     Sort its subfields by code
   """
-  @spec sort(JPMarc.DataField.t)::JPMarc.DataField.t
+  @spec sort(t)::t
   def sort(field) do
     sfs = field.subfields |> Enum.sort(&(&1.code <= &2.code))
     %__MODULE__{field | subfields: sfs}

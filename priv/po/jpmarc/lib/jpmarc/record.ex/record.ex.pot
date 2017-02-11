@@ -1,0 +1,32 @@
+#. TRANSLATORS: def JPMarc.Record.to_xml(record)
+#: lib/jpmarc/record.ex:54 
+msgid ""
+"Return the MARCXML Format of the JPMarc struct\n"
+msgstr ""
+#. TRANSLATORS: Elixir.JPMarc.Record Summary
+#: lib/jpmarc/record.ex:2 
+msgid ""
+"  Tools for working with JPMARC Record\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.Record.sort(record)
+#: lib/jpmarc/record.ex:67 
+msgid ""
+"  Sort its fields by tag and subfields of field\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.Record.to_marc(record)
+#: lib/jpmarc/record.ex:43 
+msgid ""
+"  Return the MARC Format of the JPMarc struct\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.Record.from_marc(marc)
+#: lib/jpmarc/record.ex:24 
+msgid ""
+"  Decode the String of a marc and return `JPMarc.Record` struct\n"
+msgstr ""
+#. TRANSLATORS: @type t
+#: lib/jpmarc/record.ex:16 
+msgid ""
+"    Type that represents `JPMarc.Record` struct\n"
+"\n"
+"    This is constructed with `:leader` as `JPMarc.Leader.t`, `:control_fiels` as List of `JPMarc.ControlField.t` adn `:data_fields` as List of `JPMarc.DataField.t`\n"
+msgstr ""

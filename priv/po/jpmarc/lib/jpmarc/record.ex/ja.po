@@ -1,0 +1,53 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"PO-Revision-Date: 2017-02-11 16:09+0900\n"
+"Last-Translator: Keiji Suzuki <EMAIL@ADDRESS>\n"
+"Language-Team: Japanese\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"POT-Creation-Date: \n"
+"X-Generator: Poedit 1.8.11\n"
+
+#. TRANSLATORS: def JPMarc.Record.to_xml(record)
+#: lib/jpmarc/record.ex:54
+msgid "Return the MARCXML Format of the JPMarc struct\n"
+msgstr "JPMarc.Record構造体をMARCXML形式で返します。\n"
+
+#. TRANSLATORS: Elixir.JPMarc.Record Summary
+#: lib/jpmarc/record.ex:2
+msgid "  Tools for working with JPMARC Record\n"
+msgstr "JPMARCレコードを扱うツールです。\n"
+
+#. TRANSLATORS: def JPMarc.Record.sort(record)
+#: lib/jpmarc/record.ex:67
+msgid "  Sort its fields by tag and subfields of field\n"
+msgstr "フィールドをタグ順、インジケータ順にソートします。\n"
+
+#. TRANSLATORS: def JPMarc.Record.to_marc(record)
+#: lib/jpmarc/record.ex:43
+msgid "  Return the MARC Format of the JPMarc struct\n"
+msgstr "JPMarc.Record構造体をMARC形式で返します。\n"
+
+#. TRANSLATORS: def JPMarc.Record.from_marc(marc)
+#: lib/jpmarc/record.ex:24
+msgid "  Decode the String of a marc and return `JPMarc.Record` struct\n"
+msgstr "MAC形式の文字列を解析してJPMarc.Record構造体を返します。\n"
+
+#. TRANSLATORS: @type t
+#: lib/jpmarc/record.ex:16
+msgid ""
+"    Type that represents `JPMarc.Record` struct\n"
+"\n"
+"    This is constructed with `:leader` as `JPMarc.Leader.t`, `:"
+"control_fiels` as List of `JPMarc.ControlField.t` adn `:data_fields` as List "
+"of `JPMarc.DataField.t`\n"
+msgstr ""
+"`JPMarc.Record`構造体の型です。\n"
+"\n"
+"`JPMarc.Leader.t`の`:leader`、`JPMarc.ControlField.t`のリストである`:"
+"control_fields`、`JPMarc.DataField.t`のリストである`:data_fields`で構成されま"
+"す。\n"
