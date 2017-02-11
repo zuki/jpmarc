@@ -1,10 +1,20 @@
+#. TRANSLATORS: Elixir.JPMarc.DataField Summary
+#: lib/jpmarc/data_field.ex:2 
+msgid ""
+"Tools for working with JPMARC DataFields\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.DataField.sort(field)
+#: lib/jpmarc/data_field.ex:38 
+msgid ""
+"  Sort its subfields by code\n"
+msgstr ""
 #. TRANSLATORS: def JPMarc.DataField.to_marc(field)
-#: lib/jpmarc/data_field.ex:13 
+#: lib/jpmarc/data_field.ex:17 
 msgid ""
 "  Return the MARC Format of the data field\n"
 msgstr ""
 #. TRANSLATORS: @type t
-#: lib/jpmarc/data_field.ex:5 
+#: lib/jpmarc/data_field.ex:9 
 msgid ""
 "    Type that represents `JPMarc.DataField` struct.\n"
 "\n"

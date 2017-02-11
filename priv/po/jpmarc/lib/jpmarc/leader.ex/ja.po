@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-02-08 21:01+0900\n"
+"PO-Revision-Date: 2017-02-11 10:35+0900\n"
 "Last-Translator: Keiji Suzuki <EMAIL@ADDRESS>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -12,13 +12,23 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.8.11\n"
 
+#. TRANSLATORS: Elixir.JPMarc.Leader Summary
+#: lib/jpmarc/leader.ex:2
+msgid "Tools for working with JPMARC Leader\n"
+msgstr "JPMARCリーダーを扱うツールです。\n"
+
+#. TRANSLATORS: def JPMarc.Leader.decode(leader)
+#: lib/jpmarc/leader.ex:14
+msgid "Decode the string representation to JPMarc.Leader struct\n"
+msgstr "JPMARCのリーダーを表す文字列をJPMarc.Leader構造体に変換します。\n"
+
 #. TRANSLATORS: def JPMarc.Leader.to_marc(l)
-#: lib/jpmarc/leader.ex:10
+#: lib/jpmarc/leader.ex:25
 msgid "  Return the MARC Format of the leader\n"
 msgstr "このリーダーのMARC形式の文字列を返します。\n"
 
 #. TRANSLATORS: @type t
-#: lib/jpmarc/leader.ex:2
+#: lib/jpmarc/leader.ex:6
 msgid ""
 "    Type that represents `JPMarc.Leader` struct\n"
 "\n"

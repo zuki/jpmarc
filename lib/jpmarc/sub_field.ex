@@ -1,7 +1,10 @@
 defmodule JPMarc.SubField do
-  # Subfield separator
-  @ss "\x1f"
+  @moduledoc"""
+  Tools for working with JPMARC SubFields
+  """
 
+  @fs "\x1e" # Field separator
+  @ss "\x1f" # Subfield separator
 
   @typedoc """
       Type that represents `JPMarc.SubField` struct
@@ -11,12 +14,33 @@ defmodule JPMarc.SubField do
   @type t :: %JPMarc.SubField{code: String.t, value: String.t}
   defstruct code: "", value: ""
 
+  @doc"""
+  Decode a string representation to JPMarc.SubField struct
+  """
+  @spec decode(String.t)::[JPMarc.SubField.t]
+  def decode(data) do
+    data = String.trim_trailing(data, @fs)
+    String.split(data, @ss, trim: true)
+      |> Enum.map(fn chunk ->
+        <<code::bytes-size(1), value::binary>> = chunk
+        %__MODULE__{code: code, value: value}
+    end)
+  end
+
   @doc """
     Return the MARC Format of the subfield
   """
   @spec to_marc(JPMarc.SubField.t)::String.t
   def to_marc(field) do
     @ss <> field.code <> field.value
+  end
+
+  @doc"""
+  Return a tuple representing its xml element
+  """
+  @spec to_xml(JPMarc.SubField.t)::tuple
+  def to_xml(sf) do
+    {:subfield, %{code: sf.code}, sf.value}
   end
 
   defimpl Inspect, for: JPMarc.SubField do

@@ -1,6 +1,9 @@
 defmodule JPMarc.ControlField do
-  # Field separator
-  @fs "\x1e"
+  @moduledoc"""
+  Tools for working with JPMARC ControlFields
+  """
+
+  @fs "\x1e" # Field separator
 
   @typedoc """
       Type that represents `JPMarc.ControlField` struct
@@ -16,6 +19,14 @@ defmodule JPMarc.ControlField do
   @spec to_marc(JPMarc.ControlField.t)::String.t
   def to_marc(field) do
      field.value <> @fs
+  end
+
+  @doc"""
+  Return a tuple representing its xml element
+  """
+  @spec to_xml(JPMarc.ControlField.t)::tuple
+  def to_xml(cf) do
+    {:controlfield, %{tag: cf.tag}, cf.value}
   end
 
   defimpl Inspect do

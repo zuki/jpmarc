@@ -10,5 +10,6 @@ mix.lock
 priv/lang
 *.pot_db
 marc.mrc
+marc.xml
 *.txt
 example.ex

@@ -17,7 +17,7 @@ defmodule JPMarc.MarcSigil do
     [leader|fields] = lines |> String.split("\n") |> Enum.map(&String.trim/1) |> Enum.map(fn (l) ->
       case l do
         <<"LDR\t \t", leader::binary>> ->
-          JPMarc.parse_leader(leader)
+          JPMarc.Leader.decode(leader)
         <<"FMT", _::binary>> -> []
         <<"SYS", _::binary>> -> []
         <<tag::bytes-size(3), "\t \t", value::binary>> ->

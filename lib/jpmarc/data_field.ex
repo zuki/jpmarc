@@ -1,8 +1,10 @@
 defmodule JPMarc.DataField do
-  alias JPMarc.SubField
+  @moduledoc"""
+  Tools for working with JPMARC DataFields
+  """
 
-  # Field separator
-  @fs "\x1e"
+  alias JPMarc.SubField
+  @fs "\x1e" # Field separator
 
   @typedoc """
       Type that represents `JPMarc.DataField` struct.
@@ -22,6 +24,15 @@ defmodule JPMarc.DataField do
       |> Enum.join
 
     field.ind1 <> field.ind2 <> subfields <> @fs
+  end
+
+  @doc"""
+  Return a tuple representing its xml element
+  """
+  @spec to_xml(JPMarc.DataField.t)::tuple
+  def to_xml(df) do
+    sfs = df.subfields |> Enum.map(&SubField.to_xml/1)
+    {:datafield, %{tag: df.tag}, sfs}
   end
 
   @doc """

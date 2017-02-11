@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-02-08 21:06+0900\n"
+"PO-Revision-Date: 2017-02-11 10:31+0900\n"
 "Last-Translator: Keiji Suzuki <EMAIL@ADDRESS>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -12,13 +12,23 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.8.11\n"
 
+#. TRANSLATORS: def JPMarc.to_xml(record)
+#: lib/jpmarc.ex:66
+msgid "Return the MARCXML Format of the JPMarc struct\n"
+msgstr "このJPMarc構造体のMARCXML形式の文字列を返します。\n"
+
+#. TRANSLATORS: def JPMarc.sort(record)
+#: lib/jpmarc.ex:80
+msgid "  Sort its fields by tag and subfields of field\n"
+msgstr "タグとインジケータでフィールドをソートします。\n"
+
 #. TRANSLATORS: def JPMarc.to_marc(record)
-#: lib/jpmarc.ex:51
+#: lib/jpmarc.ex:55
 msgid "  Return the MARC Format of the JPMarc struct\n"
 msgstr "このJPMarc構造体のMARC形式の文字列を返します。\n"
 
 #. TRANSLATORS: def JPMarc.parse_file(file)
-#: lib/jpmarc.ex:19
+#: lib/jpmarc.ex:23
 msgid ""
 "  Parse a marc file and return `JPMarc` struct or nil if a error occures "
 "when reading the specific file\n"
@@ -27,7 +37,7 @@ msgstr ""
 "イルの読み込み時にエラーが発生した場合は、`nil`を返します。\n"
 
 #. TRANSLATORS: def JPMarc.parse_record(marc)
-#: lib/jpmarc.ex:33
+#: lib/jpmarc.ex:37
 msgid "  Parse a binary of marc and return `JPMarc` struct\n"
 msgstr ""
 "MARC形式の文字列をパースして`JPMarc`構造体を返します。\n"
@@ -39,7 +49,7 @@ msgid "  Library for parsing JPMARC\n"
 msgstr "JPMARCを解析するライブラリ\n"
 
 #. TRANSLATORS: @type t
-#: lib/jpmarc.ex:10
+#: lib/jpmarc.ex:15
 msgid ""
 "    Type that represents `JPMarc` struct\n"
 "\n"

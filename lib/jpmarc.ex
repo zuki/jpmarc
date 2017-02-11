@@ -2,6 +2,7 @@ defmodule JPMarc do
   @moduledoc """
     Library for parsing JPMARC
   """
+  import XmlBuilder
   alias JPMarc.Leader
   alias JPMarc.ControlField
   alias JPMarc.DataField
@@ -39,7 +40,7 @@ defmodule JPMarc do
   @spec parse_record(binary)::JPMarc.t
   def parse_record(marc) do
     <<leader::bytes-size(24), rest::binary>> = marc
-    leader = parse_leader(leader)
+    leader = Leader.decode(leader)
     length_of_dirs = leader.base - 24 - 1 # -1 for \x1e
     <<dir_block::bytes-size(length_of_dirs), @fs, data:: binary>> = rest
 
@@ -57,10 +58,24 @@ defmodule JPMarc do
   @spec to_marc(JPMarc.t)::String.t
   def to_marc(record) do
     {directories, data} = make_directories_data(record.fields)
-    marc = JPMarc.Leader.to_marc(record.leader) <> directories <> @fs <> data <> @rs
+    marc = Leader.to_marc(record.leader) <> directories <> @fs <> data <> @rs
     l = %Leader{record.leader | length: byte_size(marc), base: (25 + byte_size(directories))}
     Leader.to_marc(l) <> directories <> @fs <> data <> @rs
   end
+
+  @doc"""
+  Return the MARCXML Format of the JPMarc struct
+  """
+  @spec to_xml(JPMarc.DataField.t)::String.t
+  def to_xml(record) do
+    sorted = sort(record)
+    {control_fields, data_fields} = Enum.split_with(sorted.fields, &(&1.__struct__ == ControlField))
+    cf_xml = control_fields |> Enum.map(&ControlField.to_xml/1)
+    df_xml = data_fields |> Enum.map(&DataField.to_xml/1)
+    xml = [Leader.to_xml(sorted.leader)] ++ cf_xml ++ df_xml
+    XmlBuilder.doc(:collection, %{xmlns: "http://www.loc.gov/MARC21/slim"}, xml)
+  end
+
 
   @doc """
     Sort its fields by tag and subfields of field
@@ -74,7 +89,6 @@ defmodule JPMarc do
     %__MODULE__{record | fields: sorted_control_fields ++ sorted_data_fields}
   end
 
-
   defp get_directories(block), do: _get_directories(block, [])
   defp _get_directories("", acc) do
     Enum.reverse acc
@@ -84,29 +98,13 @@ defmodule JPMarc do
     _get_directories(rest, acc)
   end
 
-  def parse_leader(leader) do
-    <<length::bytes-size(5), status::bytes-size(1), type::bytes-size(1),
-      level::bytes-size(1), _::bytes-size(4), base::bytes-size(5), encoding::bytes-size(1), format::bytes-size(1), _::binary>> = leader
-    base = if base == "     ", do: "00000", else: base
-    %Leader{length: String.to_integer(length), status: status, type: type, level: level, base: String.to_integer(base), encoding: encoding, format: format}
-  end
-
   defp parse_tag_data(tag, <<ind1::bytes-size(1), ind2::bytes-size(1), @ss, rest::binary>>) do
-    subfields = parse_subfields(rest)
+    subfields = SubField.decode(rest)
     %DataField{tag: tag, ind1: ind1, ind2: ind2, subfields: subfields}
   end
 
   defp parse_tag_data(tag, data) do
     %ControlField{tag: tag, value: String.trim_trailing(data, @fs)}
-  end
-
-  defp parse_subfields(data) do
-    data = String.trim_trailing(data, @fs)
-    String.split(data, @ss, trim: true)
-      |> Enum.map(fn chunk ->
-        <<code::bytes-size(1), value::binary>> = chunk
-        %SubField{code: code, value: value}
-    end)
   end
 
   defp make_directories_data(fields), do: _make_directories_data(fields, {[], []}, 0)

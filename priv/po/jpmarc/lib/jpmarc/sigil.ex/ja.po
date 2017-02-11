@@ -1,0 +1,20 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"PO-Revision-Date: 2017-02-11 10:36+0900\n"
+"Last-Translator: Keiji Suzuki <EMAIL@ADDRESS>\n"
+"Language-Team: Japanese\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"POT-Creation-Date: \n"
+"X-Generator: Poedit 1.8.11\n"
+
+#. TRANSLATORS: def JPMarc.MarcSigil.sigil_M(lines, list)
+#: lib/jpmarc/sigil.ex:2
+msgid ""
+"Implement the \"~M\" sigil, which takes a string containig\n"
+"JPMARC representation and return JPMarc struct.\n"
+msgstr "JPMARCタグ形式の文字列をJPMarc構造体に変換する`~M`シジルを実装します。\n"

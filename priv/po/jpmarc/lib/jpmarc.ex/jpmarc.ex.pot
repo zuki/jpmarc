@@ -1,15 +1,25 @@
+#. TRANSLATORS: def JPMarc.to_xml(record)
+#: lib/jpmarc.ex:66 
+msgid ""
+"Return the MARCXML Format of the JPMarc struct\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.sort(record)
+#: lib/jpmarc.ex:80 
+msgid ""
+"  Sort its fields by tag and subfields of field\n"
+msgstr ""
 #. TRANSLATORS: def JPMarc.to_marc(record)
-#: lib/jpmarc.ex:51 
+#: lib/jpmarc.ex:55 
 msgid ""
 "  Return the MARC Format of the JPMarc struct\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.parse_file(file)
-#: lib/jpmarc.ex:19 
+#: lib/jpmarc.ex:23 
 msgid ""
 "  Parse a marc file and return `JPMarc` struct or nil if a error occures when reading the specific file\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.parse_record(marc)
-#: lib/jpmarc.ex:33 
+#: lib/jpmarc.ex:37 
 msgid ""
 "  Parse a binary of marc and return `JPMarc` struct\n"
 msgstr ""
@@ -19,7 +29,7 @@ msgid ""
 "  Library for parsing JPMARC\n"
 msgstr ""
 #. TRANSLATORS: @type t
-#: lib/jpmarc.ex:10 
+#: lib/jpmarc.ex:15 
 msgid ""
 "    Type that represents `JPMarc` struct\n"
 "\n"
