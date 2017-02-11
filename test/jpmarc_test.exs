@@ -85,4 +85,9 @@ defmodule JPMarcTest do
     assert record.__struct__ == Record
   end
 
+  test "Write MARCXML", %{records: records} do
+    xml = JPMarc.to_xml(records)
+    assert xml == "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<collection xmlns=\"http://www.loc.gov/MARC21/slim\">\n\t<record>\n\t\t<leader>00276nam a2200109zi 4500</leader>\n\t\t<controlfield tag=\"001\">123456789012</controlfield>\n\t\t<controlfield tag=\"003\">JTNDL</controlfield>\n\t\t<controlfield tag=\"005\">20170209103923.0</controlfield>\n\t\t<controlfield tag=\"007\">ta</controlfield>\n\t\t<controlfield tag=\"008\">170209s2017    ja ||||g |||| |||||||jpn  </controlfield>\n\t\t<datafield tag=\"020\">\n\t\t\t<subfield code=\"c\">2000円</subfield>\n\t\t\t<subfield code=\"z\">978-4-123456-01-0</subfield>\n\t\t</datafield>\n\t\t<datafield tag=\"245\">\n\t\t\t<subfield code=\"a\">タイトル :</subfield>\n\t\t\t<subfield code=\"b\">関連情報 /</subfield>\n\t\t\t<subfield code=\"c\">山田太郎 著.</subfield>\n\t\t</datafield>\n\t</record>\n</collection>"
+  end
+
 end
