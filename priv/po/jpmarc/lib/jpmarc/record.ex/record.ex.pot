@@ -9,7 +9,7 @@ msgid ""
 "  Tools for working with JPMARC Record\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.sort(record)
-#: lib/jpmarc/record.ex:67 
+#: lib/jpmarc/record.ex:66 
 msgid ""
 "  Sort its fields by tag and subfields of field\n"
 msgstr ""

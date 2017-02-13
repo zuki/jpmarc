@@ -1,6 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
+"POT-Creation-Date: \n"
 "PO-Revision-Date: 2017-02-11 16:09+0900\n"
 "Last-Translator: Keiji Suzuki <EMAIL@ADDRESS>\n"
 "Language-Team: Japanese\n"
@@ -9,7 +10,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"POT-Creation-Date: \n"
 "X-Generator: Poedit 1.8.11\n"
 
 #. TRANSLATORS: def JPMarc.Record.to_xml(record)
@@ -23,7 +23,7 @@ msgid "  Tools for working with JPMARC Record\n"
 msgstr "JPMARCレコードを扱うツールです。\n"
 
 #. TRANSLATORS: def JPMarc.Record.sort(record)
-#: lib/jpmarc/record.ex:67
+#: lib/jpmarc/record.ex:66
 msgid "  Sort its fields by tag and subfields of field\n"
 msgstr "フィールドをタグ順、インジケータ順にソートします。\n"
 

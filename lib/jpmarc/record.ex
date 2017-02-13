@@ -54,7 +54,7 @@ defmodule JPMarc.Record do
   @doc """
   Return the MARCXML Format of the JPMarc struct
   """
-  @spec to_xml(t)::String.t
+  @spec to_xml(t)::tuple
   def to_xml(record) do
     sorted = sort(record)
     cf_xml = sorted.control_fields |> Enum.map(&ControlField.to_xml/1)
