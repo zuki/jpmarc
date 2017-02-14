@@ -98,7 +98,18 @@ defmodule JPMarcTest do
   end
 
   test "~M sigil" do
-    record = ~M"""
+    record1 = ~M"""
+    00000cam a22     zi 4500
+    001 027524410
+    245 0 0 $6 880-01 $a タイトル / $c 山田, 太郎著.
+    260     $6 880-02 $a 東京 : $b A出版, $c 2017.2.
+    300     $a 325p ; $c 21cm.
+    880 0 0 $6 245-01/$1 $a タイトル.
+    """
+    assert record1.__struct__ == Record
+    assert Record.subfield_value(record1, "880", "6") == "245-01/$1"
+
+    record2 = ~M"""
     FMT	 	BK
     LDR	 	00000cam a22     zi 4500
     001	 	027524410
@@ -106,8 +117,9 @@ defmodule JPMarcTest do
     260	 	|6 880-02 |a 東京 : |b A出版, |c 2017.2.
     300	 	|a 325p ; |c 21cm.
     SYS	 	027524410
-    """
-    assert record.__struct__ == Record
+    """n
+    assert record2.__struct__ == Record
+    assert Record.subfield_value(record1, "245", ["a", "c"]) == "タイトル / 山田, 太郎著."
   end
 
   test "Write MARCXML", %{record: record} do

@@ -9,27 +9,20 @@ defmodule JPMarc.MarcSigil do
   alias JPMarc.DataField, as: DF
   alias JPMarc.SubField, as: SF
 
-  def sigil_M(lines, []), do: _M(lines, :ndl)
+  def sigil_M(lines, []), do: _M(lines, :jpmarc)
   def sigil_M(lines, 'n'), do: _M(lines, :ndl)
   #def sigil_M(lines, 'v'), do: _M(lines, :vufind)
 
-  defp _M(lines, :ndl) do
+  defp _M(lines, :jpmarc) do
+    separator = "$"
     [leader|fields] = lines |> String.split("\n") |> Enum.map(&String.trim/1) |> Enum.map(fn (l) ->
       case l do
-        <<"LDR\t \t", leader::binary>> ->
+        <<tag::bytes-size(3), " ", ind1::bytes-size(1), " ", ind2::bytes-size(1), " $", value::binary>> ->
+          make_data_field(tag, ind1, ind2, separator <> value, separator)
+        <<tag::bytes-size(3), " ", value::binary>> ->
+          %CF{tag: tag, value: value}
+        <<leader::bytes-size(24)>> ->
           JPMarc.Leader.decode(leader)
-        <<"FMT", _::binary>> -> []
-        <<"SYS", _::binary>> -> []
-        <<tag::bytes-size(3), "\t \t", value::binary>> ->
-          if String.starts_with?(value, "|") do
-            make_data_field(tag, " ", " ", value)
-          else
-            %CF{tag: tag, value: value}
-          end
-        <<tag::bytes-size(3), ind1::bytes-size(1), "\t \t", value::binary>> ->
-          make_data_field(tag, ind1, " ", value)
-        <<tag::bytes-size(3), ind1::bytes-size(1), ind2::bytes-size(1), "\t \t", value::binary>> ->
-          make_data_field(tag, ind1, ind2, value)
         _ -> []
       end
     end) |> List.flatten()
@@ -37,9 +30,34 @@ defmodule JPMarc.MarcSigil do
     %Record{leader: leader, control_fields: control_fields, data_fields: data_fields}
   end
 
-  defp make_data_field(tag, ind1, ind2, value) do
+  defp _M(lines, :ndl) do
+    separator = "|"
+    [leader|fields] = lines |> String.split("\n") |> Enum.map(&String.trim/1) |> Enum.map(fn (l) ->
+      case l do
+        <<"LDR\t \t", leader::binary>> ->
+          JPMarc.Leader.decode(leader)
+        <<"FMT", _::binary>> -> []
+        <<"SYS", _::binary>> -> []
+        <<tag::bytes-size(3), "\t \t", value::binary>> ->
+          if String.starts_with?(value, " |") do
+            make_data_field(tag, " ", " ", value, separator)
+          else
+            %CF{tag: tag, value: value}
+          end
+        <<tag::bytes-size(3), ind1::bytes-size(1), "\t \t", value::binary>> ->
+          make_data_field(tag, ind1, " ", value, separator)
+        <<tag::bytes-size(3), ind1::bytes-size(1), ind2::bytes-size(1), "\t \t", value::binary>> ->
+          make_data_field(tag, ind1, ind2, value, separator)
+        _ -> []
+      end
+    end) |> List.flatten()
+    {control_fields, data_fields} = Enum.split_with(fields, &(&1.__struct__ == ControlField))
+    %Record{leader: leader, control_fields: control_fields, data_fields: data_fields}
+  end
+
+  defp make_data_field(tag, ind1, ind2, value, separator) do
     subfields = " " <> value
-      |> String.split(" |", trim: true)
+      |> String.split(" #{separator}", trim: true)
       |> Enum.map(&String.split(&1, " ", parts: 2))
       |> Enum.map(fn l -> %SF{code: List.first(l), value: List.last(l)} end)
     %DF{tag: tag, ind1: ind1, ind2: ind2, subfields: subfields}
