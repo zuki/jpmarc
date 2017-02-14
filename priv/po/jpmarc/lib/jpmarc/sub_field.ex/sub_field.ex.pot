@@ -1,3 +1,10 @@
+#. TRANSLATORS: @type t
+#: lib/jpmarc/sub_field.ex:9 
+msgid ""
+"    Type that represents `JPMarc.SubField` struct\n"
+"\n"
+"    This is constructed with `:code` as String and `:value` as String.\n"
+msgstr ""
 #. TRANSLATORS: def JPMarc.SubField.to_xml(sf)
 #: lib/jpmarc/sub_field.ex:38 
 msgid ""
@@ -8,20 +15,13 @@ msgstr ""
 msgid ""
 "Tools for working with JPMARC SubFields\n"
 msgstr ""
-#. TRANSLATORS: def JPMarc.SubField.decode(data)
-#: lib/jpmarc/sub_field.ex:17 
-msgid ""
-"Decode a string representation to JPMarc.SubField struct\n"
-msgstr ""
 #. TRANSLATORS: def JPMarc.SubField.to_marc(field)
 #: lib/jpmarc/sub_field.ex:30 
 msgid ""
 "  Return the MARC Format of the subfield\n"
 msgstr ""
-#. TRANSLATORS: @type t
-#: lib/jpmarc/sub_field.ex:9 
+#. TRANSLATORS: def JPMarc.SubField.decode(data)
+#: lib/jpmarc/sub_field.ex:17 
 msgid ""
-"    Type that represents `JPMarc.SubField` struct\n"
-"\n"
-"    This is constructed with `:code` as String and `:value` as String.\n"
+"Decode a string representation to JPMarc.SubField struct\n"
 msgstr ""

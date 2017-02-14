@@ -12,26 +12,6 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.8.11\n"
 
-#. TRANSLATORS: def JPMarc.SubField.to_xml(sf)
-#: lib/jpmarc/sub_field.ex:38
-msgid "Return a tuple representing its xml element\n"
-msgstr "XmlBuilderのタプル形式でXML要素を返します。\n"
-
-#. TRANSLATORS: Elixir.JPMarc.SubField Summary
-#: lib/jpmarc/sub_field.ex:2
-msgid "Tools for working with JPMARC SubFields\n"
-msgstr "JPMARCサブフィールドを扱うツールです。\n"
-
-#. TRANSLATORS: def JPMarc.SubField.decode(data)
-#: lib/jpmarc/sub_field.ex:17
-msgid "Decode a string representation to JPMarc.SubField struct\n"
-msgstr "JPMARCのサブフィールドを表す文字列をJPMarc.SubField構造体に変換します。\n"
-
-#. TRANSLATORS: def JPMarc.SubField.to_marc(field)
-#: lib/jpmarc/sub_field.ex:30
-msgid "  Return the MARC Format of the subfield\n"
-msgstr "このサブフィールドのMARC形式の文字列を返します。\n"
-
 #. TRANSLATORS: @type t
 #: lib/jpmarc/sub_field.ex:9
 msgid ""
@@ -42,3 +22,24 @@ msgstr ""
 "`JPMarc.SubField`構造体の型。\n"
 "\n"
 "文字列の`:code`および文字列の`:value`で構成されます。\n"
+
+#. TRANSLATORS: def JPMarc.SubField.to_xml(sf)
+#: lib/jpmarc/sub_field.ex:38
+msgid "Return a tuple representing its xml element\n"
+msgstr "XmlBuilderのタプル形式でXML要素を返します。\n"
+
+#. TRANSLATORS: Elixir.JPMarc.SubField Summary
+#: lib/jpmarc/sub_field.ex:2
+msgid "Tools for working with JPMARC SubFields\n"
+msgstr "JPMARCサブフィールドを扱うツールです。\n"
+
+#. TRANSLATORS: def JPMarc.SubField.to_marc(field)
+#: lib/jpmarc/sub_field.ex:30
+msgid "  Return the MARC Format of the subfield\n"
+msgstr "このサブフィールドのMARC形式の文字列を返します。\n"
+
+#. TRANSLATORS: def JPMarc.SubField.decode(data)
+#: lib/jpmarc/sub_field.ex:17
+msgid "Decode a string representation to JPMarc.SubField struct\n"
+msgstr ""
+"JPMARCのサブフィールドを表す文字列をJPMarc.SubField構造体に変換します。\n"

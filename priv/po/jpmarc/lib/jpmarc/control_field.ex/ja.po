@@ -12,15 +12,15 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.8.11\n"
 
-#. TRANSLATORS: Elixir.JPMarc.ControlField Summary
-#: lib/jpmarc/control_field.ex:2
-msgid "Tools for working with JPMARC ControlFields\n"
-msgstr "JPMARCコントロールフィールドを扱うツールです。\n"
-
 #. TRANSLATORS: def JPMarc.ControlField.to_marc(field)
 #: lib/jpmarc/control_field.ex:16
 msgid "  Return the MARC Format of the control field\n"
 msgstr "このコントロールフィールドのMARC形式の文字列を返します。\n"
+
+#. TRANSLATORS: Elixir.JPMarc.ControlField Summary
+#: lib/jpmarc/control_field.ex:2
+msgid "Tools for working with JPMARC ControlFields\n"
+msgstr "JPMARCコントロールフィールドを扱うツールです。\n"
 
 #. TRANSLATORS: @type t
 #: lib/jpmarc/control_field.ex:8

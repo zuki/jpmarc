@@ -1,32 +1,95 @@
-#. TRANSLATORS: def JPMarc.Record.to_xml(record)
-#: lib/jpmarc/record.ex:54 
+#. TRANSLATORS: def JPMarc.Record.subfield(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil)
+#: lib/jpmarc/record.ex:77 
 msgid ""
-"Return the MARCXML Format of the JPMarc struct\n"
+"Returns first SubField with `tag`, `ind1`, `ind2` and `code` in `record`, [] when it doesn't exist\n"
+"\n"
+"`code` is either of :all, `code` as String or List of `code`.\n"
+"Default is `:all`.\n"
+msgstr ""
+#. TRANSLATORS: @type t
+#: lib/jpmarc/record.ex:17 
+msgid ""
+"    Type that represents `JPMarc.Record` struct\n"
+"\n"
+"    This is constructed with `:leader` as `JPMarc.Leader.t`, `:control_fiels` as List of `JPMarc.ControlField.t` adn `:data_fields` as List of `JPMarc.DataField.t`\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.Record.field_values(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " ")
+#: lib/jpmarc/record.ex:86 
+msgid ""
+"Returns a list of SubFields value with `tag`, `ind1`, `ind2` and `code` in `record`, `[]` when it doesn't exist\n"
+"\n"
+"`code` is either of :all, `code` as String or List of `code`.\n"
+"Default is `:all`.\n"
 msgstr ""
 #. TRANSLATORS: Elixir.JPMarc.Record Summary
 #: lib/jpmarc/record.ex:2 
 msgid ""
 "  Tools for working with JPMARC Record\n"
 msgstr ""
-#. TRANSLATORS: def JPMarc.Record.sort(record)
-#: lib/jpmarc/record.ex:66 
+#. TRANSLATORS: def JPMarc.Record.fields(record, tag, ind1 \\ nil, ind2 \\ nil)
+#: lib/jpmarc/record.ex:31 
 msgid ""
-"  Sort its fields by tag and subfields of field\n"
+"Returns a list of Fields with `tag`, `ind1` and `ind2` in `record`, [] when it doesn't exist\n"
 msgstr ""
-#. TRANSLATORS: def JPMarc.Record.to_marc(record)
-#: lib/jpmarc/record.ex:43 
+#. TRANSLATORS: def JPMarc.Record.subfield_value(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " ")
+#: lib/jpmarc/record.ex:121 
 msgid ""
-"  Return the MARC Format of the JPMarc struct\n"
+"Returns first SubFields value with `tag`, `ind1`, `ind2` and `code` in `record`, `nil` when it doesn't exist\n"
+"\n"
+"`code` is either of :all, `code` as String or List of `code`.\n"
+"Default is `:all`.\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.Record.to_xml(record)
+#: lib/jpmarc/record.ex:160 
+msgid ""
+"Return the MARCXML Format of the JPMarc struct\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.from_marc(marc)
-#: lib/jpmarc/record.ex:24 
+#: lib/jpmarc/record.ex:130 
 msgid ""
 "  Decode the String of a marc and return `JPMarc.Record` struct\n"
 msgstr ""
-#. TRANSLATORS: @type t
-#: lib/jpmarc/record.ex:16 
+#. TRANSLATORS: def JPMarc.Record.to_marc(record)
+#: lib/jpmarc/record.ex:149 
 msgid ""
-"    Type that represents `JPMarc.Record` struct\n"
+"  Return the MARC Format of the JPMarc struct\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.Record.subfield_values(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " ")
+#: lib/jpmarc/record.ex:110 
+msgid ""
+"Returns a list of SubFields value with `tag`, `ind1`, `ind2` and `code` in `record`, `[]`when it doesn't exist\n"
 "\n"
-"    This is constructed with `:leader` as `JPMarc.Leader.t`, `:control_fiels` as List of `JPMarc.ControlField.t` adn `:data_fields` as List of `JPMarc.DataField.t`\n"
+"`code` is either of :all, `code` as String or List of `code`.\n"
+"Default is `:all`.\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.Record.field(record, tag, ind1 \\ nil, ind2 \\ nil)
+#: lib/jpmarc/record.ex:45 
+msgid ""
+"Returns first DataFields with `tag`, `ind1` and `ind2` in `record`, nil when it doesn't exist\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.Record.control_field?(tag)
+#: lib/jpmarc/record.ex:25 
+msgid ""
+"Return `true` if `tag` is a valid tag number as ControlField, otherwise `false`\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.Record.sort(record)
+#: lib/jpmarc/record.ex:172 
+msgid ""
+"  Sort its fields by tag and subfields of field\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.Record.field_value(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " ")
+#: lib/jpmarc/record.ex:101 
+msgid ""
+"Returns a list of Field values with `tag`, `ind1`, `ind2` and `code` in `record`, `nil` when it doesn't exist\n"
+"\n"
+"`code` is either of :all, `code` as String or List of `code`.\n"
+"Default is `:all`.\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.Record.subfields(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil)
+#: lib/jpmarc/record.ex:51 
+msgid ""
+"Returns a list of SubFields with `tag`, `ind1`, `ind2` and `code` in `record`, [] when it doesn't exist\n"
+"\n"
+"`code` is either of :all, `code` as String or List of `code`.\n"
+"Default is `:all`.\n"
 msgstr ""

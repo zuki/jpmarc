@@ -20,7 +20,7 @@ defmodule JPMarcTest do
   end
 
   test "Parse MARC file", %{records: records} do
-    assert length(records) == 1
+    assert length(records) == 2
   end
 
   test "Parse leader", %{leader: leader} do
@@ -51,7 +51,7 @@ defmodule JPMarcTest do
 
   test "Write a MARC file", %{record: record} do
     marc = JPMarc.to_marc([record])
-    {:ok, org} = File.read("test/data/test.mrc")
+    {:ok, org} = File.read("test/data/test1.mrc")
     assert marc == org
   end
 
@@ -72,6 +72,31 @@ defmodule JPMarcTest do
     assert Record.sort(record) == sorted
   end
 
+  test "Fields", %{record: record} do
+    assert Record.control_field?("001") == true
+    assert Record.control_field?("002") == false
+
+    df = %DF{tag: "245", ind1: "0", ind2: "0",
+      subfields: [
+        %SF{code: "a", value: "タイトル :"},
+        %SF{code: "b", value: "関連情報 /"},
+        %SF{code: "c", value: "山田太郎 著."},
+      ]}
+
+    assert Record.field(record, "001") == %CF{tag: "001", value: "123456789012"}
+    assert Record.fields(record, "245") == [df]
+    assert Record.field(record, "245") == df
+    assert Record.fields(record, "245", "0", "0") == [df]
+    assert Record.field(record, "245", "0", "0") == df
+
+    assert Record.field_value(record, "001") == "123456789012"
+    assert Record.field_value(record, "245") == "タイトル : 関連情報 / 山田太郎 著."
+    assert Record.subfield_value(record, "245") == "タイトル : 関連情報 / 山田太郎 著."
+    assert Record.subfield_value(record, "245", :all) == "タイトル : 関連情報 / 山田太郎 著."
+    assert Record.subfield_value(record, "245", "a") == "タイトル :"
+    assert Record.subfield_value(record, "245", ["a", "b"]) == "タイトル : 関連情報 /"
+  end
+
   test "~M sigil" do
     record = ~M"""
     FMT	 	BK
@@ -85,8 +110,8 @@ defmodule JPMarcTest do
     assert record.__struct__ == Record
   end
 
-  test "Write MARCXML", %{records: records} do
-    xml = JPMarc.to_xml(records)
+  test "Write MARCXML", %{record: record} do
+    xml = JPMarc.to_xml(record)
     assert xml == "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<collection xmlns=\"http://www.loc.gov/MARC21/slim\">\n\t<record>\n\t\t<leader>00276nam a2200109zi 4500</leader>\n\t\t<controlfield tag=\"001\">123456789012</controlfield>\n\t\t<controlfield tag=\"003\">JTNDL</controlfield>\n\t\t<controlfield tag=\"005\">20170209103923.0</controlfield>\n\t\t<controlfield tag=\"007\">ta</controlfield>\n\t\t<controlfield tag=\"008\">170209s2017    ja ||||g |||| |||||||jpn  </controlfield>\n\t\t<datafield tag=\"020\">\n\t\t\t<subfield code=\"c\">2000円</subfield>\n\t\t\t<subfield code=\"z\">978-4-123456-01-0</subfield>\n\t\t</datafield>\n\t\t<datafield tag=\"245\">\n\t\t\t<subfield code=\"a\">タイトル :</subfield>\n\t\t\t<subfield code=\"b\">関連情報 /</subfield>\n\t\t\t<subfield code=\"c\">山田太郎 著.</subfield>\n\t\t</datafield>\n\t</record>\n</collection>"
   end
 

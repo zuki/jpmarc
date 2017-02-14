@@ -12,6 +12,7 @@ defmodule JPMarc.Record do
   @fs "\x1e"   # Field separator
   @ss "\x1f"   # Subfield separator
   @leader_length 24
+  @valid_control_fields ~W(001 003 005 007 008) # Valied fields
 
   @typedoc """
       Type that represents `JPMarc.Record` struct
@@ -20,6 +21,111 @@ defmodule JPMarc.Record do
   """
   @type t :: %__MODULE__{leader: Leader.t, control_fields: [ControlField.t], data_fields: [DataField.t]}
   defstruct leader: nil, control_fields: [], data_fields: []
+
+  @doc """
+  Return `true` if `tag` is a valid tag number as ControlField, otherwise `false`
+  """
+  @spec control_field?(String.t)::boolean
+  def control_field?(tag), do: Enum.member?(@valid_control_fields, tag)
+
+  @doc """
+  Returns a list of Fields with `tag`, `ind1` and `ind2` in `record`, [] when it doesn't exist
+  """
+  @spec fields(JPMarc.Record.t, String.t, String.t, String.t)::[t]
+  def fields(record, tag, ind1 \\ nil, ind2 \\ nil) do
+    if control_field?(tag) do
+      record.control_fields |> Enum.filter(&(&1.tag == tag))
+    else
+      dfs = record.data_fields |> Enum.filter(&(&1.tag == tag))
+      dfs = if ind1, do: (dfs |> Enum.filter(&(&1.ind1 == ind1))), else: dfs
+      if ind2, do: (dfs |> Enum.filter(&(&1.ind2 == ind2))), else: dfs
+    end
+  end
+
+  @doc """
+  Returns first DataFields with `tag`, `ind1` and `ind2` in `record`, nil when it doesn't exist
+  """
+  @spec field(JPMarc.Record.t, String.t, String.t, String.t)::(t|nil)
+  def field(record, tag, ind1 \\ nil, ind2 \\ nil), do: fields(record, tag, ind1, ind2) |> Enum.at(0)
+
+  @doc """
+  Returns a list of SubFields with `tag`, `ind1`, `ind2` and `code` in `record`, [] when it doesn't exist
+
+  `code` is either of :all, `code` as String or List of `code`.
+  Default is `:all`.
+  """
+  @spec subfields(JPMarc.Record.t, String.t, (String.t|[String.t]), String.t, String.t)::[SubField.t]
+  def subfields(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil) do
+    fields = fields(record, tag, ind1, ind2)
+    unless Enum.empty?(fields) do
+      cond do
+        code == :all ->
+          fields |> Enum.map(&(&1.subfields))
+        is_list(code) ->
+          fields |> Enum.map(fn(df) ->
+            df.subfields |> Enum.filter(&Enum.member?(code, &1.code))end)
+        is_binary(code) ->
+          fields |> Enum.map(fn(df) ->
+            df.subfields |> Enum.filter(&(&1.code == code))end)
+        true -> []
+      end
+    else
+      []
+    end
+  end
+
+  @doc """
+  Returns first SubField with `tag`, `ind1`, `ind2` and `code` in `record`, [] when it doesn't exist
+
+  `code` is either of :all, `code` as String or List of `code`.
+  Default is `:all`.
+  """
+  @spec subfield(JPMarc.Record.t, String.t, (String.t|[String.t]), String.t, String.t)::SubField.t
+  def subfield(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil), do: subfields(record, tag, code, ind1, ind2) |> Enum.at(0)
+
+  @doc """
+  Returns a list of SubFields value with `tag`, `ind1`, `ind2` and `code` in `record`, `[]` when it doesn't exist
+
+  `code` is either of :all, `code` as String or List of `code`.
+  Default is `:all`.
+  """
+  @spec field_values(JPMarc.Record.t, String.t, (atom|String.t|[String.t]), String.t, String.t)::[String.t]
+  def field_values(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " ") do
+    if control_field?(tag) do
+      if cf = field(record, tag), do: [cf.value], else: []
+    else
+      subfield_values(record, tag, code, ind1, ind2, joiner)
+    end
+  end
+
+  @doc """
+  Returns a list of Field values with `tag`, `ind1`, `ind2` and `code` in `record`, `nil` when it doesn't exist
+
+  `code` is either of :all, `code` as String or List of `code`.
+  Default is `:all`.
+  """
+  @spec field_value(JPMarc.Record.t, String.t, (atom|String.t|[String.t]), String.t, String.t)::String.t
+  def field_value(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " "), do: field_values(record, tag, code, ind1, ind2, joiner) |> Enum.at(0)
+
+  @doc """
+  Returns a list of SubFields value with `tag`, `ind1`, `ind2` and `code` in `record`, `[]`when it doesn't exist
+
+  `code` is either of :all, `code` as String or List of `code`.
+  Default is `:all`.
+  """
+  @spec subfield_values(JPMarc.Record.t, String.t, (String.t|[String.t]), String.t, String.t)::[String.t]
+  def subfield_values(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " ") do
+    subfields(record, tag, code, ind1, ind2) |> Enum.map(fn(sf) -> Enum.map(sf, &("#{&1.value}")) |> Enum.join(joiner) end)
+  end
+
+  @doc """
+  Returns first SubFields value with `tag`, `ind1`, `ind2` and `code` in `record`, `nil` when it doesn't exist
+
+  `code` is either of :all, `code` as String or List of `code`.
+  Default is `:all`.
+  """
+  @spec subfield_value(JPMarc.Record.t, String.t, (String.t|[String.t]), String.t, String.t)::String.t
+  def subfield_value(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " "), do: subfield_values(record, tag, code, ind1, ind2, joiner) |> Enum.at(0)
 
   @doc """
     Decode the String of a marc and return `JPMarc.Record` struct

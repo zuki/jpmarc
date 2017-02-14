@@ -1,3 +1,8 @@
+#. TRANSLATORS: def JPMarc.Leader.to_marc(l)
+#: lib/jpmarc/leader.ex:25 
+msgid ""
+"  Return the MARC Format of the leader\n"
+msgstr ""
 #. TRANSLATORS: Elixir.JPMarc.Leader Summary
 #: lib/jpmarc/leader.ex:2 
 msgid ""
@@ -7,11 +12,6 @@ msgstr ""
 #: lib/jpmarc/leader.ex:14 
 msgid ""
 "Decode the string representation to JPMarc.Leader struct\n"
-msgstr ""
-#. TRANSLATORS: def JPMarc.Leader.to_marc(l)
-#: lib/jpmarc/leader.ex:25 
-msgid ""
-"  Return the MARC Format of the leader\n"
 msgstr ""
 #. TRANSLATORS: @type t
 #: lib/jpmarc/leader.ex:6 
