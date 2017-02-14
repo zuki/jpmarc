@@ -1,4 +1,4 @@
-#. TRANSLATORS: def JPMarc.MarcSigil.sigil_M(lines, list)
+#. TRANSLATORS: def JPMarc.MarcSigil.sigil_m(lines, list)
 #: lib/jpmarc/sigil.ex:2 
 msgid ""
 "Implement the \"~M\" sigil, which takes a string containig\n"

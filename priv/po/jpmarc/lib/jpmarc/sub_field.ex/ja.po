@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-02-11 10:39+0900\n"
+"PO-Revision-Date: 2017-02-14 18:13+0900\n"
 "Last-Translator: Keiji Suzuki <EMAIL@ADDRESS>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -38,8 +38,12 @@ msgstr "JPMARCサブフィールドを扱うツールです。\n"
 msgid "  Return the MARC Format of the subfield\n"
 msgstr "このサブフィールドのMARC形式の文字列を返します。\n"
 
+#. TRANSLATORS: def JPMarc.SubField.to_text(sf)
+#: lib/jpmarc/sub_field.ex:46
+msgid "Return a text representing its element\n"
+msgstr "テキスト形式で要素を返します。\n"
+
 #. TRANSLATORS: def JPMarc.SubField.decode(data)
 #: lib/jpmarc/sub_field.ex:17
 msgid "Decode a string representation to JPMarc.SubField struct\n"
-msgstr ""
-"JPMARCのサブフィールドを表す文字列をJPMarc.SubField構造体に変換します。\n"
+msgstr "JPMARCのサブフィールドを表す文字列をJPMarc.SubField構造体に変換します。\n"

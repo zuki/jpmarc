@@ -40,6 +40,14 @@ defmodule JPMarc.Leader do
     {:leader, nil, JPMarc.Leader.to_marc(leader)}
   end
 
+  @doc"""
+  Return a text representing the leader
+  """
+  @spec to_text(t)::String.t
+  def to_text(leader) do
+    to_marc(leader)
+  end
+
   defimpl Inspect, for: JPMarc.Leader do
     def inspect(leader, _opts) do
       JPMarc.Leader.to_marc(leader)

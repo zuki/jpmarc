@@ -19,8 +19,9 @@ defmodule JPMarcTest do
       data_fields: record.data_fields]}
   end
 
-  test "Parse MARC file", %{records: records} do
+  test "Parse MARC file", %{records: records, record: record} do
     assert length(records) == 2
+    assert JPMarc.parse_marc("test/data/test1.mrc") == record
   end
 
   test "Parse leader", %{leader: leader} do
@@ -55,10 +56,11 @@ defmodule JPMarcTest do
     assert marc == org
   end
 
-  test "DataField sort" do
-    df = %DF{tag: "100", subfields: [%SF{code: "b", value: "ab"}, %SF{code: "a", value: "cd"}]}
-    sorted = %DF{tag: "100", subfields: [%SF{code: "a", value: "cd"}, %SF{code: "b", value: "ab"}]}
-    assert DF.sort(df) == sorted
+  test "Write a MARC as text file", %{record: record} do
+    marc_text = "00276nam a2200109zi 4500\n001 123456789012\n003 JTNDL\n005 20170209103923.0\n007 ta\n008 170209s2017    ja ||||g |||| |||||||jpn  \n020    $c 2000円 $z 978-4-123456-01-0\n245 00 $a タイトル : $b 関連情報 / $c 山田太郎 著."
+    assert Record.to_text(record) == marc_text
+    record1 = ~m"#{marc_text}"
+    assert record1 == record
   end
 
   test "Record sort" do
@@ -97,19 +99,19 @@ defmodule JPMarcTest do
     assert Record.subfield_value(record, "245", ["a", "b"]) == "タイトル : 関連情報 /"
   end
 
-  test "~M sigil" do
-    record1 = ~M"""
+  test "~m sigil" do
+    record1 = ~m"""
     00000cam a22     zi 4500
     001 027524410
-    245 0 0 $6 880-01 $a タイトル / $c 山田, 太郎著.
-    260     $6 880-02 $a 東京 : $b A出版, $c 2017.2.
-    300     $a 325p ; $c 21cm.
-    880 0 0 $6 245-01/$1 $a タイトル.
+    245 00 $6 880-01 $a タイトル / $c 山田, 太郎著.
+    260    $6 880-02 $a 東京 : $b A出版, $c 2017.2.
+    300    $a 325p ; $c 21cm.
+    880 00 $6 245-01/$1 $a タイトル.
     """
     assert record1.__struct__ == Record
     assert Record.subfield_value(record1, "880", "6") == "245-01/$1"
 
-    record2 = ~M"""
+    record2 = ~m"""
     FMT	 	BK
     LDR	 	00000cam a22     zi 4500
     001	 	027524410

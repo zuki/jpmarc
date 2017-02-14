@@ -12,7 +12,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.8.11\n"
 
-#. TRANSLATORS: def JPMarc.MarcSigil.sigil_M(lines, list)
+#. TRANSLATORS: def JPMarc.MarcSigil.sigil_m(lines, list)
 #: lib/jpmarc/sigil.ex:2
 msgid ""
 "Implement the \"~M\" sigil, which takes a string containig\n"

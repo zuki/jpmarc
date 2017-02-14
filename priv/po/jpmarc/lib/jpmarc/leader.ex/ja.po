@@ -40,3 +40,9 @@ msgstr ""
 "\n"
 "integerの`:length`、文字列の`:status`、文字列の`:type`、文字列の`:level`、"
 "integerの`:base`、文字列の`:encoding`、文字列の`:format`で構成されます。\n"
+
+#. TRANSLATORS: def JPMarc.Leader.to_text(leader)
+#: lib/jpmarc/leader.ex:43
+#, fuzzy
+msgid "Return a text representing the leader\n"
+msgstr "このリーダーのMARC形式の文字列を返します。\n"

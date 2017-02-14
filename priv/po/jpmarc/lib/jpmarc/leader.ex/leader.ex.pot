@@ -20,3 +20,8 @@ msgid ""
 "\n"
 "    This constructed with `:length` as integer, `:status` as String, `:type` of String, `:level` as String, `:base` as integer, `:encoding` String, `:format` String\n"
 msgstr ""
+#. TRANSLATORS: def JPMarc.Leader.to_text(leader)
+#: lib/jpmarc/leader.ex:43 
+msgid ""
+"Return a text representing the leader\n"
+msgstr ""

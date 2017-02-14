@@ -73,7 +73,7 @@ msgid ""
 "Return `true` if `tag` is a valid tag number as ControlField, otherwise `false`\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.sort(record)
-#: lib/jpmarc/record.ex:172 
+#: lib/jpmarc/record.ex:183 
 msgid ""
 "  Sort its fields by tag and subfields of field\n"
 msgstr ""
@@ -84,6 +84,11 @@ msgid ""
 "\n"
 "`code` is either of :all, `code` as String or List of `code`.\n"
 "Default is `:all`.\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.Record.to_text(record)
+#: lib/jpmarc/record.ex:172 
+msgid ""
+"Return the Text Format of the JPMarc struct\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.subfields(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil)
 #: lib/jpmarc/record.ex:51 

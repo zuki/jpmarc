@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-02-11 10:34+0900\n"
+"PO-Revision-Date: 2017-02-14 18:10+0900\n"
 "Last-Translator: Keiji Suzuki <EMAIL@ADDRESS>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -12,20 +12,47 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.8.11\n"
 
+#. TRANSLATORS: def JPMarc.DataField.subfields(field, code \\ :all)
+#: lib/jpmarc/data_field.ex:17
+msgid ""
+"Returns a list of SubFields with `code` in `field`, [] when it doesn't "
+"exist\n"
+"\n"
+"`code` is either of :all, code as String or List of code.\n"
+"Default is `:all`.\n"
+msgstr ""
+"データフィールド`field`のコード値`code`のサブフィールドのリストを、該当するサ"
+"ブフィールドがない場合は`[]`を返します。\n"
+"\n"
+"`code`には、:all,、コード値、コード値のリストを指定できます。\n"
+" デフォルトは`:all`です。\n"
+
+#. TRANSLATORS: def JPMarc.DataField.subfield_value(field, code \\ :all, joiner \\ " ")
+#: lib/jpmarc/data_field.ex:36
+msgid ""
+"Returns a Subfield value with `code` in `field`, `\"\"` when it doesn't "
+"exist\n"
+"\n"
+"`code` is either of :all, code as String or List of code.\n"
+"Default is `:all`.\n"
+msgstr ""
+"データフィールド`field`のコード値`code`のサブフィールドの値を、該当するサブ"
+"フィールドがない場合は空値を返します。\n"
+"\n"
+"`code`には、:all,、コード値、コード値のリストを指定できます。\n"
+" デフォルトは`:all`です。\n"
+
 #. TRANSLATORS: Elixir.JPMarc.DataField Summary
 #: lib/jpmarc/data_field.ex:2
 msgid "Tools for working with JPMARC DataFields\n"
 msgstr "JPMARCデータフィールドを扱うツールです。\n"
 
-#. TRANSLATORS: def JPMarc.DataField.sort(field)
-#: lib/jpmarc/data_field.ex:38
-msgid "  Sort its subfields by code\n"
-msgstr "サブフィールドのリストをコードをもとにソートします。\n"
-
 #. TRANSLATORS: def JPMarc.DataField.to_marc(field)
-#: lib/jpmarc/data_field.ex:17
-msgid "  Return the MARC Format of the data field\n"
-msgstr "このデータフィールドのMARC形式の文字列を返します。\n"
+#: lib/jpmarc/data_field.ex:47
+msgid "Return the MARC Format of the data field\n"
+msgstr ""
+"このデータフィールドのMARC形式の文字列を返します。\n"
+"\n"
 
 #. TRANSLATORS: @type t
 #: lib/jpmarc/data_field.ex:9
@@ -39,3 +66,6 @@ msgstr ""
 "\n"
 "文字列の`:tag`、文字列の`:indicator`、`JPMarc.SubField.t`のリストの`:"
 "subfields`で構成されます。\n"
+
+#~ msgid "  Sort its subfields by code\n"
+#~ msgstr "サブフィールドのリストをコードをもとにソートします。\n"

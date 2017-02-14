@@ -43,6 +43,14 @@ defmodule JPMarc.SubField do
     {:subfield, %{code: sf.code}, sf.value}
   end
 
+  @doc"""
+  Return a text representing its element
+  """
+  @spec to_text(t)::String.t
+  def to_text(sf) do
+    "$#{sf.code} #{sf.value}"
+  end
+
   defimpl Inspect, for: JPMarc.SubField do
     def inspect(%JPMarc.SubField{code: code, value: value}, _opts) do
       "$#{code} #{value}"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-02-14 11:14+0900\n"
+"PO-Revision-Date: 2017-02-14 18:00+0900\n"
 "Last-Translator: Keiji Suzuki <EMAIL@ADDRESS>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -145,7 +145,7 @@ msgstr ""
 "`false`を返します。\n"
 
 #. TRANSLATORS: def JPMarc.Record.sort(record)
-#: lib/jpmarc/record.ex:172
+#: lib/jpmarc/record.ex:183
 msgid "  Sort its fields by tag and subfields of field\n"
 msgstr "フィールドをタグ順、インジケータ順にソートします。\n"
 
@@ -165,6 +165,11 @@ msgstr ""
 "コードが、`code`はそのコードが、`code`のリストはリストに含まれるコードが抽出"
 "の対象となります。\n"
 "デフォルトは`:all`です。\n"
+
+#. TRANSLATORS: def JPMarc.Record.to_text(record)
+#: lib/jpmarc/record.ex:172
+msgid "Return the Text Format of the JPMarc struct\n"
+msgstr "JPMarc.Record構造体をテキスト形式で返します。\n"
 
 #. TRANSLATORS: def JPMarc.Record.subfields(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil)
 #: lib/jpmarc/record.ex:51

@@ -54,7 +54,7 @@ defmodule JPMarc.Record do
   `code` is either of :all, `code` as String or List of `code`.
   Default is `:all`.
   """
-  @spec subfields(JPMarc.Record.t, String.t, (String.t|[String.t]), String.t, String.t)::[SubField.t]
+  @spec subfields(t, String.t, (atom|String.t|[String.t]), String.t, String.t)::[SubField.t]
   def subfields(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil) do
     fields = fields(record, tag, ind1, ind2)
     unless Enum.empty?(fields) do
@@ -80,7 +80,7 @@ defmodule JPMarc.Record do
   `code` is either of :all, `code` as String or List of `code`.
   Default is `:all`.
   """
-  @spec subfield(JPMarc.Record.t, String.t, (String.t|[String.t]), String.t, String.t)::SubField.t
+  @spec subfield(t, String.t, (atom|String.t|[String.t]), String.t, String.t)::SubField.t
   def subfield(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil), do: subfields(record, tag, code, ind1, ind2) |> Enum.at(0)
 
   @doc """
@@ -89,7 +89,7 @@ defmodule JPMarc.Record do
   `code` is either of :all, `code` as String or List of `code`.
   Default is `:all`.
   """
-  @spec field_values(JPMarc.Record.t, String.t, (atom|String.t|[String.t]), String.t, String.t)::[String.t]
+  @spec field_values(t, String.t, (atom|String.t|[String.t]), String.t, String.t, String.t)::[String.t]
   def field_values(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " ") do
     if control_field?(tag) do
       if cf = field(record, tag), do: [cf.value], else: []
@@ -104,7 +104,7 @@ defmodule JPMarc.Record do
   `code` is either of :all, `code` as String or List of `code`.
   Default is `:all`.
   """
-  @spec field_value(JPMarc.Record.t, String.t, (atom|String.t|[String.t]), String.t, String.t)::String.t
+  @spec field_value(t, String.t, (atom|String.t|[String.t]), String.t, String.t)::String.t
   def field_value(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " "), do: field_values(record, tag, code, ind1, ind2, joiner) |> Enum.at(0)
 
   @doc """
@@ -113,7 +113,7 @@ defmodule JPMarc.Record do
   `code` is either of :all, `code` as String or List of `code`.
   Default is `:all`.
   """
-  @spec subfield_values(JPMarc.Record.t, String.t, (String.t|[String.t]), String.t, String.t)::[String.t]
+  @spec subfield_values(t, String.t, (atom|String.t|[String.t]), String.t, String.t, String.t)::[String.t]
   def subfield_values(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " ") do
     subfields(record, tag, code, ind1, ind2) |> Enum.map(fn(sf) -> Enum.map(sf, &("#{&1.value}")) |> Enum.join(joiner) end)
   end
@@ -124,7 +124,7 @@ defmodule JPMarc.Record do
   `code` is either of :all, `code` as String or List of `code`.
   Default is `:all`.
   """
-  @spec subfield_value(JPMarc.Record.t, String.t, (String.t|[String.t]), String.t, String.t)::String.t
+  @spec subfield_value(t, String.t, (atom|String.t|[String.t]), String.t, String.t, String.t)::String.t
   def subfield_value(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " "), do: subfield_values(record, tag, code, ind1, ind2, joiner) |> Enum.at(0)
 
   @doc """
@@ -170,12 +170,25 @@ defmodule JPMarc.Record do
   end
 
   @doc """
+  Return the Text Format of the JPMarc struct
+  """
+  @spec to_text(t)::tuple
+  def to_text(record) do
+    sorted = sort(record)
+    cfs = sorted.control_fields |> Enum.map(&ControlField.to_text/1)
+    dfs = sorted.data_fields |> Enum.map(&DataField.to_text/1)
+    ([Leader.to_text(sorted.leader)] ++ cfs ++ dfs) |> Enum.join("\n")
+  end
+
+  @doc """
     Sort its fields by tag and subfields of field
   """
   @spec sort(t)::t
   def sort(record) do
     sorted_control_fields = record.control_fields |> Enum.sort(&(&1.tag <= &2.tag))
-    sorted_data_fields = record.data_fields |> Enum.map(&DataField.sort/1) |> Enum.sort(&(&1.tag<>&1.ind1<>&1.ind2 <= &2.tag<>&2.ind1<>&2.ind2))
+    {t880, rest} = Enum.split_with(record.data_fields, &(&1.tag == "880"))
+    sorted_data_fields = (rest |> Enum.sort(&(&1.tag<>&1.ind1<>&1.ind2 <= &2.tag<>&2.ind1<>&2.ind2)))
+        ++ (t880 |> Enum.sort(&(DataField.subfield_value(&1, "6") <= DataField.subfield_value(&2, "6"))))
     %__MODULE__{record | control_fields: sorted_control_fields, data_fields: sorted_data_fields}
   end
 
