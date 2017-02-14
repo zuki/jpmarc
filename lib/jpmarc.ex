@@ -22,6 +22,12 @@ defmodule JPMarc do
   end
 
   @doc """
+    Parse a marc file which contains one marc record, and return a `JPMarc.Record` struct
+  """
+  @spec parse_marc(String.t)::JPMarc.Record.t
+  def parse_marc(file), do: JPMarc.parse_file(file) |> Enum.at(0)
+
+  @doc """
     Return the String representing MARC Format of the JPMarc.Record struct (one or List of that)
   """
   @spec to_marc(JPMarc.Record.t|[JPMarc.Record.t])::String.t
