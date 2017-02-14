@@ -18,7 +18,12 @@ defmodule JPMarc.Leader do
   def decode(leader) do
     <<length::bytes-size(5), status::bytes-size(1), type::bytes-size(1),
       level::bytes-size(1), _::bytes-size(4), base::bytes-size(5), encoding::bytes-size(1), format::bytes-size(1), _::binary>> = leader
-    base = if base == "     ", do: "00000", else: base
+    base = try do
+      _ = String.to_integer(base)
+      base
+    rescue
+      ArgumentError -> "00000"
+    end
     %__MODULE__{length: String.to_integer(length), status: status, type: type, level: level, base: String.to_integer(base), encoding: encoding, format: format}
   end
 

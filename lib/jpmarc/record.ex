@@ -36,9 +36,14 @@ defmodule JPMarc.Record do
     if control_field?(tag) do
       record.control_fields |> Enum.filter(&(&1.tag == tag))
     else
-      dfs = record.data_fields |> Enum.filter(&(&1.tag == tag))
-      dfs = if ind1, do: (dfs |> Enum.filter(&(&1.ind1 == ind1))), else: dfs
-      if ind2, do: (dfs |> Enum.filter(&(&1.ind2 == ind2))), else: dfs
+      case {tag, ind1, ind2} do
+        {tag, nil, nil} ->
+          record.data_fields |> Enum.filter(&(&1.tag == tag))
+        {tag, ind1, nil} ->
+          record.data_fields |> Enum.filter(&(&1.tag == tag && &1.ind1 == ind1))
+        {tag, ind1, ind2} ->
+          record.data_fields |> Enum.filter(&(&1.tag == tag && &1.ind1 == ind1 && &1.ind2 == ind2))
+      end
     end
   end
 
@@ -151,9 +156,10 @@ defmodule JPMarc.Record do
   """
   @spec to_marc(t)::String.t
   def to_marc(record) do
-    {directories, data} = make_directories_data(record.control_fields ++ record.data_fields)
-    marc = Leader.to_marc(record.leader) <> directories <> @fs <> data <> @rs
-    l = %Leader{record.leader | length: byte_size(marc), base: (@leader_length + 1 + byte_size(directories))}
+    sorted = sort(record)
+    {directories, data} = make_directories_data(sorted.control_fields ++ sorted.data_fields)
+    marc = Leader.to_marc(sorted.leader) <> directories <> @fs <> data <> @rs
+    l = %Leader{sorted.leader | length: byte_size(marc), base: (@leader_length + 1 + byte_size(directories))}
     Leader.to_marc(l) <> directories <> @fs <> data <> @rs
   end
 

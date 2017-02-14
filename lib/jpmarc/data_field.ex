@@ -49,10 +49,7 @@ defmodule JPMarc.DataField do
   """
   @spec to_marc(t)::String.t
   def to_marc(field) do
-    subfields = field.subfields
-      |> Enum.map(&SubField.to_marc/1)
-      |> Enum.join
-
+    subfields = field.subfields |> Enum.map(&SubField.to_marc/1) |> Enum.join
     field.ind1 <> field.ind2 <> subfields <> @fs
   end
 
@@ -61,8 +58,8 @@ defmodule JPMarc.DataField do
   """
   @spec to_xml(t)::tuple
   def to_xml(df) do
-    sfs = df.subfields |> Enum.map(&SubField.to_xml/1)
-    {:datafield, %{tag: df.tag}, sfs}
+    subfields = df.subfields |> Enum.map(&SubField.to_xml/1)
+    {:datafield, %{tag: df.tag}, subfields}
   end
 
   @doc """
