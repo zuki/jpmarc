@@ -9,15 +9,15 @@ defmodule JPMarc.MarcSigil do
   alias JPMarc.DataField, as: DF
   alias JPMarc.SubField, as: SF
 
-  def sigil_M(lines, []), do: _M(lines, :jpmarc)
-  def sigil_M(lines, 'n'), do: _M(lines, :ndl)
-  #def sigil_M(lines, 'v'), do: _M(lines, :vufind)
+  def sigil_m(lines, []), do: _m(lines, :jpmarc)
+  def sigil_m(lines, 'n'), do: _m(lines, :ndl)
+  #def sigil_m(lines, 'v'), do: _m(lines, :vufind)
 
-  defp _M(lines, :jpmarc) do
+  defp _m(lines, :jpmarc) do
     separator = "$"
-    [leader|fields] = lines |> String.split("\n") |> Enum.map(&String.trim/1) |> Enum.map(fn (l) ->
+    [leader|fields] = lines |> String.split("\n") |> Enum.map(&String.trim_leading/1) |> Enum.map(fn (l) ->
       case l do
-        <<tag::bytes-size(3), " ", ind1::bytes-size(1), " ", ind2::bytes-size(1), " $", value::binary>> ->
+        <<tag::bytes-size(3), " ", ind1::bytes-size(1), ind2::bytes-size(1), " $", value::binary>> ->
           make_data_field(tag, ind1, ind2, separator <> value, separator)
         <<tag::bytes-size(3), " ", value::binary>> ->
           %CF{tag: tag, value: value}
@@ -26,11 +26,11 @@ defmodule JPMarc.MarcSigil do
         _ -> []
       end
     end) |> List.flatten()
-    {control_fields, data_fields} = Enum.split_with(fields, &(&1.__struct__ == ControlField))
+    {control_fields, data_fields} = Enum.split_with(fields, &(&1.__struct__ == CF))
     %Record{leader: leader, control_fields: control_fields, data_fields: data_fields}
   end
 
-  defp _M(lines, :ndl) do
+  defp _m(lines, :ndl) do
     separator = "|"
     [leader|fields] = lines |> String.split("\n") |> Enum.map(&String.trim/1) |> Enum.map(fn (l) ->
       case l do
@@ -51,7 +51,7 @@ defmodule JPMarc.MarcSigil do
         _ -> []
       end
     end) |> List.flatten()
-    {control_fields, data_fields} = Enum.split_with(fields, &(&1.__struct__ == ControlField))
+    {control_fields, data_fields} = Enum.split_with(fields, &(&1.__struct__ == CF))
     %Record{leader: leader, control_fields: control_fields, data_fields: data_fields}
   end
 
