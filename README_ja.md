@@ -4,7 +4,7 @@ ElixirでJPMARCを扱うためのライブラリです。
 
 ## インストール
 
-`mix.exs`に`:jpmarc`を追加して、`mix deps.get`してください。
+`mix.exs`に`jpmarc`を追加して、`mix deps.get`してください。
 
 ```elixir
 def deps do
@@ -21,6 +21,8 @@ alias JPMarc.ControlField, as: CF
 alias JPMarc.DataField, as: DF
 alias JPMarc.SubField, as: SF
 import JPMarc.MarkSigil
+
+# MARCファイルを読んで、MARCレコードごとに処理
 
 for record <- JPMarc.parse_file("marc.dat") do
   # フィールド 245、サブフィールド a の値を出力
