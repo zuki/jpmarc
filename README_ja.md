@@ -39,6 +39,9 @@ t245c = %SF{code: "c", value: "山田, 太郎 著."}
 t245 = %DF{tag: "245", ind1: "0", ind2: "0", subfields: [t245a, t245c]}
 record = %Record{leader: leader, fields: [t001, t003, t245]}
 
+# ~mシジルによるレコードの作成
+record = %Record{leader: %Leader{}, fields: [~m"001 1234", ~m"003 JTNDL", ~m"245 00 $a タイトル / $b 山田, 太郎 著."]}
+
 # MARC形式で出力
 File.write("marc.dat", JPMarc.to_marc(record))
 
@@ -54,9 +57,10 @@ File.write("marc.txt", Record.to_text(record))
 
 ## ~m シジル
 
-テキスト形式のMARCをJPMarc.Record構造体に変換する。
+テキスト形式のMARCをJPMarc構造体に変換する。
 
 ````elixir
+# レコード
 record = ~m"""
 00276nam a2200109zi 4500
 001 123456789012
@@ -69,6 +73,15 @@ record = ~m"""
 """
 
 IO.puts Record.subfield_value(record, "245", "a") # -> "タイトル : "
+
+# リーダー
+leader = ~m"00276nam a2200109zi 4500"
+
+# コントロールフィールド
+cf = ~m"001 123456789012"
+
+# データフィールド
+df = ~m"245 00 $a タイトル : $b 関連情報 / $c 山田太郎 著."
 ````
 
 ## APIドキュメント

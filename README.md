@@ -39,6 +39,9 @@ t245c = %SF{code: "c", value: "山田, 太郎 著."}
 t245 = %DF{tag: "245", ind1: "0", ind2: "0", subfields: [t245a, t245c]}
 record = %Record{leader: leader, fields: [t001, t003, t245]}
 
+# Construct a JPMarc.Record with ~m sigil
+record = %Record{leader: %Leader{}, fields: [~m"001 1234", ~m"003 JTNDL", ~m"245 00 $a タイトル / $b 山田, 太郎 著."]}
+
 # Write records in MARC format
 File.write("marc.dat", JPMarc.to_marc(record))
 
@@ -57,6 +60,7 @@ File.write("marc.txt", Record.to_text(record))
 Covert string in Text MARC format to JPMarc.Record.
 
 ````elixir
+# Record
 record = ~m"""
 00276nam a2200109zi 4500
 001 123456789012
@@ -69,6 +73,15 @@ record = ~m"""
 """
 
 IO.puts Record.subfield_value(record, "245", "a") # -> "タイトル : "
+
+# Leader
+leader = ~m"00276nam a2200109zi 4500"
+
+# Control field
+cf = ~m"001 123456789012"
+
+# Data field
+df = ~m"245 00 $a タイトル : $b 関連情報 / $c 山田太郎 著."
 ````
 
 ## API documents
