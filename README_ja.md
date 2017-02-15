@@ -8,7 +8,7 @@ ElixirでJPMARCを扱うためのライブラリです。
 
 ```elixir
 def deps do
-  [{:jpmarc, github: "zuki/exgettext"}]
+  [{:jpmarc, github: "zuki/jpmarc"}]
 end
 ```
 

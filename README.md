@@ -8,7 +8,7 @@ Add `jpmarc` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
-  [{:jpmarc, github: "zuki/exgettext"}]
+  [{:jpmarc, github: "zuki/jpmarc"}]
 end
 ```
 
