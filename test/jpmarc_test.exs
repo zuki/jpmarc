@@ -11,12 +11,13 @@ defmodule JPMarcTest do
   setup_all do
     records = JPMarc.parse_file("test/data/test.mrc")
     record = Enum.at(records, 0)
+    {control_fields, data_fields} = Enum.split_with(record.fields, &(&1.__struct__ == CF))
     {:ok, [
       records: records,
       record: record,
       leader: record.leader,
-      control_fields: record.control_fields,
-      data_fields: record.data_fields]}
+      control_fields: control_fields,
+      data_fields: data_fields]}
   end
 
   test "Parse MARC file", %{records: records, record: record} do
@@ -69,8 +70,8 @@ defmodule JPMarcTest do
     df3 = %DF{tag: "100", ind1: " ", ind2: " ", subfields: [%SF{code: "a", value: "012345"}]}
     cf1 = %CF{tag: "001", value: "12345"}
     l = %Leader{}
-    record = %Record{leader: l, data_fields: [df1, df2, df3], control_fields: [cf1]}
-    sorted = %Record{leader: l, control_fields: [cf1], data_fields: [df3, df2, df1]}
+    record = %Record{leader: l, fields: [df1, df2, df3, cf1]}
+    sorted = %Record{leader: l, fields: [cf1, df3, df2, df1]}
     assert Record.sort(record) == sorted
   end
 

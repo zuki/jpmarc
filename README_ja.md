@@ -37,12 +37,12 @@ t003 = %CF{tag: "003", value: "JTNDL"}
 t245a = %SF{code: "a", value: "タイトル /"}
 t245c = %SF{code: "c", value: "山田, 太郎 著."}
 t245 = %DF{tag: "245", ind1: "0", ind2: "0", subfields: [t245a, t245c]}
-record = %Record{leader: leader, control_fields: [t001, t003], data_fields: [t245]}
+record = %Record{leader: leader, fields: [t001, t003, t245]}
 
 # MARC形式で出力
 File.write("marc.dat", JPMarc.to_marc(record))
 
-# XMLMARC形式で出力
+# MARCXML形式で出力
 File.write("marc.xml", JPMarc.to_xml(record))
 
 # JSON形式で出力

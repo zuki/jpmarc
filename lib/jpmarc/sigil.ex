@@ -26,8 +26,7 @@ defmodule JPMarc.MarcSigil do
         _ -> []
       end
     end) |> List.flatten()
-    {control_fields, data_fields} = Enum.split_with(fields, &(&1.__struct__ == CF))
-    %Record{leader: leader, control_fields: control_fields, data_fields: data_fields}
+    %Record{leader: leader, fields: fields}
   end
 
   defp _m(lines, :ndl) do
@@ -51,8 +50,7 @@ defmodule JPMarc.MarcSigil do
         _ -> []
       end
     end) |> List.flatten()
-    {control_fields, data_fields} = Enum.split_with(fields, &(&1.__struct__ == CF))
-    %Record{leader: leader, control_fields: control_fields, data_fields: data_fields}
+    %Record{leader: leader, fields: fields}
   end
 
   defp make_data_field(tag, ind1, ind2, value, separator) do

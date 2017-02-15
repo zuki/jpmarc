@@ -17,10 +17,10 @@ defmodule JPMarc.Record do
   @typedoc """
       Type that represents `JPMarc.Record` struct
 
-      This is constructed with `:leader` as `JPMarc.Leader.t`, `:control_fiels` as List of `JPMarc.ControlField.t` adn `:data_fields` as List of `JPMarc.DataField.t`
+      This is constructed with `:leader` as `JPMarc.Leader.t`, `:fiels` as List of `JPMarc.ControlField.t` or `JPMarc.DataField.t`
   """
-  @type t :: %__MODULE__{leader: Leader.t, control_fields: [ControlField.t], data_fields: [DataField.t]}
-  defstruct leader: nil, control_fields: [], data_fields: []
+  @type t :: %__MODULE__{leader: Leader.t, fields: [ ControlField.t | DataField.t ]}
+  defstruct leader: nil, fields: []
 
   @doc """
   Return `true` if `tag` is a valid tag number as ControlField, otherwise `false`
@@ -34,15 +34,15 @@ defmodule JPMarc.Record do
   @spec fields(JPMarc.Record.t, String.t, String.t, String.t)::[t]
   def fields(record, tag, ind1 \\ nil, ind2 \\ nil) do
     if control_field?(tag) do
-      record.control_fields |> Enum.filter(&(&1.tag == tag))
+      record.fields |> Enum.filter(&(&1.tag == tag))
     else
       case {tag, ind1, ind2} do
         {tag, nil, nil} ->
-          record.data_fields |> Enum.filter(&(&1.tag == tag))
+          record.fields |> Enum.filter(&(&1.tag == tag))
         {tag, ind1, nil} ->
-          record.data_fields |> Enum.filter(&(&1.tag == tag && &1.ind1 == ind1))
+          record.fields |> Enum.filter(&(&1.tag == tag && &1.ind1 == ind1))
         {tag, ind1, ind2} ->
-          record.data_fields |> Enum.filter(&(&1.tag == tag && &1.ind1 == ind1 && &1.ind2 == ind2))
+          record.fields |> Enum.filter(&(&1.tag == tag && &1.ind1 == ind1 && &1.ind2 == ind2))
       end
     end
   end
@@ -147,8 +147,7 @@ defmodule JPMarc.Record do
       tag_data = binary_part(data, position, length)
       parse_tag_data(tag, tag_data)
     end
-    {control_fields, data_fields} = Enum.split_with(fields, &(&1.__struct__ == ControlField))
-    %__MODULE__{leader: leader, control_fields: control_fields, data_fields: data_fields}
+    %__MODULE__{leader: leader, fields: fields}
   end
 
   @doc """
@@ -157,7 +156,7 @@ defmodule JPMarc.Record do
   @spec to_marc(t)::String.t
   def to_marc(record) do
     sorted = reset(record)
-    {directories, data} = make_directories_data(sorted.control_fields ++ sorted.data_fields)
+    {directories, data} = make_directories_data(sorted.fields)
     Leader.to_marc(sorted.leader) <> directories <> @fs <> data <> @rs
   end
 
@@ -167,10 +166,13 @@ defmodule JPMarc.Record do
   @spec to_xml(t)::tuple
   def to_xml(record) do
     sorted = reset(record)
-    cf_xml = sorted.control_fields |> Enum.map(&ControlField.to_xml/1)
-    df_xml = sorted.data_fields |> Enum.map(&DataField.to_xml/1)
-    xml = [Leader.to_xml(sorted.leader)] ++ cf_xml ++ df_xml
-    element(:record, nil, xml)
+    xml = sorted.fields |> Enum.map(fn(f) ->
+      if Enum.member?(@valid_control_fields, f.tag),
+        do: ControlField.to_xml(f),
+        else: DataField.to_xml(f)
+      end)
+    fields_xml = [Leader.to_xml(sorted.leader)] ++ xml
+    element(:record, nil, fields_xml)
   end
 
   @doc """
@@ -179,9 +181,12 @@ defmodule JPMarc.Record do
   @spec to_text(t)::tuple
   def to_text(record) do
     sorted = reset(record)
-    cfs = sorted.control_fields |> Enum.map(&ControlField.to_text/1)
-    dfs = sorted.data_fields |> Enum.map(&DataField.to_text/1)
-    ([Leader.to_text(sorted.leader)] ++ cfs ++ dfs) |> Enum.join("\n")
+    text = sorted.fields |> Enum.map(fn(f) ->
+      if Enum.member?(@valid_control_fields, f.tag),
+        do: ControlField.to_text(f),
+        else: DataField.to_text(f)
+      end)
+    ([Leader.to_text(sorted.leader)] ++ text) |> Enum.join("\n")
   end
 
   @doc"""
@@ -190,13 +195,17 @@ defmodule JPMarc.Record do
   @spec to_json(t)::String.t
   def to_json(record) do
     sorted = reset(record)
-    fields = (sorted.control_fields |> Enum.map(&ControlField.to_json/1)) ++ (sorted.data_fields |> Enum.map(&DataField.to_json/1))
-    "{#{Leader.to_json(sorted.leader)},\"fields\": [#{Enum.join(fields, ",")}]}"
+    json = sorted.fields |> Enum.map(fn(f) ->
+      if Enum.member?(@valid_control_fields, f.tag),
+        do: ControlField.to_json(f),
+        else: DataField.to_json(f)
+      end)
+    "{#{Leader.to_json(sorted.leader)},\"fields\": [#{Enum.join(json, ",")}]}"
   end
 
   defp reset(record) do
     sorted = sort(record)
-    {directories, data} = make_directories_data(sorted.control_fields ++ sorted.data_fields)
+    {directories, data} = make_directories_data(sorted.fields)
     marc = Leader.to_marc(sorted.leader) <> directories <> @fs <> data <> @rs
     new_leader = %Leader{sorted.leader | length: byte_size(marc), base: (@leader_length + 1 + byte_size(directories))}
     %__MODULE__{sorted | leader: new_leader}
@@ -207,11 +216,12 @@ defmodule JPMarc.Record do
   """
   @spec sort(t)::t
   def sort(record) do
-    sorted_control_fields = record.control_fields |> Enum.sort(&(&1.tag <= &2.tag))
-    {t880, rest} = Enum.split_with(record.data_fields, &(&1.tag == "880"))
+    {control_fields, data_fields} = Enum.split_with(record.fields, &(&1.__struct__ == ControlField))
+    sorted_control_fields = control_fields |> Enum.sort(&(&1.tag <= &2.tag))
+    {t880, rest} = Enum.split_with(data_fields, &(&1.tag == "880"))
     sorted_data_fields = (rest |> Enum.sort(&(&1.tag<>&1.ind1<>&1.ind2 <= &2.tag<>&2.ind1<>&2.ind2)))
         ++ (t880 |> Enum.sort(&(DataField.subfield_value(&1, "6") <= DataField.subfield_value(&2, "6"))))
-    %__MODULE__{record | control_fields: sorted_control_fields, data_fields: sorted_data_fields}
+    %__MODULE__{record | fields: sorted_control_fields ++ sorted_data_fields}
   end
 
   defp get_directories(block), do: _get_directories(block, [])
@@ -251,14 +261,14 @@ defmodule JPMarc.Record do
   end
 
   defimpl Inspect do
-    def inspect(%JPMarc.Record{leader: leader, control_fields: control_fields, data_fields: data_fields}, _opts) do
-      "#{leader}\n#{Enum.join(control_fields ++ data_fields, "\n")}"
+    def inspect(%JPMarc.Record{leader: leader, fields: fields}, _opts) do
+      "#{leader}\n#{Enum.join(fields, "\n")}"
     end
   end
 
   defimpl String.Chars, for: JPMarc.Record do
-    def to_string(%JPMarc.Record{leader: leader, control_fields: control_fields, data_fields: data_fields}) do
-      "#{leader}, #{Enum.join(control_fields ++ data_fields, "\n")}"
+    def to_string(%JPMarc.Record{leader: leader, fields: fields}) do
+      "#{leader}, #{Enum.join(fields, "\n")}"
     end
   end
 

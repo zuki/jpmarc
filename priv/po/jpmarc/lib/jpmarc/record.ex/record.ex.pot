@@ -1,10 +1,3 @@
-#. TRANSLATORS: @type t
-#: lib/jpmarc/record.ex:17 
-msgid ""
-"    Type that represents `JPMarc.Record` struct\n"
-"\n"
-"    This is constructed with `:leader` as `JPMarc.Leader.t`, `:control_fiels` as List of `JPMarc.ControlField.t` adn `:data_fields` as List of `JPMarc.DataField.t`\n"
-msgstr ""
 #. TRANSLATORS: def JPMarc.Record.field_values(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " ")
 #: lib/jpmarc/record.ex:91 
 msgid ""
@@ -21,6 +14,13 @@ msgid ""
 "`code` is either of :all, `code` as String or List of `code`.\n"
 "Default is `:all`.\n"
 msgstr ""
+#. TRANSLATORS: @type t
+#: lib/jpmarc/record.ex:17 
+msgid ""
+"    Type that represents `JPMarc.Record` struct\n"
+"\n"
+"    This is constructed with `:leader` as `JPMarc.Leader.t`, `:fiels` as List of `JPMarc.ControlField.t` or `JPMarc.DataField.t`\n"
+msgstr ""
 #. TRANSLATORS: Elixir.JPMarc.Record Summary
 #: lib/jpmarc/record.ex:2 
 msgid ""
@@ -32,7 +32,7 @@ msgid ""
 "Returns a list of Fields with `tag`, `ind1` and `ind2` in `record`, [] when it doesn't exist\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.to_json(record)
-#: lib/jpmarc/record.ex:189 
+#: lib/jpmarc/record.ex:192 
 msgid ""
 "Return a json representing of the record\n"
 msgstr ""
@@ -45,7 +45,7 @@ msgid ""
 "Default is `:all`.\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.to_xml(record)
-#: lib/jpmarc/record.ex:166 
+#: lib/jpmarc/record.ex:163 
 msgid ""
 "Return the MARCXML Format of the JPMarc struct\n"
 msgstr ""
@@ -55,7 +55,7 @@ msgid ""
 "  Decode the String of a marc and return `JPMarc.Record` struct\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.to_marc(record)
-#: lib/jpmarc/record.ex:154 
+#: lib/jpmarc/record.ex:153 
 msgid ""
 "  Return the MARC Format of the JPMarc struct\n"
 msgstr ""
@@ -78,7 +78,7 @@ msgid ""
 "Return `true` if `tag` is a valid tag number as ControlField, otherwise `false`\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.sort(record)
-#: lib/jpmarc/record.ex:199 
+#: lib/jpmarc/record.ex:214 
 msgid ""
 "  Sort its fields by tag and subfields of field\n"
 msgstr ""
