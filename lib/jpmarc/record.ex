@@ -156,11 +156,9 @@ defmodule JPMarc.Record do
   """
   @spec to_marc(t)::String.t
   def to_marc(record) do
-    sorted = sort(record)
+    sorted = reset(record)
     {directories, data} = make_directories_data(sorted.control_fields ++ sorted.data_fields)
-    marc = Leader.to_marc(sorted.leader) <> directories <> @fs <> data <> @rs
-    l = %Leader{sorted.leader | length: byte_size(marc), base: (@leader_length + 1 + byte_size(directories))}
-    Leader.to_marc(l) <> directories <> @fs <> data <> @rs
+    Leader.to_marc(sorted.leader) <> directories <> @fs <> data <> @rs
   end
 
   @doc """
@@ -168,7 +166,7 @@ defmodule JPMarc.Record do
   """
   @spec to_xml(t)::tuple
   def to_xml(record) do
-    sorted = sort(record)
+    sorted = reset(record)
     cf_xml = sorted.control_fields |> Enum.map(&ControlField.to_xml/1)
     df_xml = sorted.data_fields |> Enum.map(&DataField.to_xml/1)
     xml = [Leader.to_xml(sorted.leader)] ++ cf_xml ++ df_xml
@@ -180,7 +178,7 @@ defmodule JPMarc.Record do
   """
   @spec to_text(t)::tuple
   def to_text(record) do
-    sorted = sort(record)
+    sorted = reset(record)
     cfs = sorted.control_fields |> Enum.map(&ControlField.to_text/1)
     dfs = sorted.data_fields |> Enum.map(&DataField.to_text/1)
     ([Leader.to_text(sorted.leader)] ++ cfs ++ dfs) |> Enum.join("\n")
@@ -191,9 +189,17 @@ defmodule JPMarc.Record do
   """
   @spec to_json(t)::String.t
   def to_json(record) do
-    sorted = sort(record)
+    sorted = reset(record)
     fields = (sorted.control_fields |> Enum.map(&ControlField.to_json/1)) ++ (sorted.data_fields |> Enum.map(&DataField.to_json/1))
     "{#{Leader.to_json(sorted.leader)},\"fields\": [#{Enum.join(fields, ",")}]}"
+  end
+
+  defp reset(record) do
+    sorted = sort(record)
+    {directories, data} = make_directories_data(sorted.control_fields ++ sorted.data_fields)
+    marc = Leader.to_marc(sorted.leader) <> directories <> @fs <> data <> @rs
+    new_leader = %Leader{sorted.leader | length: byte_size(marc), base: (@leader_length + 1 + byte_size(directories))}
+    %__MODULE__{sorted | leader: new_leader}
   end
 
   @doc """
