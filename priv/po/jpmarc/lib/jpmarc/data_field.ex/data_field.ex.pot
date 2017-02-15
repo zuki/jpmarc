@@ -1,3 +1,13 @@
+#. TRANSLATORS: def JPMarc.DataField.to_text(df)
+#: lib/jpmarc/data_field.ex:65 
+msgid ""
+"Return a text representing of the field\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.DataField.to_json(df)
+#: lib/jpmarc/data_field.ex:74 
+msgid ""
+"Return a json representing of the field\n"
+msgstr ""
 #. TRANSLATORS: def JPMarc.DataField.subfields(field, code \\ :all)
 #: lib/jpmarc/data_field.ex:17 
 msgid ""

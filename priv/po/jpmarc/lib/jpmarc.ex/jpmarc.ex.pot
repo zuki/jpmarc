@@ -3,6 +3,11 @@
 msgid ""
 "Return the MARCXML Format of JPMarc.Record struct (One or List of that)\n"
 msgstr ""
+#. TRANSLATORS: def JPMarc.to_json(records)
+#: lib/jpmarc.ex:49 
+msgid ""
+"Return the JSON Format of JPMarc.Record struct (One or List of that)\n"
+msgstr ""
 #. TRANSLATORS: Elixir.JPMarc Summary
 #: lib/jpmarc.ex:2 
 msgid ""

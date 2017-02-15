@@ -30,13 +30,20 @@ defmodule JPMarc.ControlField do
   end
 
   @doc"""
-  Return a text representing its element
+  Return a text representing of this field
   """
   @spec to_text(t)::String.t
   def to_text(cf) do
     "#{cf.tag} #{cf.value}"
   end
 
+  @doc"""
+  Return a json representing of this field
+  """
+  @spec to_json(t)::String.t
+  def to_json(cf) do
+    "{\"#{cf.tag}\": \"#{cf.value}\"}"
+  end
 
   defimpl Inspect do
     def inspect(%JPMarc.ControlField{tag: tag, value: value}, _opts) do

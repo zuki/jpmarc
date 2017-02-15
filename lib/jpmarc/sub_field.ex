@@ -44,11 +44,19 @@ defmodule JPMarc.SubField do
   end
 
   @doc"""
-  Return a text representing its element
+  Return a text representing  of the subfield
   """
   @spec to_text(t)::String.t
   def to_text(sf) do
     "$#{sf.code} #{sf.value}"
+  end
+
+  @doc"""
+  Return a json representing of the subfield
+  """
+  @spec to_json(t)::String.t
+  def to_json(sf) do
+    "{\"#{sf.code}\": \"#{sf.value}\"}"
   end
 
   defimpl Inspect, for: JPMarc.SubField do

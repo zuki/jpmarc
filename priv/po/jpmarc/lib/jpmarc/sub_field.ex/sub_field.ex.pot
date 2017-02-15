@@ -10,6 +10,16 @@ msgstr ""
 msgid ""
 "Return a tuple representing its xml element\n"
 msgstr ""
+#. TRANSLATORS: def JPMarc.SubField.to_text(sf)
+#: lib/jpmarc/sub_field.ex:46 
+msgid ""
+"Return a text representing  of the subfield\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.SubField.to_json(sf)
+#: lib/jpmarc/sub_field.ex:54 
+msgid ""
+"Return a json representing of the subfield\n"
+msgstr ""
 #. TRANSLATORS: Elixir.JPMarc.SubField Summary
 #: lib/jpmarc/sub_field.ex:2 
 msgid ""
@@ -19,11 +29,6 @@ msgstr ""
 #: lib/jpmarc/sub_field.ex:30 
 msgid ""
 "  Return the MARC Format of the subfield\n"
-msgstr ""
-#. TRANSLATORS: def JPMarc.SubField.to_text(sf)
-#: lib/jpmarc/sub_field.ex:46 
-msgid ""
-"Return a text representing its element\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.SubField.decode(data)
 #: lib/jpmarc/sub_field.ex:17 

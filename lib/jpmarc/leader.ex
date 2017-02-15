@@ -53,6 +53,14 @@ defmodule JPMarc.Leader do
     to_marc(leader)
   end
 
+  @doc"""
+  Return a json representing of this field
+  """
+  @spec to_json(t)::String.t
+  def to_json(leader) do
+    "\"leader\": \"#{to_marc(leader)}\""
+  end
+
   defimpl Inspect, for: JPMarc.Leader do
     def inspect(leader, _opts) do
       JPMarc.Leader.to_marc(leader)
@@ -64,4 +72,5 @@ defmodule JPMarc.Leader do
       JPMarc.Leader.to_marc(leader)
     end
   end
+
 end

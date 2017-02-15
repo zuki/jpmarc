@@ -45,4 +45,14 @@ defmodule JPMarc do
     doc(:collection, %{xmlns: "http://www.loc.gov/MARC21/slim"}, xmls)
   end
   def to_xml(record), do: to_xml([record])
+
+  @doc """
+  Return the JSON Format of JPMarc.Record struct (One or List of that)
+  """
+  @spec to_json(JPMarc.Record.t|[JPMarc.Record.t])::String.t
+  def to_json(records) when is_list(records) do
+    "[#{records |> Enum.map(&Record.to_json/1) |> Enum.join(",")}]"
+  end
+  def to_json(record), do: to_json([record])
+
 end

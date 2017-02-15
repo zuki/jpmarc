@@ -1,3 +1,8 @@
+#. TRANSLATORS: def JPMarc.ControlField.to_text(cf)
+#: lib/jpmarc/control_field.ex:32 
+msgid ""
+"Return a text representing of this field\n"
+msgstr ""
 #. TRANSLATORS: def JPMarc.ControlField.to_marc(field)
 #: lib/jpmarc/control_field.ex:16 
 msgid ""

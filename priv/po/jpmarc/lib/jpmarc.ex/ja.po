@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-02-14 18:14+0900\n"
+"PO-Revision-Date: 2017-02-15 11:45+0900\n"
 "Last-Translator: Keiji Suzuki <EMAIL@ADDRESS>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -18,6 +18,13 @@ msgid ""
 "Return the MARCXML Format of JPMarc.Record struct (One or List of that)\n"
 msgstr ""
 "JPMarc.Record構造体（単体または構造体のリスト）のMARCXML形式の文字列を返しま"
+"す。\n"
+
+#. TRANSLATORS: def JPMarc.to_json(records)
+#: lib/jpmarc.ex:49
+msgid "Return the JSON Format of JPMarc.Record struct (One or List of that)\n"
+msgstr ""
+"JPMarc.Record構造体（単体または構造体のリスト）のJSON形式の文字列を返しま"
 "す。\n"
 
 #. TRANSLATORS: Elixir.JPMarc Summary

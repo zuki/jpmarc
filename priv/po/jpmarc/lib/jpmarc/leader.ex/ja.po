@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-02-11 10:35+0900\n"
+"PO-Revision-Date: 2017-02-15 11:35+0900\n"
 "Last-Translator: Keiji Suzuki <EMAIL@ADDRESS>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -13,19 +13,19 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 
 #. TRANSLATORS: def JPMarc.Leader.to_marc(l)
-#: lib/jpmarc/leader.ex:25
+#: lib/jpmarc/leader.ex:30
 msgid "  Return the MARC Format of the leader\n"
 msgstr "このリーダーのMARC形式の文字列を返します。\n"
-
-#. TRANSLATORS: Elixir.JPMarc.Leader Summary
-#: lib/jpmarc/leader.ex:2
-msgid "Tools for working with JPMARC Leader\n"
-msgstr "JPMARCリーダーを扱うツールです。\n"
 
 #. TRANSLATORS: def JPMarc.Leader.decode(leader)
 #: lib/jpmarc/leader.ex:14
 msgid "Decode the string representation to JPMarc.Leader struct\n"
 msgstr "JPMARCのリーダーを表す文字列をJPMarc.Leader構造体に変換します。\n"
+
+#. TRANSLATORS: def JPMarc.Leader.to_json(leader)
+#: lib/jpmarc/leader.ex:56
+msgid "Return a json representing of this field\n"
+msgstr "このリーダーのJSON形式の文字列を返します。\n"
 
 #. TRANSLATORS: @type t
 #: lib/jpmarc/leader.ex:6
@@ -42,7 +42,11 @@ msgstr ""
 "integerの`:base`、文字列の`:encoding`、文字列の`:format`で構成されます。\n"
 
 #. TRANSLATORS: def JPMarc.Leader.to_text(leader)
-#: lib/jpmarc/leader.ex:43
-#, fuzzy
+#: lib/jpmarc/leader.ex:48
 msgid "Return a text representing the leader\n"
-msgstr "このリーダーのMARC形式の文字列を返します。\n"
+msgstr "このリーダーのテキスト形式の文字列を返します。\n"
+
+#. TRANSLATORS: Elixir.JPMarc.Leader Summary
+#: lib/jpmarc/leader.ex:2
+msgid "Tools for working with JPMARC Leader\n"
+msgstr "JPMARCリーダーを扱うツールです。\n"

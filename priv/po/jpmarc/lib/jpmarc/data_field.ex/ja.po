@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-02-14 18:10+0900\n"
+"PO-Revision-Date: 2017-02-15 11:35+0900\n"
 "Last-Translator: Keiji Suzuki <EMAIL@ADDRESS>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -11,6 +11,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.8.11\n"
+
+#. TRANSLATORS: def JPMarc.DataField.to_text(df)
+#: lib/jpmarc/data_field.ex:65
+msgid "Return a text representing of the field\n"
+msgstr "このデータフィールドのテキスト形式の文字列を返します。\n"
+
+#. TRANSLATORS: def JPMarc.DataField.to_json(df)
+#: lib/jpmarc/data_field.ex:74
+msgid "Return a json representing of the field\n"
+msgstr ""
+"このデータフィールドのJON形式の文字列を返します。\n"
+"\n"
 
 #. TRANSLATORS: def JPMarc.DataField.subfields(field, code \\ :all)
 #: lib/jpmarc/data_field.ex:17

@@ -63,12 +63,21 @@ defmodule JPMarc.DataField do
   end
 
   @doc """
-  Return a text representing its element
+  Return a text representing of the field
   """
   @spec to_text(t)::String.t
   def to_text(df) do
     subfields = df.subfields |> Enum.map(&SubField.to_text/1)
     "#{df.tag} #{df.ind1}#{df.ind2} #{Enum.join(subfields, " ")}"
+  end
+
+  @doc"""
+  Return a json representing of the field
+  """
+  @spec to_json(t)::String.t
+  def to_json(df) do
+    subfields = df.subfields |> Enum.map(&SubField.to_json/1) |> Enum.join(",")
+    "{\"#{df.tag}\": {\"ind1\": \"#{df.ind1}\", \"ind2\": \"#{df.ind2}\", \"subfields\": [#{subfields}]}}"
   end
 
   defimpl Inspect do

@@ -129,4 +129,9 @@ defmodule JPMarcTest do
     assert xml == "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<collection xmlns=\"http://www.loc.gov/MARC21/slim\">\n\t<record>\n\t\t<leader>00276nam a2200109zi 4500</leader>\n\t\t<controlfield tag=\"001\">123456789012</controlfield>\n\t\t<controlfield tag=\"003\">JTNDL</controlfield>\n\t\t<controlfield tag=\"005\">20170209103923.0</controlfield>\n\t\t<controlfield tag=\"007\">ta</controlfield>\n\t\t<controlfield tag=\"008\">170209s2017    ja ||||g |||| |||||||jpn  </controlfield>\n\t\t<datafield tag=\"020\">\n\t\t\t<subfield code=\"c\">2000円</subfield>\n\t\t\t<subfield code=\"z\">978-4-123456-01-0</subfield>\n\t\t</datafield>\n\t\t<datafield tag=\"245\">\n\t\t\t<subfield code=\"a\">タイトル :</subfield>\n\t\t\t<subfield code=\"b\">関連情報 /</subfield>\n\t\t\t<subfield code=\"c\">山田太郎 著.</subfield>\n\t\t</datafield>\n\t</record>\n</collection>"
   end
 
+  test "Write JSON", %{record: record} do
+    json = JPMarc.to_json(record)
+    assert json == "[{\"leader\": \"00276nam a2200109zi 4500\",\"fields\": [{\"001\": \"123456789012\"},{\"003\": \"JTNDL\"},{\"005\": \"20170209103923.0\"},{\"007\": \"ta\"},{\"008\": \"170209s2017    ja ||||g |||| |||||||jpn  \"},{\"020\": {\"ind1\": \" \", \"ind2\": \" \", \"subfields\": [{\"c\": \"2000円\"},{\"z\": \"978-4-123456-01-0\"}]}},{\"245\": {\"ind1\": \"0\", \"ind2\": \"0\", \"subfields\": [{\"a\": \"タイトル :\"},{\"b\": \"関連情報 /\"},{\"c\": \"山田太郎 著.\"}]}}]}]"
+  end
+
 end

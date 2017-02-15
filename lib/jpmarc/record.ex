@@ -186,6 +186,16 @@ defmodule JPMarc.Record do
     ([Leader.to_text(sorted.leader)] ++ cfs ++ dfs) |> Enum.join("\n")
   end
 
+  @doc"""
+  Return a json representing of the record
+  """
+  @spec to_json(t)::String.t
+  def to_json(record) do
+    sorted = sort(record)
+    fields = (sorted.control_fields |> Enum.map(&ControlField.to_json/1)) ++ (sorted.data_fields |> Enum.map(&DataField.to_json/1))
+    "{#{Leader.to_json(sorted.leader)},\"fields\": [#{Enum.join(fields, ",")}]}"
+  end
+
   @doc """
     Sort its fields by tag and subfields of field
   """
