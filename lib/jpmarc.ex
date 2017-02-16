@@ -4,8 +4,29 @@ defmodule JPMarc do
   """
   import XmlBuilder
   alias JPMarc.Record
+  alias JPMarc.Leader
+  alias JPMarc.ControlField
+  alias JPMarc.DataField
 
   @rs "\x1d"   # Record separator
+
+  @doc """
+  Is element a leader?
+  """
+  @spec is_leader(any)::boolean
+  def is_leader(element), do: element.__struct__ == Leader
+
+  @doc """
+  Is element a control field?
+  """
+  @spec is_controlfield(any)::boolean
+  def is_controlfield(element), do: element.__struct__ == ControlField
+
+  @doc """
+  Is element a data field?
+  """
+  @spec is_datafield(any)::boolean
+  def is_datafield(element), do: element.__struct__ == DataField
 
   @doc """
     Parse a marc file and return List of `JPMarc.Record` struct

@@ -13,6 +13,11 @@ msgstr ""
 msgid ""
 "Return a json representing of this field\n"
 msgstr ""
+#. TRANSLATORS: Elixir.JPMarc.Leader Summary
+#: lib/jpmarc/leader.ex:2 
+msgid ""
+"Tools for working with JPMARC Leader\n"
+msgstr ""
 #. TRANSLATORS: @type t
 #: lib/jpmarc/leader.ex:6 
 msgid ""
@@ -24,9 +29,4 @@ msgstr ""
 #: lib/jpmarc/leader.ex:48 
 msgid ""
 "Return a text representing the leader\n"
-msgstr ""
-#. TRANSLATORS: Elixir.JPMarc.Leader Summary
-#: lib/jpmarc/leader.ex:2 
-msgid ""
-"Tools for working with JPMARC Leader\n"
 msgstr ""

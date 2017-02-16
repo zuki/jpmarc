@@ -13,15 +13,32 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 
 #. TRANSLATORS: def JPMarc.to_xml(records)
-#: lib/jpmarc.ex:39
+#: lib/jpmarc.ex:60
 msgid ""
 "Return the MARCXML Format of JPMarc.Record struct (One or List of that)\n"
 msgstr ""
 "JPMarc.Record構造体（単体または構造体のリスト）のMARCXML形式の文字列を返しま"
 "す。\n"
 
+#. TRANSLATORS: def JPMarc.is_controlfield(element)
+#: lib/jpmarc.ex:19
+msgid "Is element a control field?\n"
+msgstr ""
+
+#. TRANSLATORS: def JPMarc.is_leader(element)
+#: lib/jpmarc.ex:13
+msgid "Is element a leader?\n"
+msgstr ""
+
+#. TRANSLATORS: def JPMarc.parse_file(file)
+#: lib/jpmarc.ex:31
+msgid "  Parse a marc file and return List of `JPMarc.Record` struct\n"
+msgstr ""
+"MARC形式の文字列をパースして`JPMarc.Record`構造体を返します。\n"
+"\n"
+
 #. TRANSLATORS: def JPMarc.to_json(records)
-#: lib/jpmarc.ex:49
+#: lib/jpmarc.ex:70
 msgid "Return the JSON Format of JPMarc.Record struct (One or List of that)\n"
 msgstr ""
 "JPMarc.Record構造体（単体または構造体のリスト）のJSON形式の文字列を返しま"
@@ -33,7 +50,7 @@ msgid "  Tools for working wiht JPMARC records\n"
 msgstr "JPMARCを扱うツールです。\n"
 
 #. TRANSLATORS: def JPMarc.to_marc(records)
-#: lib/jpmarc.ex:30
+#: lib/jpmarc.ex:51
 msgid ""
 "  Return the String representing MARC Format of the JPMarc.Record struct "
 "(one or List of that)\n"
@@ -41,21 +58,19 @@ msgstr ""
 "JPMarc.Record構造体（単体または構造体のリスト）のMARC形式の文字列を返しま"
 "す。\n"
 
-#. TRANSLATORS: def JPMarc.parse_file(file)
-#: lib/jpmarc.ex:10
-msgid "  Parse a marc file and return List of `JPMarc.Record` struct\n"
-msgstr ""
-"MARC形式の文字列をパースして`JPMarc.Record`構造体を返します。\n"
-"\n"
-
 #. TRANSLATORS: def JPMarc.parse_marc(file)
-#: lib/jpmarc.ex:24
+#: lib/jpmarc.ex:45
 msgid ""
 "  Parse a marc file which contains one marc record, and return a `JPMarc."
 "Record` struct\n"
 msgstr ""
 "MARCレコードを1つ含むファイルをパースして`JPMarc.Record`構造体を返します。\n"
 "\n"
+
+#. TRANSLATORS: def JPMarc.is_datafield(element)
+#: lib/jpmarc.ex:25
+msgid "Is element a data field?\n"
+msgstr ""
 
 #~ msgid "  Sort its fields by tag and subfields of field\n"
 #~ msgstr "タグとインジケータでフィールドをソートします。\n"
@@ -64,8 +79,8 @@ msgstr ""
 #~ "  Parse a marc file and return `JPMarc` struct or nil if a error occures "
 #~ "when reading the specific file\n"
 #~ msgstr ""
-#~ "MARCファイルのパスである文字列を受け取り、`JPMarc`構造体を返します。ファ"
-#~ "イルの読み込み時にエラーが発生した場合は、`nil`を返します。\n"
+#~ "MARCファイルのパスである文字列を受け取り、`JPMarc`構造体を返します。ファイ"
+#~ "ルの読み込み時にエラーが発生した場合は、`nil`を返します。\n"
 
 #~ msgid "  Library for parsing JPMARC\n"
 #~ msgstr "JPMARCを解析するライブラリ\n"

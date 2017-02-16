@@ -27,6 +27,11 @@ msgstr "JPMARCのリーダーを表す文字列をJPMarc.Leader構造体に変�
 msgid "Return a json representing of this field\n"
 msgstr "このリーダーのJSON形式の文字列を返します。\n"
 
+#. TRANSLATORS: Elixir.JPMarc.Leader Summary
+#: lib/jpmarc/leader.ex:2
+msgid "Tools for working with JPMARC Leader\n"
+msgstr "JPMARCリーダーを扱うツールです。\n"
+
 #. TRANSLATORS: @type t
 #: lib/jpmarc/leader.ex:6
 msgid ""
@@ -45,8 +50,3 @@ msgstr ""
 #: lib/jpmarc/leader.ex:48
 msgid "Return a text representing the leader\n"
 msgstr "このリーダーのテキスト形式の文字列を返します。\n"
-
-#. TRANSLATORS: Elixir.JPMarc.Leader Summary
-#: lib/jpmarc/leader.ex:2
-msgid "Tools for working with JPMARC Leader\n"
-msgstr "JPMARCリーダーを扱うツールです。\n"

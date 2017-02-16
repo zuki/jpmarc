@@ -1,7 +1,7 @@
 defmodule JPMarc.MarcSigil do
-  @doc """
+  @moduledoc """
   Implement the "~M" sigil, which takes a string containig
-  JPMARC representation and return JPMarc struct.
+  representation of JPMARC elements and return its corresponding JPMarc struct.
   """
 
   alias JPMarc.Record
@@ -10,17 +10,88 @@ defmodule JPMarc.MarcSigil do
   alias JPMarc.DataField, as: DF
   alias JPMarc.SubField, as: SF
 
+
+  @doc """
+
+  Creates JPMarc.Record
+
+      iex> record = ~m\"\"\"
+      ...> 00276nam a2200109zi 4500
+      ...> 001 123456789012
+      ...> 003 JTNDL
+      ...> 005 20170209103923.0
+      ...> 007 ta
+      ...> 008 170209s2017    ja ||||g |||| |||||||jpn
+      ...> 020    $c 2000 $z 978-4-123456-01-0
+      ...> 245 00 $a Book title : $b subtitle / $c Yamada Taro.
+      ...> \"\"\"
+      00276nam a2200109zi 4500
+      001 123456789012
+      003 JTNDL
+      005 20170209103923.0
+      007 ta
+      008 170209s2017    ja ||||g |||| |||||||jpn
+      020    $c 2000 $z 978-4-123456-01-0
+      245 00 $a Book title : $b subtitle / $c Yamada Taro.
+
+      iex> IO.puts JPMarc.Record.subfield_value(record, "245", "a")
+      Book title :
+
+  Creates JPMarc.Leader
+
+      iex> leader = ~m"00276nam a2200109zi 4500"
+      00276nam a2200109zi 4500
+
+      iex> JPMarc.is_leader(leader)
+      true
+
+  Creates JPMarc.ControlField
+
+      iex> cf = ~m"001 123456789012"
+      001 123456789012
+
+      iex> JPMarc.is_controlfield(cf)
+      true
+
+  Creates JPMarc.DataField
+
+      iex> df = ~m"245 00 $a Book title : $b subtitle / $c Yamada Taro."
+      245 00 $a Book title : $b subtitle / $c Yamada Taro.
+
+      iex> JPMarc.is_datafield(df)
+      true
+
+  Creates a list of JPMarc.ControlField and JPMarc.DataField
+
+      iex> fields = ~m\"\"\"
+      ...> 001 123456789012
+      ...> 245 00 $a Book title : $b subtitle / $c Yamada Taro.
+      ...> \"\"\"
+      [001 123456789012, 245 00 $a Book title : $b subtitle / $c Yamada Taro.]
+
+      iex> length(fields)
+      2
+
+      iex> JPMarc.is_controlfield(Enum.at(fields, 0))
+      true
+
+      iex> JPMarc.is_datafield(Enum.at(fields, 1))
+      true
+  
+  """
   def sigil_m(text, []), do: _m(text, :jpmarc)
   def sigil_m(text, 'n'), do: _m(text, :ndl)
   #def sigil_m(text, 'v'), do: _m(text, :vufind)
 
   defp _m(text, :jpmarc) do
-    lines = text |> String.split("\n") |> Enum.map(&String.trim_leading/1)
-    if length(lines) == 1 do
-      lines |> Enum.at(0) |> parse()
-    else
-      [leader | fields] =  lines |> Enum.map(&parse/1) |> List.flatten()
-      %Record{leader: leader, fields: fields}
+    elements = text |> String.split("\n") |> Enum.map(&String.trim_leading/1) |> Enum.map(&parse/1) |> List.flatten()
+    case elements do
+      [element|[]] -> element
+      [head|tail] ->
+        if JPMarc.is_leader(head),
+          do: %Record{leader: head, fields: tail},
+        else: [head|tail]
+      _ -> elements
     end
   end
 

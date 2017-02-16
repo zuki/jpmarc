@@ -12,6 +12,21 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.8.11\n"
 
+#. TRANSLATORS: def JPMarc.DataField.subfield_value(field, code \\ :all, joiner \\ " ")
+#: lib/jpmarc/data_field.ex:36
+msgid ""
+"Returns a Subfield value with `code` in `field`, `\"\"` when it doesn't "
+"exist\n"
+"\n"
+"`code` is either of :all, code as String or List of code.\n"
+"Default is `:all`.\n"
+msgstr ""
+"データフィールド`field`のコード値`code`のサブフィールドの値を、該当するサブ"
+"フィールドがない場合は空値を返します。\n"
+"\n"
+"`code`には、:all,、コード値、コード値のリストを指定できます。\n"
+" デフォルトは`:all`です。\n"
+
 #. TRANSLATORS: def JPMarc.DataField.to_text(df)
 #: lib/jpmarc/data_field.ex:65
 msgid "Return a text representing of the field\n"
@@ -35,21 +50,6 @@ msgid ""
 msgstr ""
 "データフィールド`field`のコード値`code`のサブフィールドのリストを、該当するサ"
 "ブフィールドがない場合は`[]`を返します。\n"
-"\n"
-"`code`には、:all,、コード値、コード値のリストを指定できます。\n"
-" デフォルトは`:all`です。\n"
-
-#. TRANSLATORS: def JPMarc.DataField.subfield_value(field, code \\ :all, joiner \\ " ")
-#: lib/jpmarc/data_field.ex:36
-msgid ""
-"Returns a Subfield value with `code` in `field`, `\"\"` when it doesn't "
-"exist\n"
-"\n"
-"`code` is either of :all, code as String or List of code.\n"
-"Default is `:all`.\n"
-msgstr ""
-"データフィールド`field`のコード値`code`のサブフィールドの値を、該当するサブ"
-"フィールドがない場合は空値を返します。\n"
 "\n"
 "`code`には、:all,、コード値、コード値のリストを指定できます。\n"
 " デフォルトは`:all`です。\n"

@@ -112,6 +112,19 @@ defmodule JPMarcTest do
     assert record1.__struct__ == Record
     assert Record.subfield_value(record1, "880", "6") == "245-01/$1"
 
+    assert JPMarc.is_leader(~m"00000cam a22     zi 4500")
+    assert JPMarc.is_controlfield(~m"001 027524410")
+    assert JPMarc.is_datafield(~m"245 00 $6 880-01 $a タイトル / $c 山田, 太郎著.")
+
+    fields = ~m"""
+    001 027524410
+    245 00 $6 880-01 $a タイトル / $c 山田, 太郎著.
+    """
+
+    assert length(fields) == 2
+    assert JPMarc.is_controlfield(Enum.at(fields, 0))
+    assert JPMarc.is_datafield(Enum.at(fields, 1))
+
     record2 = ~m"""
     FMT	 	BK
     LDR	 	00000cam a22     zi 4500

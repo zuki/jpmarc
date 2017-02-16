@@ -82,6 +82,16 @@ cf = ~m"001 123456789012"
 
 # データフィールド
 df = ~m"245 00 $a タイトル : $b 関連情報 / $c 山田太郎 著."
+
+# 複数フィールドの一括作成
+fs = ~m"""
+001 123456789012
+245 00 $a タイトル : $b 関連情報 / $c 山田太郎 著.
+"""
+
+length(fields) # -> 2
+JPMarc.is_controlfield(Enum.at(fields, 0)) # -> true
+JPMarc.is_datafield(Enum.at(fields, 1)) # -> true
 ````
 
 ## APIドキュメント
