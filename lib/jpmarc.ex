@@ -11,22 +11,31 @@ defmodule JPMarc do
   @rs "\x1d"   # Record separator
 
   @doc """
-  Is element a leader?
+  Whether the element is a leader?
   """
   @spec is_leader(any)::boolean
-  def is_leader(element), do: element.__struct__ == Leader
+  def is_leader(element), do: is_struct(element) && element.__struct__ == Leader
 
   @doc """
-  Is element a control field?
+  Whether the element is a control field?
   """
   @spec is_controlfield(any)::boolean
-  def is_controlfield(element), do: element.__struct__ == ControlField
+  def is_controlfield(element), do: is_struct(element) && element.__struct__ == ControlField
 
   @doc """
-  Is element a data field?
+  Whether the element is a data field?
   """
   @spec is_datafield(any)::boolean
-  def is_datafield(element), do: element.__struct__ == DataField
+  def is_datafield(element), do: is_struct(element) && element.__struct__ == DataField
+
+  defp is_struct(element) do
+    try do
+      element.__struct__
+      true
+    rescue
+      e -> false
+    end
+  end
 
   @doc """
     Parse a marc file and return List of `JPMarc.Record` struct
