@@ -12,6 +12,7 @@ defmodule JPMarc.SubField do
       This is constructed with `:code` as String and `:value` as String.
   """
   @type t :: %__MODULE__{code: String.t, value: String.t}
+  @derive [Poison.Encoder]
   defstruct code: "", value: ""
 
   @doc """
@@ -51,12 +52,8 @@ defmodule JPMarc.SubField do
     "$#{sf.code} #{sf.value}"
   end
 
-  @doc"""
-  Return a json representing of the subfield
-  """
-  @spec to_json(t)::String.t
-  def to_json(sf) do
-    "{\"#{sf.code}\": \"#{sf.value}\"}"
+  defimpl Poison.Encoder, for: JPMarc.SubField do
+    def encode(sf, _options), do: "{\"#{sf.code}\":\"#{sf.value}\"}"
   end
 
   defimpl Inspect, for: JPMarc.SubField do

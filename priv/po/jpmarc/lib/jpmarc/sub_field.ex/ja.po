@@ -24,14 +24,9 @@ msgstr ""
 "文字列の`:code`および文字列の`:value`で構成されます。\n"
 
 #. TRANSLATORS: def JPMarc.SubField.to_xml(sf)
-#: lib/jpmarc/sub_field.ex:38
+#: lib/jpmarc/sub_field.ex:39
 msgid "Return a tuple representing its xml element\n"
 msgstr "XmlBuilderのタプル形式でXML要素を返します。\n"
-
-#. TRANSLATORS: def JPMarc.SubField.to_json(sf)
-#: lib/jpmarc/sub_field.ex:54
-msgid "Return a json representing of the subfield\n"
-msgstr "サブフィールドのJSON形式の文字列を返します。\n"
 
 #. TRANSLATORS: Elixir.JPMarc.SubField Summary
 #: lib/jpmarc/sub_field.ex:2
@@ -39,17 +34,20 @@ msgid "Tools for working with JPMARC SubFields\n"
 msgstr "JPMARCサブフィールドを扱うツールです。\n"
 
 #. TRANSLATORS: def JPMarc.SubField.to_text(sf)
-#: lib/jpmarc/sub_field.ex:46
+#: lib/jpmarc/sub_field.ex:47
 msgid "Return a text representing  of the subfield\n"
 msgstr "サブフィールドのテキスト形式の文字列を返します。\n"
 
 #. TRANSLATORS: def JPMarc.SubField.to_marc(field)
-#: lib/jpmarc/sub_field.ex:30
+#: lib/jpmarc/sub_field.ex:31
 msgid "  Return the MARC Format of the subfield\n"
 msgstr "サブフィールドのMARC形式の文字列を返します。\n"
 
 #. TRANSLATORS: def JPMarc.SubField.decode(data)
-#: lib/jpmarc/sub_field.ex:17
+#: lib/jpmarc/sub_field.ex:18
 msgid "Decode a string representation to JPMarc.SubField struct\n"
 msgstr ""
 "JPMARCのサブフィールドを表す文字列をJPMarc.SubField構造体に変換します。\n"
+
+#~ msgid "Return a json representing of the subfield\n"
+#~ msgstr "サブフィールドのJSON形式の文字列を返します。\n"

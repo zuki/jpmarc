@@ -6,14 +6,9 @@ msgid ""
 "    This is constructed with `:code` as String and `:value` as String.\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.SubField.to_xml(sf)
-#: lib/jpmarc/sub_field.ex:38 
+#: lib/jpmarc/sub_field.ex:39 
 msgid ""
 "Return a tuple representing its xml element\n"
-msgstr ""
-#. TRANSLATORS: def JPMarc.SubField.to_json(sf)
-#: lib/jpmarc/sub_field.ex:54 
-msgid ""
-"Return a json representing of the subfield\n"
 msgstr ""
 #. TRANSLATORS: Elixir.JPMarc.SubField Summary
 #: lib/jpmarc/sub_field.ex:2 
@@ -21,17 +16,17 @@ msgid ""
 "Tools for working with JPMARC SubFields\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.SubField.to_text(sf)
-#: lib/jpmarc/sub_field.ex:46 
+#: lib/jpmarc/sub_field.ex:47 
 msgid ""
 "Return a text representing  of the subfield\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.SubField.to_marc(field)
-#: lib/jpmarc/sub_field.ex:30 
+#: lib/jpmarc/sub_field.ex:31 
 msgid ""
 "  Return the MARC Format of the subfield\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.SubField.decode(data)
-#: lib/jpmarc/sub_field.ex:17 
+#: lib/jpmarc/sub_field.ex:18 
 msgid ""
 "Decode a string representation to JPMarc.SubField struct\n"
 msgstr ""

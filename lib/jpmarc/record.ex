@@ -20,6 +20,7 @@ defmodule JPMarc.Record do
       This is constructed with `:leader` as `JPMarc.Leader.t`, `:fiels` as List of `JPMarc.ControlField.t` or `JPMarc.DataField.t`
   """
   @type t :: %__MODULE__{leader: Leader.t, fields: [ ControlField.t | DataField.t ]}
+  @derive [Poison.Encoder]
   defstruct leader: nil, fields: []
 
   @doc """
@@ -194,16 +195,10 @@ defmodule JPMarc.Record do
   """
   @spec to_json(t)::String.t
   def to_json(record) do
-    sorted = reset(record)
-    json = sorted.fields |> Enum.map(fn(f) ->
-      if Enum.member?(@valid_control_fields, f.tag),
-        do: ControlField.to_json(f),
-        else: DataField.to_json(f)
-      end)
-    "{#{Leader.to_json(sorted.leader)},\"fields\": [#{Enum.join(json, ",")}]}"
+    reset(record) |> Poison.encode!()
   end
 
-  defp reset(record) do
+  def reset(record) do
     sorted = sort(record)
     {directories, data} = make_directories_data(sorted.fields)
     marc = Leader.to_marc(sorted.leader) <> directories <> @fs <> data <> @rs

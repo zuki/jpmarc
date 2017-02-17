@@ -11,6 +11,7 @@ defmodule JPMarc.ControlField do
       This is constructed with `:tag` as String and `:value` as String.
   """
   @type t :: %__MODULE__{tag: String.t, value: String.t}
+  @derive [Poison.Encoder]
   defstruct tag: "", value: ""
 
   @doc """
@@ -37,12 +38,8 @@ defmodule JPMarc.ControlField do
     "#{cf.tag} #{cf.value}"
   end
 
-  @doc"""
-  Return a json representing of this field
-  """
-  @spec to_json(t)::String.t
-  def to_json(cf) do
-    "{\"#{cf.tag}\": \"#{cf.value}\"}"
+  defimpl Poison.Encoder, for: JPMarc.ControlField do
+    def encode(cf, _options), do: "{\"#{cf.tag}\":\"#{cf.value}\"}"
   end
 
   defimpl Inspect do

@@ -13,19 +13,14 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 
 #. TRANSLATORS: def JPMarc.Leader.to_marc(l)
-#: lib/jpmarc/leader.ex:30
+#: lib/jpmarc/leader.ex:31
 msgid "  Return the MARC Format of the leader\n"
 msgstr "このリーダーのMARC形式の文字列を返します。\n"
 
 #. TRANSLATORS: def JPMarc.Leader.decode(leader)
-#: lib/jpmarc/leader.ex:14
+#: lib/jpmarc/leader.ex:15
 msgid "Decode the string representation to JPMarc.Leader struct\n"
 msgstr "JPMARCのリーダーを表す文字列をJPMarc.Leader構造体に変換します。\n"
-
-#. TRANSLATORS: def JPMarc.Leader.to_json(leader)
-#: lib/jpmarc/leader.ex:56
-msgid "Return a json representing of this field\n"
-msgstr "このリーダーのJSON形式の文字列を返します。\n"
 
 #. TRANSLATORS: Elixir.JPMarc.Leader Summary
 #: lib/jpmarc/leader.ex:2
@@ -47,6 +42,9 @@ msgstr ""
 "integerの`:base`、文字列の`:encoding`、文字列の`:format`で構成されます。\n"
 
 #. TRANSLATORS: def JPMarc.Leader.to_text(leader)
-#: lib/jpmarc/leader.ex:48
+#: lib/jpmarc/leader.ex:49
 msgid "Return a text representing the leader\n"
 msgstr "このリーダーのテキスト形式の文字列を返します。\n"
+
+#~ msgid "Return a json representing of this field\n"
+#~ msgstr "このリーダーのJSON形式の文字列を返します。\n"

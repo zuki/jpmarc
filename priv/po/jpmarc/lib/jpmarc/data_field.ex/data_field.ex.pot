@@ -1,5 +1,5 @@
 #. TRANSLATORS: def JPMarc.DataField.subfield_value(field, code \\ :all, joiner \\ " ")
-#: lib/jpmarc/data_field.ex:36 
+#: lib/jpmarc/data_field.ex:37 
 msgid ""
 "Returns a Subfield value with `code` in `field`, `\"\"` when it doesn't exist\n"
 "\n"
@@ -7,17 +7,12 @@ msgid ""
 "Default is `:all`.\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.DataField.to_text(df)
-#: lib/jpmarc/data_field.ex:65 
+#: lib/jpmarc/data_field.ex:66 
 msgid ""
 "Return a text representing of the field\n"
 msgstr ""
-#. TRANSLATORS: def JPMarc.DataField.to_json(df)
-#: lib/jpmarc/data_field.ex:74 
-msgid ""
-"Return a json representing of the field\n"
-msgstr ""
 #. TRANSLATORS: def JPMarc.DataField.subfields(field, code \\ :all)
-#: lib/jpmarc/data_field.ex:17 
+#: lib/jpmarc/data_field.ex:18 
 msgid ""
 "Returns a list of SubFields with `code` in `field`, [] when it doesn't exist\n"
 "\n"
@@ -30,7 +25,7 @@ msgid ""
 "Tools for working with JPMARC DataFields\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.DataField.to_marc(field)
-#: lib/jpmarc/data_field.ex:47 
+#: lib/jpmarc/data_field.ex:48 
 msgid ""
 "Return the MARC Format of the data field\n"
 msgstr ""

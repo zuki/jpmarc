@@ -12,6 +12,7 @@ defmodule JPMarc.DataField do
       This is constructed with `:tag` as String, `:ind1` as String, `:ind2` as String and `:subfields` as List of `JPMarc.SubField.t`
   """
   @type t :: %__MODULE__{tag: String.t, ind1: String.t, ind2: String.t, subfields: [SubField.t]}
+  @derive [Poison.Encoder]
   defstruct tag: "", ind1: " ", ind2: " ", subfields: []
 
   @doc """
@@ -71,13 +72,11 @@ defmodule JPMarc.DataField do
     "#{df.tag} #{df.ind1}#{df.ind2} #{Enum.join(subfields, " ")}"
   end
 
-  @doc"""
-  Return a json representing of the field
-  """
-  @spec to_json(t)::String.t
-  def to_json(df) do
-    subfields = df.subfields |> Enum.map(&SubField.to_json/1) |> Enum.join(",")
-    "{\"#{df.tag}\": {\"ind1\": \"#{df.ind1}\", \"ind2\": \"#{df.ind2}\", \"subfields\": [#{subfields}]}}"
+  defimpl Poison.Encoder, for: JPMarc.DataField do
+    def encode(df, _options) do
+      subfields = df.subfields |> Enum.map(&Poison.encode!/1) |> Enum.join(",")
+       "{\"#{df.tag}\":{\"ind1\":\"#{df.ind1}\",\"ind2\":\"#{df.ind2}\",\"subfields\":[#{subfields}]}}"
+    end
   end
 
   defimpl Inspect do

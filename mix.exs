@@ -37,7 +37,8 @@ defmodule JPMarc.Mixfile do
     [
       {:ex_doc, "~> 0.14"},
       {:exgettext, github: "zuki/exgettext"},
-      {:xml_builder, "~> 0.0.6"}
+      {:xml_builder, "~> 0.0.6"},
+      {:poison, "~> 3.0"}
     ]
   end
 end

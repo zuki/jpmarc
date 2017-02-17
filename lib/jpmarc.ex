@@ -70,10 +70,9 @@ defmodule JPMarc do
   @doc """
   Return the JSON Format of JPMarc.Record struct (One or List of that)
   """
-  @spec to_json(JPMarc.Record.t|[JPMarc.Record.t])::String.t
   def to_json(records) when is_list(records) do
-    "[#{records |> Enum.map(&Record.to_json/1) |> Enum.join(",")}]"
+    "[" <> (records |> Enum.map(&Record.to_json/1) |> Enum.join(",")) <> "]"
   end
-  def to_json(record), do: to_json([record])
+  def to_json(record), do: Record.to_json(record)
 
 end

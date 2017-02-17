@@ -1,5 +1,5 @@
 #. TRANSLATORS: def JPMarc.Record.field_values(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " ")
-#: lib/jpmarc/record.ex:91 
+#: lib/jpmarc/record.ex:92 
 msgid ""
 "Returns a list of SubFields value with `tag`, `ind1`, `ind2` and `code` in `record`, `[]` when it doesn't exist\n"
 "\n"
@@ -7,12 +7,12 @@ msgid ""
 "Default is `:all`.\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.from_marc(marc)
-#: lib/jpmarc/record.ex:135 
+#: lib/jpmarc/record.ex:136 
 msgid ""
 "  Decode the String of a marc and return `JPMarc.Record` struct\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.subfield(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil)
-#: lib/jpmarc/record.ex:82 
+#: lib/jpmarc/record.ex:83 
 msgid ""
 "Returns first SubField with `tag`, `ind1`, `ind2` and `code` in `record`, [] when it doesn't exist\n"
 "\n"
@@ -27,12 +27,12 @@ msgid ""
 "    This is constructed with `:leader` as `JPMarc.Leader.t`, `:fiels` as List of `JPMarc.ControlField.t` or `JPMarc.DataField.t`\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.to_marc(record)
-#: lib/jpmarc/record.ex:153 
+#: lib/jpmarc/record.ex:154 
 msgid ""
 "  Return the MARC Format of the JPMarc struct\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.subfield_values(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " ")
-#: lib/jpmarc/record.ex:115 
+#: lib/jpmarc/record.ex:116 
 msgid ""
 "Returns a list of SubFields value with `tag`, `ind1`, `ind2` and `code` in `record`, `[]`when it doesn't exist\n"
 "\n"
@@ -40,12 +40,12 @@ msgid ""
 "Default is `:all`.\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.field(record, tag, ind1 \\ nil, ind2 \\ nil)
-#: lib/jpmarc/record.ex:50 
+#: lib/jpmarc/record.ex:51 
 msgid ""
 "Returns first DataFields with `tag`, `ind1` and `ind2` in `record`, nil when it doesn't exist\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.control_field?(tag)
-#: lib/jpmarc/record.ex:25 
+#: lib/jpmarc/record.ex:26 
 msgid ""
 "Return `true` if `tag` is a valid tag number as ControlField, otherwise `false`\n"
 msgstr ""
@@ -55,17 +55,17 @@ msgid ""
 "  Tools for working with JPMARC Record\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.fields(record, tag, ind1 \\ nil, ind2 \\ nil)
-#: lib/jpmarc/record.ex:31 
+#: lib/jpmarc/record.ex:32 
 msgid ""
 "Returns a list of Fields with `tag`, `ind1` and `ind2` in `record`, [] when it doesn't exist\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.to_json(record)
-#: lib/jpmarc/record.ex:192 
+#: lib/jpmarc/record.ex:193 
 msgid ""
 "Return a json representing of the record\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.subfield_value(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " ")
-#: lib/jpmarc/record.ex:126 
+#: lib/jpmarc/record.ex:127 
 msgid ""
 "Returns first SubFields value with `tag`, `ind1`, `ind2` and `code` in `record`, `nil` when it doesn't exist\n"
 "\n"
@@ -73,22 +73,22 @@ msgid ""
 "Default is `:all`.\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.to_xml(record)
-#: lib/jpmarc/record.ex:163 
+#: lib/jpmarc/record.ex:164 
 msgid ""
 "Return the MARCXML Format of the JPMarc struct\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.sort(record)
-#: lib/jpmarc/record.ex:214 
+#: lib/jpmarc/record.ex:209 
 msgid ""
 "  Sort its fields by tag and subfields of field\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.to_text(record)
-#: lib/jpmarc/record.ex:178 
+#: lib/jpmarc/record.ex:179 
 msgid ""
 "Return the Text Format of the JPMarc struct\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.field_value(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " ")
-#: lib/jpmarc/record.ex:106 
+#: lib/jpmarc/record.ex:107 
 msgid ""
 "Returns a list of Field values with `tag`, `ind1`, `ind2` and `code` in `record`, `nil` when it doesn't exist\n"
 "\n"
@@ -96,7 +96,7 @@ msgid ""
 "Default is `:all`.\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.Record.subfields(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil)
-#: lib/jpmarc/record.ex:56 
+#: lib/jpmarc/record.ex:57 
 msgid ""
 "Returns a list of SubFields with `tag`, `ind1`, `ind2` and `code` in `record`, [] when it doesn't exist\n"
 "\n"

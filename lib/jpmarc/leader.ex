@@ -9,6 +9,7 @@ defmodule JPMarc.Leader do
       This constructed with `:length` as integer, `:status` as String, `:type` of String, `:level` as String, `:base` as integer, `:encoding` String, `:format` String
   """
   @type t :: %__MODULE__{length: integer, status: String.t, type: String.t, level: String.t, base: integer, encoding: String.t, format: String.t}
+  @derive [Poison.Encoder]
   defstruct length: 0, status: "n", type: "a", level: "m", base: 0, encoding: "z", format: "i"
 
   @doc """
@@ -53,12 +54,8 @@ defmodule JPMarc.Leader do
     to_marc(leader)
   end
 
-  @doc"""
-  Return a json representing of this field
-  """
-  @spec to_json(t)::String.t
-  def to_json(leader) do
-    "\"leader\": \"#{to_marc(leader)}\""
+  defimpl Poison.Encoder, for: JPMarc.Leader do
+    def encode(leader, _options), do: "\"#{JPMarc.Leader.to_marc(leader)}\""
   end
 
   defimpl Inspect, for: JPMarc.Leader do

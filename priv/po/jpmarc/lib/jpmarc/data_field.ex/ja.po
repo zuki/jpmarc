@@ -13,7 +13,7 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 
 #. TRANSLATORS: def JPMarc.DataField.subfield_value(field, code \\ :all, joiner \\ " ")
-#: lib/jpmarc/data_field.ex:36
+#: lib/jpmarc/data_field.ex:37
 msgid ""
 "Returns a Subfield value with `code` in `field`, `\"\"` when it doesn't "
 "exist\n"
@@ -28,19 +28,12 @@ msgstr ""
 " デフォルトは`:all`です。\n"
 
 #. TRANSLATORS: def JPMarc.DataField.to_text(df)
-#: lib/jpmarc/data_field.ex:65
+#: lib/jpmarc/data_field.ex:66
 msgid "Return a text representing of the field\n"
 msgstr "このデータフィールドのテキスト形式の文字列を返します。\n"
 
-#. TRANSLATORS: def JPMarc.DataField.to_json(df)
-#: lib/jpmarc/data_field.ex:74
-msgid "Return a json representing of the field\n"
-msgstr ""
-"このデータフィールドのJON形式の文字列を返します。\n"
-"\n"
-
 #. TRANSLATORS: def JPMarc.DataField.subfields(field, code \\ :all)
-#: lib/jpmarc/data_field.ex:17
+#: lib/jpmarc/data_field.ex:18
 msgid ""
 "Returns a list of SubFields with `code` in `field`, [] when it doesn't "
 "exist\n"
@@ -60,7 +53,7 @@ msgid "Tools for working with JPMARC DataFields\n"
 msgstr "JPMARCデータフィールドを扱うツールです。\n"
 
 #. TRANSLATORS: def JPMarc.DataField.to_marc(field)
-#: lib/jpmarc/data_field.ex:47
+#: lib/jpmarc/data_field.ex:48
 msgid "Return the MARC Format of the data field\n"
 msgstr ""
 "このデータフィールドのMARC形式の文字列を返します。\n"
@@ -78,6 +71,11 @@ msgstr ""
 "\n"
 "文字列の`:tag`、文字列の`:indicator`、`JPMarc.SubField.t`のリストの`:"
 "subfields`で構成されます。\n"
+
+#~ msgid "Return a json representing of the field\n"
+#~ msgstr ""
+#~ "このデータフィールドのJON形式の文字列を返します。\n"
+#~ "\n"
 
 #~ msgid "  Sort its subfields by code\n"
 #~ msgstr "サブフィールドのリストをコードをもとにソートします。\n"
