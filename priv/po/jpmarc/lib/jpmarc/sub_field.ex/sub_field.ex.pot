@@ -15,15 +15,15 @@ msgstr ""
 msgid ""
 "Tools for working with JPMARC SubFields\n"
 msgstr ""
-#. TRANSLATORS: def JPMarc.SubField.to_text(sf)
-#: lib/jpmarc/sub_field.ex:47 
-msgid ""
-"Return a text representing  of the subfield\n"
-msgstr ""
 #. TRANSLATORS: def JPMarc.SubField.to_marc(field)
 #: lib/jpmarc/sub_field.ex:31 
 msgid ""
 "  Return the MARC Format of the subfield\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.SubField.to_text(sf)
+#: lib/jpmarc/sub_field.ex:47 
+msgid ""
+"Return a text representing  of the subfield\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.SubField.decode(data)
 #: lib/jpmarc/sub_field.ex:18 

@@ -25,18 +25,6 @@ msgstr ""
 msgid "Is element a control field?\n"
 msgstr ""
 
-#. TRANSLATORS: def JPMarc.is_leader(element)
-#: lib/jpmarc.ex:13
-msgid "Is element a leader?\n"
-msgstr ""
-
-#. TRANSLATORS: def JPMarc.parse_file(file)
-#: lib/jpmarc.ex:31
-msgid "  Parse a marc file and return List of `JPMarc.Record` struct\n"
-msgstr ""
-"MARC形式の文字列をパースして`JPMarc.Record`構造体を返します。\n"
-"\n"
-
 #. TRANSLATORS: def JPMarc.to_json(records)
 #: lib/jpmarc.ex:70
 msgid "Return the JSON Format of JPMarc.Record struct (One or List of that)\n"
@@ -48,6 +36,18 @@ msgstr ""
 #: lib/jpmarc.ex:2
 msgid "  Tools for working wiht JPMARC records\n"
 msgstr "JPMARCを扱うツールです。\n"
+
+#. TRANSLATORS: def JPMarc.is_leader(element)
+#: lib/jpmarc.ex:13
+msgid "Is element a leader?\n"
+msgstr ""
+
+#. TRANSLATORS: def JPMarc.parse_file(file)
+#: lib/jpmarc.ex:31
+msgid "  Parse a marc file and return List of `JPMarc.Record` struct\n"
+msgstr ""
+"MARC形式の文字列をパースして`JPMarc.Record`構造体を返します。\n"
+"\n"
 
 #. TRANSLATORS: def JPMarc.to_marc(records)
 #: lib/jpmarc.ex:51

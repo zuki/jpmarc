@@ -33,15 +33,15 @@ msgstr "XmlBuilderのタプル形式でXML要素を返します。\n"
 msgid "Tools for working with JPMARC SubFields\n"
 msgstr "JPMARCサブフィールドを扱うツールです。\n"
 
-#. TRANSLATORS: def JPMarc.SubField.to_text(sf)
-#: lib/jpmarc/sub_field.ex:47
-msgid "Return a text representing  of the subfield\n"
-msgstr "サブフィールドのテキスト形式の文字列を返します。\n"
-
 #. TRANSLATORS: def JPMarc.SubField.to_marc(field)
 #: lib/jpmarc/sub_field.ex:31
 msgid "  Return the MARC Format of the subfield\n"
 msgstr "サブフィールドのMARC形式の文字列を返します。\n"
+
+#. TRANSLATORS: def JPMarc.SubField.to_text(sf)
+#: lib/jpmarc/sub_field.ex:47
+msgid "Return a text representing  of the subfield\n"
+msgstr "サブフィールドのテキスト形式の文字列を返します。\n"
 
 #. TRANSLATORS: def JPMarc.SubField.decode(data)
 #: lib/jpmarc/sub_field.ex:18
