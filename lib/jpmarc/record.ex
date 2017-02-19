@@ -205,13 +205,12 @@ defmodule JPMarc.Record do
   def from_json(json) do
     jmap = Poison.Parser.parse!(json)
     leader = Map.get(jmap, "leader") |> Leader.decode()
-    fields = Map.get(jmap, "fields") |> Enum.map(&Map.to_list/1) |> Enum.map(&Enum.at(&1, 0)) |> Enum.map(fn (field) ->
+    fields = Map.get(jmap, "fields") |> Enum.map(&Map.to_list/1) |> Enum.map(fn ([field]) ->
       case field do
         {tag, %{"ind1" => ind1, "ind2" => ind2, "subfields" => sflds}} ->
           subfields = sflds
             |> Enum.map(&Map.to_list/1)
-            |> Enum.map(&Enum.at(&1, 0))
-            |> Enum.map(&(%SubField{code: elem(&1, 0), value: elem(&1, 1)}))
+            |> Enum.map(fn ([{code, value}]) -> %SubField{code: code, value: value} end)
           %DataField{tag: tag, ind1: ind1, ind2: ind2, subfields: subfields}
         {tag, value} ->
           %JPMarc.ControlField{tag: tag, value: value}
