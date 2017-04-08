@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-02-17 16:50+0900\n"
+"PO-Revision-Date: 2017-04-08 09:02+0900\n"
 "Last-Translator: Keiji Suzuki <EMAIL@ADDRESS>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -10,10 +10,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.0\n"
 
 #. TRANSLATORS: def JPMarc.Record.field_values(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " ")
-#: lib/jpmarc/record.ex:92
+#: lib/jpmarc/record.ex:103
 msgid ""
 "Returns a list of SubFields value with `tag`, `ind1`, `ind2` and `code` in "
 "`record`, `[]` when it doesn't exist\n"
@@ -31,7 +31,7 @@ msgstr ""
 "\n"
 
 #. TRANSLATORS: def JPMarc.Record.subfield(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil)
-#: lib/jpmarc/record.ex:83
+#: lib/jpmarc/record.ex:94
 msgid ""
 "Returns first SubField with `tag`, `ind1`, `ind2` and `code` in `record`, [] "
 "when it doesn't exist\n"
@@ -67,7 +67,7 @@ msgid "  Tools for working with JPMARC Record\n"
 msgstr "JPMARCレコードを扱うツールです。\n"
 
 #. TRANSLATORS: def JPMarc.Record.fields(record, tag, ind1 \\ nil, ind2 \\ nil)
-#: lib/jpmarc/record.ex:32
+#: lib/jpmarc/record.ex:43
 msgid ""
 "Returns a list of Fields with `tag`, `ind1` and `ind2` in `record`, [] when "
 "it doesn't exist\n"
@@ -76,12 +76,12 @@ msgstr ""
 "い場合は`[]`を返します。\n"
 
 #. TRANSLATORS: def JPMarc.Record.to_json(record)
-#: lib/jpmarc/record.ex:193
+#: lib/jpmarc/record.ex:204
 msgid "Return a json representing of the record\n"
 msgstr "レコードのJSON形式の文字列を返します。\n"
 
 #. TRANSLATORS: def JPMarc.Record.subfield_value(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " ")
-#: lib/jpmarc/record.ex:127
+#: lib/jpmarc/record.ex:138
 msgid ""
 "Returns first SubFields value with `tag`, `ind1`, `ind2` and `code` in "
 "`record`, `nil` when it doesn't exist\n"
@@ -98,17 +98,17 @@ msgstr ""
 "デフォルトは`:all`です。\n"
 
 #. TRANSLATORS: def JPMarc.Record.from_marc(marc)
-#: lib/jpmarc/record.ex:136
+#: lib/jpmarc/record.ex:147
 msgid "  Decode the String of a marc and return `JPMarc.Record` struct\n"
 msgstr "MAC形式の文字列を解析してJPMarc.Record構造体を返します。\n"
 
 #. TRANSLATORS: def JPMarc.Record.to_marc(record)
-#: lib/jpmarc/record.ex:154
+#: lib/jpmarc/record.ex:165
 msgid "  Return the MARC Format of the JPMarc struct\n"
 msgstr "JPMarc.Record構造体をMARC形式で返します。\n"
 
 #. TRANSLATORS: def JPMarc.Record.subfield_values(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " ")
-#: lib/jpmarc/record.ex:116
+#: lib/jpmarc/record.ex:127
 msgid ""
 "Returns a list of SubFields value with `tag`, `ind1`, `ind2` and `code` in "
 "`record`, `[]`when it doesn't exist\n"
@@ -125,7 +125,7 @@ msgstr ""
 "デフォルトは`:all`です。\n"
 
 #. TRANSLATORS: def JPMarc.Record.field(record, tag, ind1 \\ nil, ind2 \\ nil)
-#: lib/jpmarc/record.ex:51
+#: lib/jpmarc/record.ex:62
 msgid ""
 "Returns first DataFields with `tag`, `ind1` and `ind2` in `record`, nil when "
 "it doesn't exist\n"
@@ -134,7 +134,7 @@ msgstr ""
 "場合は`nil`を返します。\n"
 
 #. TRANSLATORS: def JPMarc.Record.control_field?(tag)
-#: lib/jpmarc/record.ex:26
+#: lib/jpmarc/record.ex:37
 msgid ""
 "Return `true` if `tag` is a valid tag number as ControlField, otherwise "
 "`false`\n"
@@ -143,22 +143,22 @@ msgstr ""
 "`false`を返します。\n"
 
 #. TRANSLATORS: def JPMarc.Record.sort(record)
-#: lib/jpmarc/record.ex:231
+#: lib/jpmarc/record.ex:241
 msgid "  Sort its fields by tag and subfields of field\n"
 msgstr "フィールドをタグ順、インジケータ順にソートします。\n"
 
-#. TRANSLATORS: def JPMarc.Record.to_text(record)
-#: lib/jpmarc/record.ex:179
-msgid "Return the Text Format of the JPMarc struct\n"
-msgstr "JPMarc.Record構造体をテキスト形式で返します。\n"
+#. TRANSLATORS: @type ind_t
+#: lib/jpmarc/record.ex:29
+msgid "  Type for indicators\n"
+msgstr "インディケータ用のデータ型\n"
 
 #. TRANSLATORS: def JPMarc.Record.from_json(json)
-#: lib/jpmarc/record.ex:201
+#: lib/jpmarc/record.ex:212
 msgid "Construct a record from json formatted in the marc-in-json schema\n"
 msgstr "Marc-in-json形式のjson文字列からJPMarc.Record構造体を作成します。\n"
 
 #. TRANSLATORS: def JPMarc.Record.field_value(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " ")
-#: lib/jpmarc/record.ex:107
+#: lib/jpmarc/record.ex:118
 msgid ""
 "Returns a list of Field values with `tag`, `ind1`, `ind2` and `code` in "
 "`record`, `nil` when it doesn't exist\n"
@@ -174,13 +174,23 @@ msgstr ""
 "の対象となります。\n"
 "デフォルトは`:all`です。\n"
 
+#. TRANSLATORS: @type code_t
+#: lib/jpmarc/record.ex:24
+msgid "  Type for field code\n"
+msgstr "フィールドコード用のデータ型\n"
+
 #. TRANSLATORS: def JPMarc.Record.to_xml(record)
-#: lib/jpmarc/record.ex:164
+#: lib/jpmarc/record.ex:175
 msgid "Return the MARCXML Format of the JPMarc struct\n"
 msgstr "JPMarc.Record構造体をMARCXML形式で返します。\n"
 
+#. TRANSLATORS: def JPMarc.Record.to_text(record)
+#: lib/jpmarc/record.ex:190
+msgid "Return the Text Format of the JPMarc struct\n"
+msgstr "JPMarc.Record構造体をテキスト形式で返します。\n"
+
 #. TRANSLATORS: def JPMarc.Record.subfields(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil)
-#: lib/jpmarc/record.ex:57
+#: lib/jpmarc/record.ex:68
 msgid ""
 "Returns a list of SubFields with `tag`, `ind1`, `ind2` and `code` in "
 "`record`, [] when it doesn't exist\n"

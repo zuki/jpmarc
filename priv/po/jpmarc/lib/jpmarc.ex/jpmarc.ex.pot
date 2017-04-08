@@ -1,15 +1,15 @@
 #. TRANSLATORS: def JPMarc.to_xml(records)
-#: lib/jpmarc.ex:60 
+#: lib/jpmarc.ex:69 
 msgid ""
 "Return the MARCXML Format of JPMarc.Record struct (One or List of that)\n"
 msgstr ""
-#. TRANSLATORS: def JPMarc.is_controlfield(element)
-#: lib/jpmarc.ex:19 
+#. TRANSLATORS: def JPMarc.is_datafield(element)
+#: lib/jpmarc.ex:25 
 msgid ""
-"Is element a control field?\n"
+"Whether the element is a data field?\n"
 msgstr ""
 #. TRANSLATORS: def JPMarc.to_json(records)
-#: lib/jpmarc.ex:70 
+#: lib/jpmarc.ex:79 
 msgid ""
 "Return the JSON Format of JPMarc.Record struct (One or List of that)\n"
 msgstr ""
@@ -18,28 +18,28 @@ msgstr ""
 msgid ""
 "  Tools for working wiht JPMARC records\n"
 msgstr ""
-#. TRANSLATORS: def JPMarc.is_leader(element)
-#: lib/jpmarc.ex:13 
-msgid ""
-"Is element a leader?\n"
-msgstr ""
-#. TRANSLATORS: def JPMarc.parse_file(file)
-#: lib/jpmarc.ex:31 
-msgid ""
-"  Parse a marc file and return List of `JPMarc.Record` struct\n"
-msgstr ""
 #. TRANSLATORS: def JPMarc.to_marc(records)
-#: lib/jpmarc.ex:51 
+#: lib/jpmarc.ex:60 
 msgid ""
 "  Return the String representing MARC Format of the JPMarc.Record struct (one or List of that)\n"
 msgstr ""
+#. TRANSLATORS: def JPMarc.parse_file(file)
+#: lib/jpmarc.ex:40 
+msgid ""
+"  Parse a marc file and return List of `JPMarc.Record` struct\n"
+msgstr ""
 #. TRANSLATORS: def JPMarc.parse_marc(file)
-#: lib/jpmarc.ex:45 
+#: lib/jpmarc.ex:54 
 msgid ""
 "  Parse a marc file which contains one marc record, and return a `JPMarc.Record` struct\n"
 msgstr ""
-#. TRANSLATORS: def JPMarc.is_datafield(element)
-#: lib/jpmarc.ex:25 
+#. TRANSLATORS: def JPMarc.is_leader(element)
+#: lib/jpmarc.ex:13 
 msgid ""
-"Is element a data field?\n"
+"Whether the element is a leader?\n"
+msgstr ""
+#. TRANSLATORS: def JPMarc.is_controlfield(element)
+#: lib/jpmarc.ex:19 
+msgid ""
+"Whether the element is a control field?\n"
 msgstr ""
