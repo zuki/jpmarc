@@ -40,7 +40,7 @@ defmodule JPMarc.DataField do
   `code` is either of :all, code as String or List of code.
   Default is `:all`.
   """
-  @spec subfield_value(t, (atom|String.t|[String.t]), String.t)::[String.t]
+  @spec subfield_value(t, (atom|String.t|[String.t]), String.t)::String.t
   def subfield_value(field, code \\ :all, joiner \\ " ") do
     subfields(field, code) |> Enum.map(&("#{&1.value}")) |> Enum.join(joiner)
   end

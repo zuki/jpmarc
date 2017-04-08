@@ -20,6 +20,17 @@ defmodule JPMarc.Record do
       This is constructed with `:leader` as `JPMarc.Leader.t`, `:fiels` as List of `JPMarc.ControlField.t` or `JPMarc.DataField.t`
   """
   @type t :: %__MODULE__{leader: Leader.t, fields: [ ControlField.t | DataField.t ]}
+
+  @typedoc """
+    Type for field code
+  """
+  @type code_t :: :all | String.t | [String.t]
+
+  @typedoc """
+    Type for indicators
+  """
+  @type ind_t :: String.t | nil
+
   @derive [Poison.Encoder]
   defstruct leader: nil, fields: []
 
@@ -32,7 +43,7 @@ defmodule JPMarc.Record do
   @doc """
   Returns a list of Fields with `tag`, `ind1` and `ind2` in `record`, [] when it doesn't exist
   """
-  @spec fields(JPMarc.Record.t, String.t, String.t, String.t)::[t]
+  @spec fields(t, String.t, ind_t, ind_t)::[t]
   def fields(record, tag, ind1 \\ nil, ind2 \\ nil) do
     if control_field?(tag) do
       record.fields |> Enum.filter(&(&1.tag == tag))
@@ -51,7 +62,7 @@ defmodule JPMarc.Record do
   @doc """
   Returns first DataFields with `tag`, `ind1` and `ind2` in `record`, nil when it doesn't exist
   """
-  @spec field(JPMarc.Record.t, String.t, String.t, String.t)::(t|nil)
+  @spec field(t, String.t, ind_t, ind_t)::(t|nil)
   def field(record, tag, ind1 \\ nil, ind2 \\ nil), do: fields(record, tag, ind1, ind2) |> Enum.at(0)
 
   @doc """
@@ -60,7 +71,7 @@ defmodule JPMarc.Record do
   `code` is either of :all, `code` as String or List of `code`.
   Default is `:all`.
   """
-  @spec subfields(t, String.t, (atom|String.t|[String.t]), String.t, String.t)::[SubField.t]
+  @spec subfields(t, String.t, code_t, ind_t, ind_t)::[SubField.t]
   def subfields(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil) do
     fields = fields(record, tag, ind1, ind2)
     unless Enum.empty?(fields) do
@@ -86,7 +97,7 @@ defmodule JPMarc.Record do
   `code` is either of :all, `code` as String or List of `code`.
   Default is `:all`.
   """
-  @spec subfield(t, String.t, (atom|String.t|[String.t]), String.t, String.t)::SubField.t
+  @spec subfield(t, String.t, code_t, ind_t, ind_t)::SubField.t
   def subfield(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil), do: subfields(record, tag, code, ind1, ind2) |> Enum.at(0)
 
   @doc """
@@ -95,7 +106,7 @@ defmodule JPMarc.Record do
   `code` is either of :all, `code` as String or List of `code`.
   Default is `:all`.
   """
-  @spec field_values(t, String.t, (atom|String.t|[String.t]), String.t, String.t, String.t)::[String.t]
+  @spec field_values(t, String.t, code_t, ind_t, ind_t, String.t)::[String.t]
   def field_values(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " ") do
     if control_field?(tag) do
       if cf = field(record, tag), do: [cf.value], else: []
@@ -110,7 +121,7 @@ defmodule JPMarc.Record do
   `code` is either of :all, `code` as String or List of `code`.
   Default is `:all`.
   """
-  @spec field_value(t, String.t, (atom|String.t|[String.t]), String.t, String.t)::String.t
+  @spec field_value(t, String.t, code_t, ind_t, ind_t, String.t)::String.t
   def field_value(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " "), do: field_values(record, tag, code, ind1, ind2, joiner) |> Enum.at(0)
 
   @doc """
@@ -119,7 +130,7 @@ defmodule JPMarc.Record do
   `code` is either of :all, `code` as String or List of `code`.
   Default is `:all`.
   """
-  @spec subfield_values(t, String.t, (atom|String.t|[String.t]), String.t, String.t, String.t)::[String.t]
+  @spec subfield_values(t, String.t, code_t, ind_t, ind_t, String.t)::[String.t]
   def subfield_values(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " ") do
     subfields(record, tag, code, ind1, ind2) |> Enum.map(fn(sf) -> Enum.map(sf, &("#{&1.value}")) |> Enum.join(joiner) end)
   end
@@ -130,7 +141,7 @@ defmodule JPMarc.Record do
   `code` is either of :all, `code` as String or List of `code`.
   Default is `:all`.
   """
-  @spec subfield_value(t, String.t, (atom|String.t|[String.t]), String.t, String.t, String.t)::String.t
+  @spec subfield_value(t, String.t, code_t, ind_t, ind_t, String.t)::String.t
   def subfield_value(record, tag, code \\ :all, ind1 \\ nil, ind2 \\ nil, joiner \\ " "), do: subfield_values(record, tag, code, ind1, ind2, joiner) |> Enum.at(0)
 
   @doc """
@@ -179,7 +190,7 @@ defmodule JPMarc.Record do
   @doc """
   Return the Text Format of the JPMarc struct
   """
-  @spec to_text(t)::tuple
+  @spec to_text(t)::String.t
   def to_text(record) do
     sorted = reset(record)
     text = sorted.fields |> Enum.map(fn(f) ->
